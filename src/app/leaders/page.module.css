@@ -1,0 +1,127 @@
+.page {
+    min-height: 100vh;
+    background: #f9fafb;
+}
+
+.hero {
+    background: linear-gradient(135deg, #0d2617 0%, #1a3c28 100%);
+    padding: 80px 24px;
+    text-align: center;
+}
+
+.heroContent {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 16px;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.content {
+    padding: 48px 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.controls {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.results {
+    margin-bottom: 24px;
+}
+
+.resultsCount {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.noResults {
+    text-align: center;
+    padding: 80px 24px;
+    background: #fff;
+    border-radius: 16px;
+}
+
+.noResults h3 {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+}
+
+.noResults p {
+    color: #666;
+    margin: 0 0 24px;
+}
+
+.clearButton {
+    padding: 12px 24px;
+    background: #2d5a3d;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clearButton:hover {
+    background: #1a3c28;
+}
+
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 48px 24px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

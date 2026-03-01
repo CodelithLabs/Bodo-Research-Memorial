@@ -1,0 +1,43 @@
+.page {
+    min-height: 100vh;
+    background: #f9fafb;
+}
+
+.hero {
+    background: linear-gradient(135deg, #0d2617 0%, #1a3c28 100%);
+    padding: 80px 24px;
+    text-align: center;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 16px;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.content {
+    padding: 60px 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 48px 24px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+}

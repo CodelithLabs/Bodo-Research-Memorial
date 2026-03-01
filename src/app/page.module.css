@@ -1,0 +1,151 @@
+.section {
+    padding: 80px 0;
+    background: #f9fafb;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.sectionTitle {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+}
+
+.sectionSubtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.leaderGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.timelineSection {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.viewAll {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.viewAllLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #2d5a3d;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.viewAllLink:hover {
+    gap: 12px;
+    color: #1a3c28;
+}
+
+.martyrsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.aboutSection {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #0d2617 0%, #1a3c28 100%);
+}
+
+.aboutContent {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+}
+
+.aboutTitle {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin: 0 0 24px;
+    color: #7dd3a0;
+}
+
+.aboutText {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 20px;
+}
+
+.learnMore {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding: 14px 28px;
+    background: #7dd3a0;
+    color: #0d2617;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.learnMore:hover {
+    background: #fff;
+    gap: 12px;
+}
+
+@media (max-width: 1024px) {
+    .leaderGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .martyrsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .section {
+        padding: 48px 0;
+    }
+
+    .sectionTitle {
+        font-size: 1.75rem;
+    }
+
+    .leaderGrid,
+    .martyrsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .aboutSection {
+        padding: 60px 0;
+    }
+
+    .aboutTitle {
+        font-size: 1.75rem;
+    }
+
+    .aboutText {
+        font-size: 1rem;
+    }
+}

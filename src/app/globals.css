@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   INSTITUTIONAL DESIGN SYSTEM
+   Bodo Digital Heritage Archive
+   ============================================ */
+
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', 'Source Sans 3', system-ui, sans-serif;
+    color: #1A1A1A;
+    background-color: #F8F6F1;
+    line-height: 1.7;
+  }
+
+  /* Headings - Academic serif */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #1A1A1A;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  /* Links */
+  a {
+    color: #1F3D2B;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: #C9A227;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: #C9A227;
+    color: #FFFFFF;
+  }
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+@layer components {
+
+  /* Container - max width for content */
+  .container-institutional {
+    @apply max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-[5rem];
+  }
+
+  .section-padding-sm {
+    @apply py-[3rem];
+  }
+
+  /* Card - subtle academic style */
+  .card-institutional {
+    @apply bg-white rounded-lg shadow-sm border border-[#F1EFEA];
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-institutional:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #C9A227;
+  }
+
+  /* Button primary - heritage green */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3;
+    @apply bg-[#1F3D2B] text-white font-medium rounded-md;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:bg-[#1A3424];
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+  }
+
+  /* Button secondary - gold accent */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3;
+    @apply bg-transparent text-[#1F3D2B] font-medium rounded-md;
+    @apply border-2 border-[#1F3D2B];
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-[#1F3D2B] text-white;
+  }
+
+  /* Section title */
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1F3D2B;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: #555555;
+    max-width: 42rem;
+  }
+
+  /* Divider */
+  .divider-institutional {
+    @apply h-px bg-[#F1EFEA] my-8;
+  }
+
+  /* Label/tag */
+  .label-academic {
+    @apply inline-block px-3 py-1 text-xs font-medium;
+    background-color: #FBF7E8;
+    color: #796117;
+    border-radius: 6px;
+    border: 1px solid #F7EFD1;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ============================================
+   ANIMATIONS - Subtle, professional
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

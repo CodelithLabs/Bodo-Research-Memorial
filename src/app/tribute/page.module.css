@@ -1,0 +1,125 @@
+.page {
+    min-height: 100vh;
+    background: #f9fafb;
+}
+
+.hero {
+    background: linear-gradient(135deg, #0d2617 0%, #1a3c28 100%);
+    padding: 80px 24px;
+    text-align: center;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 16px;
+}
+
+.heartIcon {
+    color: #e53e3e;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.content {
+    padding: 60px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.listTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 24px;
+}
+
+.tributesList {
+    background: #fff;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.tributes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tributeCard {
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border-left: 4px solid #7dd3a0;
+}
+
+.tributeHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.tributeName {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.tributeDate {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.tributeMessage {
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.noTributes {
+    color: #666;
+    text-align: center;
+    padding: 40px;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 48px 24px;
+    }
+
+    .title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 8px;
+    }
+}

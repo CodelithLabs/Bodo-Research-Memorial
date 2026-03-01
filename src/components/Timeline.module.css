@@ -1,0 +1,253 @@
+.timeline {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.playButton {
+    padding: 10px 20px;
+    background: #2d5a3d;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.playButton:hover {
+    background: #1a3c28;
+}
+
+.playButton.playing {
+    background: #dc2626;
+}
+
+.timelineContainer {
+    position: relative;
+}
+
+.progressBar {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.progressDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.progressDot.active {
+    background: #2d5a3d;
+    transform: scale(1.3);
+}
+
+.eventCard {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    background: #f9fafb;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.eventMarker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.eventYear {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.eventContent {
+    flex: 1;
+}
+
+.eventMeta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.eventType {
+    padding: 4px 12px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.eventDate {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.eventTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+}
+
+.eventDescription {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.leaderPreview {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.leaderAvatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #2d5a3d 0%, #1a3c28 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.leaderInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderName {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+}
+
+.leaderTitle {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.viewProfile {
+    padding: 8px 16px;
+    background: #2d5a3d;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.viewProfile:hover {
+    background: #1a3c28;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.navButton {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #e5e7eb;
+    border-radius: 50%;
+    background: #fff;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.navButton:hover {
+    border-color: #2d5a3d;
+    color: #2d5a3d;
+}
+
+.counter {
+    font-weight: 600;
+    color: #666;
+    min-width: 60px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .timeline {
+        padding: 20px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .eventCard {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .eventMarker {
+        min-width: 100%;
+        height: 60px;
+    }
+
+    .leaderPreview {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .viewProfile {
+        width: 100%;
+        text-align: center;
+    }
+}
