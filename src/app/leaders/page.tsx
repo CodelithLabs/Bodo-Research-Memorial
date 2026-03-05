@@ -1,142 +1,156 @@
-/**
- * ============================================
- * Leaders Page
- * ============================================
- * Display all leaders with filtering and search
- */
+'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
-import { Users, Filter, Search, MapPin, Calendar } from 'lucide-react';
-import { Button, Input, Card, CardContent, Badge } from '@/components/ui';
+import Image from 'next/image';
+import {
+    Users,
+    Search,
+    MapPin,
+    ChevronRight,
+    Filter,
+    History
+} from 'lucide-react';
 import { leaders } from '@/data/leaders';
 
-const regions = ['All', 'Assam', 'North Bengal', 'Darjeeling', 'Bhutan', 'BTC'];
-
-function getYear(dateStr?: string): string {
-    if (!dateStr) return '?';
-    return dateStr.split('-')[0];
-}
+const regions = ['All', 'BTC', 'Assam', 'Kokrajhar', 'Chirang', 'Baksa', 'Udalguri'];
 
 export default function LeadersPage() {
+    const [searchQuery, setSearchQuery] = useState('');
+    const [activeRegion, setActiveRegion] = useState('All');
+
+    const filteredLeaders = leaders.filter(leader => {
+        const matchesSearch = leader.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            leader.title.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesRegion = activeRegion === 'All' || leader.region === activeRegion || leader.district === activeRegion;
+        return matchesSearch && matchesRegion;
+    });
+
     return (
-        <div className="min-h-screen bg-stone-50">
+        <div className="min-h-screen bg-background">
             {/* Page Header */}
-            <section className="bg-gradient-to-r from-stone-800 to-stone-900 text-white py-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center space-x-3 mb-4">
-                        <Users className="w-8 h-8 text-amber-400" />
-                        <Badge variant="secondary" className="bg-amber-600">Historical Records</Badge>
-                    </div>
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                        Bodo Leaders & Visionaries
-                    </h1>
-                    <p className="text-lg text-stone-300 max-w-2xl">
-                        Explore comprehensive biographies of leaders, freedom fighters, and visionaries
-                        who shaped the Bodo civilization and fought for their rights.
+            <section className="bg-primary text-white pt-24 pb-20 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-weave" />
+                <div className="container-institutional relative z-10">
+                    <span className="text-secondary text-sm font-bold uppercase tracking-[0.3em] mb-4 block">Historical Database</span>
+                    <h1 className="text-white text-4xl md:text-5xl font-bold mb-6">Leaders & <span className="text-secondary">Martyrs</span></h1>
+                    <p className="text-xl text-white/70 max-w-2xl leading-relaxed">
+                        A structured repository of biographical data, contributions, and historical
+                        context for the figures who shaped the Bodo movement.
                     </p>
                 </div>
             </section>
 
-            {/* Filters & Search */}
-            <section className="sticky top-16 z-30 bg-white border-b border-gray-200 shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            {/* Discovery & Filters */}
+            <section className="sticky top-0 z-30 bg-white border-b border-divider shadow-sm py-6">
+                <div className="container-institutional">
+                    <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
                         {/* Search */}
-                        <div className="relative w-full md:w-96">
-                            <Input
-                                type="search"
-                                placeholder="Search leaders..."
-                                className="pl-10"
+                        <div className="relative w-full lg:max-w-md">
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
+                            <input
+                                type="text"
+                                placeholder="Search by name, title, or movement..."
+                                className="w-full pl-12 pr-4 py-3 bg-background border border-divider rounded-sm focus:outline-none focus:border-secondary transition-colors"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
                             />
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         </div>
 
                         {/* Region Filter */}
-                        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-                            <Filter className="w-4 h-4 text-gray-500 flex-shrink-0" />
+                        <div className="flex items-center gap-4 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
+                            <div className="flex items-center text-primary font-bold mr-2">
+                                <Filter className="w-4 h-4 mr-2" />
+                                <span className="text-sm uppercase tracking-wider">Region:</span>
+                            </div>
                             {regions.map((region) => (
-                                <Button
+                                <button
                                     key={region}
-                                    variant={region === 'All' ? 'primary' : 'ghost'}
-                                    size="sm"
-                                    className="flex-shrink-0"
+                                    onClick={() => setActiveRegion(region)}
+                                    className={`px-4 py-2 text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${activeRegion === region
+                                        ? 'bg-secondary text-primary'
+                                        : 'bg-background text-text-muted hover:bg-divider'
+                                        }`}
                                 >
                                     {region}
-                                </Button>
+                                </button>
                             ))}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Leaders Grid */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {leaders.map((leader) => (
-                        <Link key={leader.id} href={`/leaders/${leader.id}`}>
-                            <Card className="h-full overflow-hidden group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                                {/* Image */}
-                                <div className="aspect-[4/3] bg-gradient-to-br from-amber-100 to-amber-200 relative overflow-hidden">
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <Users className="w-16 h-16 text-amber-300" />
-                                    </div>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            {/* Results Grid */}
+            <section className="section-padding">
+                <div className="container-institutional">
+                    <div className="flex items-center justify-between mb-12">
+                        <p className="text-text-muted font-medium italic">
+                            Showing {filteredLeaders.length} documented records
+                        </p>
+                    </div>
 
-                                    {/* Period Badge */}
-                                    <div className="absolute top-4 right-4">
-                                        <Badge variant="secondary" className="bg-white/90 text-gray-900 backdrop-blur">
-                                            <Calendar className="w-3 h-3 mr-1" />
-                                            {getYear(leader.birthDate)} - {leader.isMartyr ? 'Martyr' : getYear(leader.deathDate) || 'Present'}
-                                        </Badge>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        {filteredLeaders.map((leader) => (
+                            <Link
+                                key={leader.id}
+                                href={`/leaders/${leader.id}`}
+                                className="group card-academic flex flex-col h-full reveal"
+                            >
+                                <div className="relative aspect-[16/10] overflow-hidden bg-primary/5">
+                                    {leader.imageUrl ? (
+                                        <Image
+                                            src={leader.imageUrl}
+                                            alt={leader.name}
+                                            fill
+                                            className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                                        />
+                                    ) : (
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <Users className="w-16 h-16 text-primary/10" />
+                                        </div>
+                                    )}
+                                    <div className="absolute top-4 left-4">
+                                        <span className={`label-category ${leader.isMartyr ? 'bg-accent text-white border-none' : ''}`}>
+                                            {leader.isMartyr ? 'Martyr' : 'Leader'}
+                                        </span>
                                     </div>
                                 </div>
 
-                                <CardContent className="p-6">
-                                    {/* Region */}
-                                    <div className="flex items-center text-sm text-amber-600 mb-2">
-                                        <MapPin className="w-4 h-4 mr-1" />
-                                        {leader.region} • {leader.district}
+                                <div className="p-8 flex-1 flex flex-col">
+                                    <div className="flex items-center text-secondary text-xs font-bold uppercase tracking-widest mb-3">
+                                        <History className="w-4 h-4 mr-2" />
+                                        {leader.era}
                                     </div>
-
-                                    {/* Name & Title */}
-                                    <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-amber-600 transition-colors">
+                                    <h3 className="text-xl font-bold mb-2 group-hover:text-secondary transition-colors line-clamp-1">
                                         {leader.name}
                                     </h3>
-                                    <p className="text-gray-600 font-medium mb-3">{leader.title}</p>
-
-                                    {/* Description - Extract from biography */}
-                                    <p className="text-gray-600 text-sm line-clamp-3 mb-4">
-                                        {leader.biography?.substring(0, 150)}...
+                                    <p className="text-text-secondary text-sm font-medium mb-6 flex items-center">
+                                        <MapPin className="w-4 h-4 mr-2 text-primary" />
+                                        {leader.district}, {leader.region}
                                     </p>
 
-                                    {/* Tags */}
-                                    <div className="flex flex-wrap gap-1.5">
-                                        {leader.movement && (
-                                            <Badge variant="outline" className="text-xs">
-                                                {leader.movement}
-                                            </Badge>
-                                        )}
-                                        {leader.era && (
-                                            <Badge variant="outline" className="text-xs">
-                                                {leader.era}
-                                            </Badge>
-                                        )}
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </Link>
-                    ))}
-                </div>
+                                    <p className="text-text-secondary text-sm leading-relaxed mb-8 line-clamp-3">
+                                        {leader.biography?.split('.')[0]}. {leader.biography?.split('.')[1]}.
+                                    </p>
 
-                {/* Pagination */}
-                <div className="mt-12 flex justify-center">
-                    <div className="flex items-center gap-2">
-                        <Button variant="outline" size="sm" disabled>Previous</Button>
-                        <Button variant="primary" size="sm">1</Button>
-                        <Button variant="ghost" size="sm">2</Button>
-                        <Button variant="ghost" size="sm">3</Button>
-                        <Button variant="outline" size="sm">Next</Button>
+                                    <div className="mt-auto pt-6 border-t border-divider flex items-center justify-between">
+                                        <span className="text-primary text-xs font-bold uppercase tracking-widest flex items-center group-hover:text-secondary transition-colors">
+                                            View Profile <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        </span>
+                                        <span className="text-[10px] text-text-muted font-bold uppercase">Archive ID: #{leader.id.slice(0, 5)}</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
                     </div>
+
+                    {filteredLeaders.length === 0 && (
+                        <div className="text-center py-20 bg-white border border-divider">
+                            <Users className="w-16 h-16 text-text-muted mx-auto mb-6 opacity-20" />
+                            <h3 className="text-2xl mb-2">No records found</h3>
+                            <p className="text-text-secondary">Try adjusting your search or region filters.</p>
+                        </div>
+                    )}
                 </div>
             </section>
         </div>

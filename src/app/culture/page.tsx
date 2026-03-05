@@ -6,8 +6,7 @@
  */
 
 import Link from 'next/link';
-import { Heart, Music, Utensils, Palette, MapPin, Calendar, ArrowRight } from 'lucide-react';
-import { Button, Card, CardContent, Badge } from '@/components/ui';
+import { Music, Utensils, Palette, MapPin, Calendar, ArrowRight } from 'lucide-react';
 
 const cultureCategories = [
     {
@@ -67,18 +66,14 @@ const featuredArticles = [
 
 export default function CulturePage() {
     return (
-        <div className="min-h-screen bg-stone-50">
+        <div className="min-h-screen bg-background">
             {/* Page Header */}
-            <section className="bg-gradient-to-r from-pink-700 to-pink-900 text-white py-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center space-x-3 mb-4">
-                        <Heart className="w-8 h-8 text-pink-300" />
-                        <Badge variant="secondary" className="bg-pink-600">Heritage</Badge>
-                    </div>
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                        Bodo Culture & Traditions
-                    </h1>
-                    <p className="text-lg text-pink-100 max-w-2xl">
+            <section className="bg-primary text-white pt-24 pb-20 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-weave" />
+                <div className="container-institutional relative z-10">
+                    <span className="text-secondary text-sm font-bold uppercase tracking-[0.3em] mb-4 block">Heritage & Traditions</span>
+                    <h1 className="text-white text-4xl md:text-5xl font-bold mb-6">Bodo <span className="text-secondary italic">Culture</span></h1>
+                    <p className="text-xl text-white/70 max-w-2xl leading-relaxed">
                         Discover the rich and vibrant culture of the Bodo people - from ancient traditions
                         to modern practices that define our identity.
                     </p>
@@ -86,84 +81,89 @@ export default function CulturePage() {
             </section>
 
             {/* Culture Categories */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid md:grid-cols-2 gap-6">
-                    {cultureCategories.map((category) => {
-                        const Icon = category.icon;
-                        return (
-                            <Link key={category.name} href={category.href}>
-                                <Card className="h-full hover:shadow-xl transition-all duration-300 group cursor-pointer border-0 shadow-sm">
-                                    <CardContent className="p-8">
-                                        <div className="flex items-start justify-between">
-                                            <div className={`w-16 h-16 rounded-2xl ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                                                <Icon className="w-8 h-8" />
+            <section className="section-padding">
+                <div className="container-institutional">
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {cultureCategories.map((category) => {
+                            const Icon = category.icon;
+                            return (
+                                <Link key={category.name} href={category.href}>
+                                    <div className="card-academic p-10 group cursor-pointer h-full">
+                                        <div className="flex items-start justify-between mb-6">
+                                            <div className="w-16 h-16 bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                                <Icon className="w-8 h-8 text-white" />
                                             </div>
-                                            <Badge variant="outline">{category.articles} articles</Badge>
+                                            <span className="text-[10px] font-black uppercase tracking-widest bg-primary/5 px-2 py-1 text-primary">
+                                                {category.articles} articles
+                                            </span>
                                         </div>
-                                        <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-pink-600 transition-colors">
+                                        <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
                                             {category.name}
                                         </h3>
-                                        <p className="text-gray-600 mb-4">{category.description}</p>
-                                        <div className="flex items-center text-pink-600 font-medium group-hover:translate-x-2 transition-transform">
-                                            Explore <ArrowRight className="w-4 h-4 ml-2" />
+                                        <p className="text-text-secondary text-sm leading-relaxed mb-6">{category.description}</p>
+                                        <div className="flex items-center text-primary text-xs font-bold uppercase tracking-widest group-hover:text-secondary transition-colors">
+                                            Explore <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </div>
-                                    </CardContent>
-                                </Card>
-                            </Link>
-                        );
-                    })}
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
                 </div>
             </section>
 
             {/* Featured Articles */}
-            <section className="bg-white py-12">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-8">Featured Articles</h2>
-                    <div className="grid md:grid-cols-3 gap-6">
+            <section className="section-padding bg-white">
+                <div className="container-institutional">
+                    <div className="flex items-center justify-between mb-12">
+                        <h2 className="text-3xl font-bold text-primary mb-0">Featured Articles</h2>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-8">
                         {featuredArticles.map((article) => (
-                            <Card key={article.title} className="hover:shadow-lg transition-shadow">
-                                <CardContent className="p-6">
-                                    <Badge variant="primary" className="mb-3">{article.category}</Badge>
-                                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                                        {article.title}
-                                    </h3>
-                                    <p className="text-gray-600 text-sm mb-4">{article.excerpt}</p>
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-xs text-gray-500">{article.readTime}</span>
-                                        <Button variant="ghost" size="sm">Read More</Button>
-                                    </div>
-                                </CardContent>
-                            </Card>
+                            <div key={article.title} className="card-academic p-8 group">
+                                <span className="label-category mb-4">{article.category}</span>
+                                <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+                                    {article.title}
+                                </h3>
+                                <p className="text-text-secondary text-sm leading-relaxed mb-6">{article.excerpt}</p>
+                                <div className="flex items-center justify-between pt-6 border-t border-divider">
+                                    <span className="text-[10px] text-text-muted font-bold uppercase">{article.readTime}</span>
+                                    <span className="text-primary text-xs font-bold uppercase tracking-widest flex items-center group-hover:text-secondary transition-colors">
+                                        Read More <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </span>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* Cultural Map Section */}
-            <section className="bg-gradient-to-r from-stone-800 to-stone-900 text-white py-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <section className="bg-primary text-white py-20">
+                <div className="container-institutional">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
-                            <h2 className="text-3xl font-bold mb-4">Cultural Regions</h2>
-                            <p className="text-stone-300 mb-6">
+                            <span className="text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4 block">Geographic Distribution</span>
+                            <h2 className="text-3xl font-bold text-white mb-6">Cultural Regions</h2>
+                            <p className="text-white/60 text-lg leading-relaxed mb-8">
                                 The Bodo people are primarily located in Assam, with significant populations
                                 in North Bengal, Darjeeling, and Bhutan. Each region has its unique cultural expressions.
                             </p>
-                            <div className="space-y-4">
+                            <div className="space-y-4 mb-8">
                                 {['Assam (Bodoland Territorial Area)', 'North Bengal (Darjeeling Hills)', 'Bhutan (Royal Manas National Park)'].map((region) => (
                                     <div key={region} className="flex items-center">
-                                        <MapPin className="w-5 h-5 text-amber-400 mr-3" />
-                                        <span>{region}</span>
+                                        <MapPin className="w-5 h-5 text-secondary mr-3" />
+                                        <span className="text-white/80">{region}</span>
                                     </div>
                                 ))}
                             </div>
-                            <Button className="mt-8 bg-amber-600 hover:bg-amber-700">
+                            <Link href="/history" className="btn-outline border-white text-white hover:bg-white hover:text-primary">
                                 Explore Regions
-                            </Button>
+                            </Link>
                         </div>
-                        <div className="bg-stone-700/50 rounded-2xl p-8">
-                            <div className="aspect-video bg-gradient-to-br from-pink-500/20 to-amber-500/20 rounded-xl flex items-center justify-center">
-                                <MapPin className="w-16 h-16 text-stone-500" />
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-12">
+                            <div className="aspect-video bg-primary/20 rounded-lg flex items-center justify-center">
+                                <MapPin className="w-24 h-24 text-white/20" />
                             </div>
                         </div>
                     </div>

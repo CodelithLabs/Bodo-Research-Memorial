@@ -1,76 +1,89 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Landmark, Search } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/leaders', label: 'Leaders' },
-    { href: '/culture', label: 'Culture' },
-    { href: '/religion', label: 'Religion' },
+    { href: '/leaders', label: 'Archive' },
     { href: '/history', label: 'History' },
     { href: '/timeline', label: 'Timeline' },
-    { href: '/tribute', label: 'Tribute' },
+    { href: '/research', label: 'Research' },
+    { href: '/tribute', label: 'Tributes' },
 ];
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
-        <header className="bg-white border-b border-divider sticky top-0 z-50">
+        <header
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-white py-5 border-b border-divider'
+                }`}
+        >
             <div className="container-institutional">
-                <div className="flex items-center justify-between h-20">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 rounded-card bg-heritage flex items-center justify-center">
-                            <Landmark className="w-5 h-5 text-white" />
+                <div className="flex items-center justify-between">
+                    {/* Logo Section */}
+                    <Link href="/" className="flex items-center gap-4 group">
+                        <div className="w-12 h-12 bg-primary flex items-center justify-center relative overflow-hidden group-hover:bg-primary/90 transition-colors">
+                            <div className="absolute inset-0 opacity-10 bg-weave" />
+                            <Landmark className="w-6 h-6 text-secondary relative z-10" />
                         </div>
-                        <div>
-                            <span className="font-display font-semibold text-heritage text-lg group-hover:text-gold-600 transition-colors">
-                                Bodofa Memorial
+                        <div className="hidden sm:block">
+                            <span className="block text-primary font-bold text-lg uppercase tracking-wider leading-none mb-1">
+                                Bodo Research <span className="text-secondary italic">Memorial</span>
                             </span>
-                            <p className="text-xs text-text-muted -mt-0.5">
-                                Digital Heritage Archive
-                            </p>
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-text-muted">
+                                Digital Heritage Repository
+                            </span>
                         </div>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-1">
+                    <nav className="hidden lg:flex items-center gap-2">
                         {navLinks.map((link) => {
                             const isActive = pathname === link.href;
                             return (
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className={`px-4 py-2 text-sm font-medium transition-colors rounded-button ${isActive
-                                            ? 'text-heritage bg-heritage-50'
-                                            : 'text-text-secondary hover:text-heritage hover:bg-parchment'
+                                    className={`relative px-5 py-2 text-[11px] font-bold uppercase tracking-[0.2em] transition-all hover:text-secondary ${isActive ? 'text-primary' : 'text-text-muted'
                                         }`}
                                 >
                                     {link.label}
+                                    {isActive && (
+                                        <motion.div
+                                            layoutId="nav-underline"
+                                            className="absolute bottom-0 left-5 right-5 h-0.5 bg-secondary"
+                                        />
+                                    )}
                                 </Link>
                             );
                         })}
                     </nav>
 
-                    {/* Search & Mobile Menu */}
-                    <div className="flex items-center gap-2">
-                        {/* Search Button */}
-                        <Link
-                            href="/leaders"
-                            className="p-2 text-text-secondary hover:text-heritage hover:bg-parchment rounded-button transition-colors"
-                            aria-label="Search"
-                        >
-                            <Search className="w-5 h-5" />
-                        </Link>
+                    {/* Action Area */}
+                    <div className="flex items-center gap-4">
+                        <button className="hidden md:flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary bg-primary/5 px-4 py-2 hover:bg-primary hover:text-white transition-all">
+                            <Search className="w-4 h-4" />
+                            <span className="hidden xl:inline">Library Search</span>
+                        </button>
 
                         {/* Mobile Menu Toggle */}
                         <button
-                            className="lg:hidden p-2 text-text-secondary hover:text-heritage hover:bg-parchment rounded-button transition-colors"
+                            className="lg:hidden p-2 text-primary hover:text-secondary transition-colors"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-label="Toggle menu"
                         >
@@ -78,11 +91,18 @@ export default function Header() {
                         </button>
                     </div>
                 </div>
+            </div>
 
-                {/* Mobile Navigation */}
+            {/* Mobile Navigation Dropdown */}
+            <AnimatePresence>
                 {isMenuOpen && (
-                    <nav className="lg:hidden border-t border-divider py-4">
-                        <div className="space-y-1">
+                    <motion.nav
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="lg:hidden bg-white border-t border-divider overflow-hidden"
+                    >
+                        <div className="container-institutional py-8 space-y-4">
                             {navLinks.map((link) => {
                                 const isActive = pathname === link.href;
                                 return (
@@ -90,19 +110,22 @@ export default function Header() {
                                         key={link.href}
                                         href={link.href}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className={`block px-4 py-3 text-sm font-medium transition-colors ${isActive
-                                                ? 'text-heritage bg-heritage-50'
-                                                : 'text-text-secondary hover:text-heritage hover:bg-parchment'
+                                        className={`block py-2 text-sm font-bold uppercase tracking-widest ${isActive ? 'text-secondary border-l-2 border-secondary pl-4' : 'text-text-muted pl-4'
                                             }`}
                                     >
                                         {link.label}
                                     </Link>
                                 );
                             })}
+                            <div className="pt-4 mt-4 border-t border-divider">
+                                <button className="w-full bg-primary text-white py-4 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                                    <Search className="w-4 h-4" /> Global Search
+                                </button>
+                            </div>
                         </div>
-                    </nav>
+                    </motion.nav>
                 )}
-            </div>
+            </AnimatePresence>
         </header>
     );
 }

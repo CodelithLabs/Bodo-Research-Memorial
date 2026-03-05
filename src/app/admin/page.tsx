@@ -18,7 +18,6 @@ import {
     TrendingUp,
     Eye
 } from 'lucide-react';
-import { Button, Card, CardContent, Badge } from '@/components/ui';
 
 const stats = [
     { title: 'Total Articles', value: '523', change: '+12%', icon: FileText, color: 'text-blue-600' },
@@ -43,116 +42,122 @@ const recentActivity = [
 
 export default function AdminDashboard() {
     return (
-        <div className="min-h-screen bg-stone-50">
+        <div className="min-h-screen bg-background">
             {/* Header */}
-            <section className="bg-gradient-to-r from-indigo-800 to-indigo-900 text-white py-8">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="bg-primary text-white py-8">
+                <div className="container-institutional">
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                            <Shield className="w-8 h-8 text-indigo-300" />
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-white/10 flex items-center justify-center">
+                                <Shield className="w-6 h-6 text-secondary" />
+                            </div>
                             <div>
-                                <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-                                <p className="text-indigo-200">Manage content and users</p>
+                                <h1 className="text-2xl font-bold text-white">Admin Dashboard</h1>
+                                <p className="text-white/60 text-sm">Manage content and users</p>
                             </div>
                         </div>
                         <Link href="/admin/settings">
-                            <Button variant="outline" className="border-indigo-500 text-white hover:bg-indigo-800">
-                                <Settings className="w-4 h-4 mr-2" />
+                            <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white border border-white/20 px-4 py-2 hover:bg-white hover:text-primary transition-all">
+                                <Settings className="w-4 h-4" />
                                 Settings
-                            </Button>
+                            </button>
                         </Link>
                     </div>
                 </div>
             </section>
 
             {/* Stats Grid */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <section className="container-institutional -mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {stats.map((stat) => {
                         const Icon = stat.icon;
                         return (
-                            <Card key={stat.title} className="border-0 shadow-lg">
-                                <CardContent className="p-6">
-                                    <div className="flex items-center justify-between">
-                                        <div>
-                                            <p className="text-sm text-gray-500">{stat.title}</p>
-                                            <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                                            <p className="text-xs text-green-600 mt-1">{stat.change} from last month</p>
-                                        </div>
-                                        <div className={`w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center ${stat.color}`}>
-                                            <Icon className="w-6 h-6" />
-                                        </div>
+                            <div key={stat.title} className="bg-white border border-divider p-6 shadow-sm">
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-text-muted text-xs font-bold uppercase tracking-wider">{stat.title}</p>
+                                        <p className="text-2xl font-bold text-primary">{stat.value}</p>
+                                        <p className="text-green-600 text-xs mt-1">{stat.change} from last month</p>
                                     </div>
-                                </CardContent>
-                            </Card>
+                                    <div className="w-12 h-12 bg-primary/5 flex items-center justify-center">
+                                        <Icon className="w-6 h-6 text-primary" />
+                                    </div>
+                                </div>
+                            </div>
                         );
                     })}
                 </div>
             </section>
 
             {/* Main Content */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="grid lg:grid-cols-2 gap-8">
+            <section className="container-institutional py-12">
+                <div className="grid lg:grid-cols-2 gap-10">
                     {/* Pending Submissions */}
-                    <Card className="border-0 shadow-lg">
-                        <CardContent className="p-6">
-                            <div className="flex items-center justify-between mb-6">
-                                <h2 className="text-lg font-semibold text-gray-900">Pending Submissions</h2>
-                                <Badge variant="warning">{pendingSubmissions.length} pending</Badge>
-                            </div>
-                            <div className="space-y-4">
-                                {pendingSubmissions.map((submission) => (
-                                    <div key={submission.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                        <div>
-                                            <h3 className="font-medium text-gray-900">{submission.title}</h3>
-                                            <p className="text-sm text-gray-500">{submission.author} • {submission.date}</p>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <Button variant="ghost" size="sm">
-                                                <Eye className="w-4 h-4" />
-                                            </Button>
-                                            <Button variant="ghost" size="sm">
-                                                <CheckCircle className="w-4 h-4 text-green-600" />
-                                            </Button>
-                                            <Button variant="ghost" size="sm">
-                                                <XCircle className="w-4 h-4 text-red-600" />
-                                            </Button>
-                                        </div>
+                    <div className="bg-white border border-divider">
+                        <div className="p-6 border-b border-divider flex items-center justify-between">
+                            <h2 className="text-lg font-bold text-primary">Pending Submissions</h2>
+                            <span className="px-3 py-1 bg-accent/10 text-accent text-xs font-bold uppercase">{pendingSubmissions.length} pending</span>
+                        </div>
+                        <div className="p-6 space-y-4">
+                            {pendingSubmissions.map((submission) => (
+                                <div key={submission.id} className="flex items-center justify-between p-4 bg-background">
+                                    <div>
+                                        <h3 className="font-medium text-primary">{submission.title}</h3>
+                                        <p className="text-text-muted text-xs">{submission.author} • {submission.date}</p>
                                     </div>
-                                ))}
-                            </div>
-                            <Button variant="outline" className="w-full mt-4">View All Submissions</Button>
-                        </CardContent>
-                    </Card>
+                                    <div className="flex items-center gap-2">
+                                        <button className="p-2 hover:bg-primary/5 text-text-muted hover:text-primary transition-colors">
+                                            <Eye className="w-4 h-4" />
+                                        </button>
+                                        <button className="p-2 hover:bg-primary/5 text-green-600 transition-colors">
+                                            <CheckCircle className="w-4 h-4" />
+                                        </button>
+                                        <button className="p-2 hover:bg-primary/5 text-red-600 transition-colors">
+                                            <XCircle className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="p-4 border-t border-divider">
+                            <button className="w-full py-3 border border-divider text-primary text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                                View All Submissions
+                            </button>
+                        </div>
+                    </div>
 
                     {/* Recent Activity */}
-                    <Card className="border-0 shadow-lg">
-                        <CardContent className="p-6">
-                            <h2 className="text-lg font-semibold text-gray-900 mb-6">Recent Activity</h2>
-                            <div className="space-y-4">
-                                {recentActivity.map((activity) => (
-                                    <div key={activity.id} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                                                <FileText className="w-4 h-4 text-indigo-600" />
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium text-gray-900">{activity.action}: {activity.item}</p>
-                                                <p className="text-xs text-gray-500">{activity.user} • {activity.date}</p>
-                                            </div>
+                    <div className="bg-white border border-divider">
+                        <div className="p-6 border-b border-divider">
+                            <h2 className="text-lg font-bold text-primary">Recent Activity</h2>
+                        </div>
+                        <div className="p-6 space-y-4">
+                            {recentActivity.map((activity) => (
+                                <div key={activity.id} className="flex items-center justify-between py-3 border-b border-divider last:border-0">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-8 h-8 bg-primary/5 flex items-center justify-center">
+                                            <FileText className="w-4 h-4 text-primary" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium text-primary">{activity.action}: {activity.item}</p>
+                                            <p className="text-xs text-text-muted">{activity.user} • {activity.date}</p>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                            <Button variant="outline" className="w-full mt-4">View All Activity</Button>
-                        </CardContent>
-                    </Card>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="p-4 border-t border-divider">
+                            <button className="w-full py-3 border border-divider text-primary text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all">
+                                View All Activity
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Quick Actions */}
-                <div className="mt-8">
-                    <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="mt-12">
+                    <h2 className="text-lg font-bold text-primary mb-6">Quick Actions</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {[
                             { label: 'Add Leader', icon: Users, href: '/admin/leaders/new' },
                             { label: 'Add Article', icon: FileText, href: '/admin/articles/new' },
@@ -162,12 +167,10 @@ export default function AdminDashboard() {
                             const Icon = action.icon;
                             return (
                                 <Link key={action.label} href={action.href}>
-                                    <Card className="hover:shadow-lg transition-shadow cursor-pointer border-0 shadow-sm">
-                                        <CardContent className="p-4 text-center">
-                                            <Icon className="w-6 h-6 mx-auto mb-2 text-indigo-600" />
-                                            <span className="text-sm font-medium text-gray-700">{action.label}</span>
-                                        </CardContent>
-                                    </Card>
+                                    <div className="bg-white border border-divider p-6 text-center hover:border-secondary transition-all cursor-pointer group">
+                                        <Icon className="w-6 h-6 mx-auto mb-3 text-primary group-hover:text-secondary transition-colors" />
+                                        <span className="text-sm font-bold text-primary">{action.label}</span>
+                                    </div>
                                 </Link>
                             );
                         })}

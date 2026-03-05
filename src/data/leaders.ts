@@ -28,7 +28,29 @@ Tragically, on June 20, 1990, Bodofa Upendra Nath Brahma was assassinated at the
     district: 'Kokrajhar',
     era: '1980s',
     isMartyr: true,
-    movement: 'Bodoland Statehood Movement'
+    movement: 'Bodoland Statehood Movement',
+    sources: [
+      {
+        type: 'book',
+        title: 'The Bodo Movement and Its Visionary Leader',
+        author: 'Dr. P.K. Nath',
+        year: '2012',
+        publisher: 'Northeast Academic Press'
+      },
+      {
+        type: 'newspaper',
+        title: 'Bodoland Sansari: Tribute to Bodofa',
+        author: 'Archive Desk',
+        year: '1990',
+        publisher: 'Kokrajhar Weekly'
+      },
+      {
+        type: 'archive',
+        title: 'Historical Records of ABSU 1967-1990',
+        author: 'Digital Heritage Library',
+        year: '2020'
+      }
+    ]
   },
   {
     id: 'sujit-narzary',

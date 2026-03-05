@@ -1,136 +1,134 @@
 'use client';
 
 import Link from 'next/link';
-import { Landmark, Mail, MapPin, Github, Twitter, Youtube, Heart } from 'lucide-react';
+import { Landmark, Mail, MapPin, Github, Twitter, Heart, ExternalLink, ShieldCheck } from 'lucide-react';
 
 const t = {
-  brandTitle: "Bodofa Memorial",
-  brandSubtitle: "Digital Heritage Archive",
-  description: "A comprehensive digital platform dedicated to preserving, documenting, and sharing the rich cultural heritage of the Bodo people for future generations.",
-  quickLinks: "Quick Links",
-  resources: "Resources",
-  contact: "Contact",
-  location: "Bodoland, Assam, India",
-  email: "contact@bodoresearch.org",
-  copyright: "All rights reserved.",
-  madeWith: "Made with love for our heritage",
+  brandTitle: "Bodo Research Memorial",
+  brandSubtitle: "Digital Heritage Repository",
+  description: "An institutional platform dedicated to the preservation of Bodo history, cultural documentation, and the commemoration of community leaders and martyrs.",
+  quickLinks: "Platform",
+  resources: "Academic Resources",
+  contact: "Institutional Contact",
+  location: "Kokrajhar, Bodoland, Assam",
+  email: "archive@bodoresearch.org",
+  copyright: "All rights reserved. Institutional Repository.",
+  madeWith: "Dedicated to the Bodo People",
 };
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-heritage text-white">
-      <div className="container-institutional py-section">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div>
-            <Link href="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-card bg-white/10 flex items-center justify-center">
-                <Landmark className="w-5 h-5 text-gold-400" />
+    <footer className="bg-primary text-white border-t border-white/5">
+      <div className="container-institutional py-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16">
+          {/* Brand & Mission */}
+          <div className="lg:col-span-1">
+            <Link href="/" className="flex items-center gap-4 mb-8 group">
+              <div className="w-12 h-12 bg-white/10 flex items-center justify-center relative overflow-hidden group-hover:bg-white/20 transition-colors">
+                <div className="absolute inset-0 opacity-10 bg-weave" />
+                <Landmark className="w-6 h-6 text-secondary relative z-10" />
               </div>
               <div>
-                <span className="font-display font-semibold text-white text-lg">
+                <span className="block font-bold text-white text-lg uppercase tracking-wider leading-none mb-1">
                   {t.brandTitle}
                 </span>
-                <p className="text-xs text-heritage-200">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">
                   {t.brandSubtitle}
                 </p>
               </div>
             </Link>
-            <p className="text-heritage-100 text-sm leading-relaxed">
-              {t.description}
+            <p className="text-white/60 text-sm leading-relaxed mb-8 italic">
+              &quot;{t.description}&quot;
             </p>
+            <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-secondary font-bold">
+              <ShieldCheck className="w-4 h-4" /> Official Historical Record
+            </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Platform Links */}
           <div>
-            <h4 className="font-display font-semibold text-lg mb-4 text-gold-400">
+            <h4 className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-8">
               {t.quickLinks}
             </h4>
-            <nav className="space-y-2">
-              <Link href="/leaders" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                All Leaders
+            <nav className="flex flex-col gap-4">
+              <Link href="/leaders" className="text-white/60 hover:text-secondary transition-colors text-xs font-bold uppercase tracking-widest">
+                Digital Archive
               </Link>
-              <Link href="/timeline" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                Timeline
+              <Link href="/timeline" className="text-white/60 hover:text-secondary transition-colors text-xs font-bold uppercase tracking-widest">
+                Historical Timeline
               </Link>
-              <Link href="/history" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                History
+              <Link href="/history" className="text-white/60 hover:text-secondary transition-colors text-xs font-bold uppercase tracking-widest">
+                History & Culture
               </Link>
-              <Link href="/tribute" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                Tribute Wall
+              <Link href="/research" className="text-white/60 hover:text-secondary transition-colors text-xs font-bold uppercase tracking-widest">
+                Research Portal
               </Link>
-              <Link href="/culture" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                Culture
-              </Link>
-              <Link href="/religion" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                Religion
+              <Link href="/tribute" className="text-white/60 hover:text-secondary transition-colors text-xs font-bold uppercase tracking-widest">
+                Memorial Wall
               </Link>
             </nav>
           </div>
 
           {/* Resources */}
           <div>
-            <h4 className="font-display font-semibold text-lg mb-4 text-gold-400">
+            <h4 className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-8">
               {t.resources}
             </h4>
-            <nav className="space-y-2">
-              <Link href="/research/submit" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                Submit Article
+            <nav className="flex flex-col gap-4">
+              <Link href="/research/submit" className="text-white/60 hover:text-secondary transition-colors text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                Document Submission <ExternalLink className="w-3 h-3" />
               </Link>
-              <Link href="/about" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                About Us
+              <Link href="/about" className="text-white/60 hover:text-secondary transition-colors text-xs font-bold uppercase tracking-widest">
+                Institutional Mission
               </Link>
-              <Link href="/api/leaders" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                API Access
+              <Link href="/citation" className="text-white/60 hover:text-secondary transition-colors text-xs font-bold uppercase tracking-widest">
+                Citation Guide
               </Link>
-              <Link href="/admin" className="block text-heritage-100 hover:text-white transition-colors text-sm">
-                Admin Portal
+              <Link href="/admin" className="text-white/40 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest mt-4">
+                Staff Portal
               </Link>
             </nav>
           </div>
 
-          {/* Contact */}
+          {/* Contact & Official */}
           <div>
-            <h4 className="font-display font-semibold text-lg mb-4 text-gold-400">
+            <h4 className="text-secondary font-bold text-xs uppercase tracking-[0.3em] mb-8">
               {t.contact}
             </h4>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 text-heritage-100 text-sm">
-                <MapPin className="w-4 h-4 text-gold-400 flex-shrink-0" />
-                <span>{t.location}</span>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4 text-white/60 text-sm">
+                <MapPin className="w-5 h-5 text-secondary shrink-0" />
+                <span className="leading-relaxed">{t.location}</span>
               </div>
-              <div className="flex items-center gap-3 text-heritage-100 text-sm">
-                <Mail className="w-4 h-4 text-gold-400 flex-shrink-0" />
+              <div className="flex items-center gap-4 text-white/60 text-sm">
+                <Mail className="w-5 h-5 text-secondary shrink-0" />
                 <span>{t.email}</span>
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="flex gap-3 mt-6">
-              <a href="#" className="w-9 h-9 rounded-card bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="GitHub">
-                <Github className="w-4 h-4" />
+            {/* Social Record Links */}
+            <div className="flex gap-4 mt-10">
+              <a href="#" className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-secondary transition-colors group" aria-label="Social">
+                <Github className="w-4 h-4 group-hover:text-secondary" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-card bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Twitter">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-card bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="YouTube">
-                <Youtube className="w-4 h-4" />
+              <a href="#" className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-secondary transition-colors group" aria-label="Social">
+                <Twitter className="w-4 h-4 group-hover:text-secondary" />
               </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-heritage-600 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-heritage-200 text-sm">
+        {/* Bottom Bar */}
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="text-white/30 text-[10px] font-bold uppercase tracking-[0.3em]">
             © {currentYear} {t.brandTitle}. {t.copyright}
-          </p>
-          <p className="flex items-center gap-2 text-heritage-200 text-sm">
-            <Heart className="w-4 h-4 text-gold-400" />
+          </div>
+          <div className="flex items-center gap-3 text-white/30 text-[10px] font-bold uppercase tracking-[0.3em]">
+            <Heart className="w-4 h-4 text-secondary/30" />
             {t.madeWith}
-          </p>
+          </div>
         </div>
       </div>
     </footer>

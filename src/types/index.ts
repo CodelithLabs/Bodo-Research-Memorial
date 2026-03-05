@@ -18,6 +18,13 @@ export interface Leader {
   era: string;
   isMartyr: boolean;
   movement: string;
+  sources?: {
+    type: 'book' | 'journal' | 'newspaper' | 'interview' | 'archive';
+    title: string;
+    author: string;
+    year: string;
+    publisher?: string;
+  }[];
 }
 
 export interface TimelineEvent {

@@ -1,158 +1,224 @@
 'use client';
 
-import { useState } from 'react';
-import { FileText, AlertCircle, CheckCircle, Upload } from 'lucide-react';
-import { Button, Input, Card, CardContent, Badge } from '@/components/ui';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, Upload, CheckCircle, Info, FileText } from 'lucide-react';
+import Link from 'next/link';
 
-const categories = [
-    'Leaders',
-    'Culture',
-    'Religion',
-    'History',
-    'Language',
-    'Music & Dance',
-    'Cuisine',
-    'Regions',
-];
+export default function ResearchSubmitPage() {
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [formData, setFormData] = useState({
+        title: '',
+        author: '',
+        university: '',
+        year: '',
+        category: 'Politics',
+        abstract: '',
+        email: ''
+    });
 
-export default function SubmitResearchPage() {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
-
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setIsSubmitting(true);
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        setIsSubmitting(false);
-        setSubmitted(true);
+        // Simulate submission
+        setTimeout(() => setIsSubmitted(true), 1000);
     };
 
-    if (submitted) {
+    if (isSubmitted) {
         return (
-            <div className="min-h-screen bg-stone-50 flex items-center justify-center py-12 px-4">
-                <Card className="max-w-md w-full">
-                    <CardContent className="p-8 text-center">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <CheckCircle className="w-8 h-8 text-green-600" />
-                        </div>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2">Submission Received!</h2>
-                        <p className="text-gray-600 mb-6">
-                            Thank you for your contribution. Our editorial team will review your submission.
-                        </p>
-                        <Button onClick={() => setSubmitted(false)} variant="outline" className="w-full">
-                            Submit Another Article
-                        </Button>
-                    </CardContent>
-                </Card>
+            <div className="min-h-screen bg-background flex items-center justify-center p-6 font-body">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="max-w-md w-full bg-white border border-divider p-12 text-center"
+                >
+                    <div className="w-20 h-20 bg-secondary/20 flex items-center justify-center mx-auto mb-8 rounded-full">
+                        <CheckCircle className="w-10 h-10 text-primary" />
+                    </div>
+                    <h2 className="text-3xl font-display font-bold text-primary mb-4">Submission Received</h2>
+                    <p className="text-text-secondary mb-10 leading-relaxed font-serif italic text-sm">
+                        Your research paper has been successfully uploaded to the repository.
+                        Our academic committee will review the document for verification before public listing.
+                    </p>
+                    <Link href="/research/papers" className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white text-xs font-bold uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all w-full">
+                        Return to Repository
+                    </Link>
+                </motion.div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-stone-50">
-            <section className="bg-gradient-to-r from-indigo-700 to-indigo-900 text-white py-16">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center space-x-3 mb-4">
-                        <FileText className="w-8 h-8 text-indigo-300" />
-                        <Badge variant="secondary" className="bg-indigo-600">Research Portal</Badge>
-                    </div>
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">Submit Your Research</h1>
-                    <p className="text-lg text-indigo-100 max-w-2xl">
-                        Contribute to the Bodo Research Archive by submitting articles about Bodo heritage.
+        <div className="min-h-screen bg-background font-body">
+            {/* Header */}
+            <section className="bg-primary text-white pt-24 pb-16 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-weave" />
+                <div className="container-institutional relative z-10">
+                    <Link href="/research/papers" className="inline-flex items-center text-secondary/80 hover:text-secondary text-xs font-bold uppercase tracking-[0.2em] mb-12 transition-colors">
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        Back to Repository
+                    </Link>
+                    <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 italic">Submit <span className="text-secondary">Scholarship</span></h1>
+                    <p className="text-xl text-white/70 max-w-3xl leading-relaxed font-serif">
+                        Contribute your academic work to the Bodo Research Memorial. We welcome theses,
+                        dissertations, and peer-reviewed articles.
                     </p>
                 </div>
             </section>
 
-            <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <Card className="border-0 shadow-xl">
-                    <CardContent className="p-8">
-                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
-                            <div className="flex items-start">
-                                <AlertCircle className="w-5 h-5 text-amber-600 mr-3 mt-0.5 flex-shrink-0" />
-                                <div>
-                                    <h3 className="font-semibold text-amber-900 mb-1">Submission Guidelines</h3>
-                                    <ul className="text-sm text-amber-800 list-disc list-inside space-y-1">
-                                        <li>All submissions are reviewed by our editorial team</li>
-                                        <li>Include proper citations and references</li>
-                                        <li>Content must be original or properly attributed</li>
-                                        <li>Minimum 500 words for articles</li>
+            <section className="section-padding">
+                <div className="container-institutional">
+                    <div className="grid lg:grid-cols-12 gap-16">
+                        <div className="lg:col-span-7">
+                            <form onSubmit={handleSubmit} className="space-y-8 bg-white border border-divider p-10 md:p-16 shadow-sm">
+                                <div className="grid md:grid-cols-2 gap-8">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-primary">Paper Title *</label>
+                                        <input
+                                            required
+                                            type="text"
+                                            className="w-full bg-background border border-divider p-4 focus:outline-none focus:border-secondary transition-colors font-medium text-sm"
+                                            placeholder="e.g. Bodo Language Evolution"
+                                            value={formData.title}
+                                            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-primary">Author Name *</label>
+                                        <input
+                                            required
+                                            type="text"
+                                            className="w-full bg-background border border-divider p-4 focus:outline-none focus:border-secondary transition-colors font-medium text-sm"
+                                            placeholder="Full Name"
+                                            value={formData.author}
+                                            onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-primary">University / Institution *</label>
+                                        <input
+                                            required
+                                            type="text"
+                                            className="w-full bg-background border border-divider p-4 focus:outline-none focus:border-secondary transition-colors font-medium text-sm"
+                                            placeholder="e.g. Gauhati University"
+                                            value={formData.university}
+                                            onChange={(e) => setFormData({ ...formData, university: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-primary">Year of Publication *</label>
+                                        <input
+                                            required
+                                            type="text"
+                                            className="w-full bg-background border border-divider p-4 focus:outline-none focus:border-secondary transition-colors font-medium text-sm"
+                                            placeholder="YYYY"
+                                            value={formData.year}
+                                            onChange={(e) => setFormData({ ...formData, year: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-primary">Academic Category</label>
+                                    <select
+                                        className="w-full bg-background border border-divider p-4 focus:outline-none focus:border-secondary transition-colors font-medium text-sm appearance-none"
+                                        value={formData.category}
+                                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                    >
+                                        <option>Politics</option>
+                                        <option>Culture</option>
+                                        <option>Language</option>
+                                        <option>History</option>
+                                    </select>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-primary">Abstract / Summary *</label>
+                                    <textarea
+                                        required
+                                        rows={6}
+                                        className="w-full bg-background border border-divider p-4 focus:outline-none focus:border-secondary transition-colors font-serif italic text-sm"
+                                        placeholder="Briefly describe the key findings and methodology of your research..."
+                                        value={formData.abstract}
+                                        onChange={(e) => setFormData({ ...formData, abstract: e.target.value })}
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-primary">Contact Email *</label>
+                                    <input
+                                        required
+                                        type="email"
+                                        className="w-full bg-background border border-divider p-4 focus:outline-none focus:border-secondary transition-colors font-medium text-sm"
+                                        placeholder="scholar@university.edu"
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    />
+                                </div>
+
+                                <div className="border-2 border-dashed border-divider p-12 text-center group hover:border-secondary transition-colors cursor-pointer">
+                                    <Upload className="w-10 h-10 text-text-muted mx-auto mb-4 group-hover:text-secondary transition-colors" />
+                                    <p className="text-xs font-bold uppercase tracking-widest group-hover:text-primary">Click to upload PDF</p>
+                                    <p className="text-[10px] text-text-muted mt-2">Maximum file size: 20MB</p>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className="w-full py-5 bg-primary text-white text-xs font-bold uppercase tracking-[0.3em] hover:bg-secondary hover:text-primary transition-all shadow-xl"
+                                >
+                                    Submit for Verification
+                                </button>
+                            </form>
+                        </div>
+
+                        <div className="lg:col-span-5">
+                            <div className="sticky top-32 space-y-8">
+                                <div className="bg-primary/5 p-10 border-l-4 border-secondary">
+                                    <Info className="w-8 h-8 text-secondary mb-6" />
+                                    <h3 className="text-xl font-display font-bold text-primary mb-4">Submission Ethics</h3>
+                                    <p className="text-text-secondary leading-relaxed text-sm italic font-serif">
+                                        By submitting your work, you confirm that you are the original author or have the
+                                        rights to distribute this research. All submissions undergo a verification process
+                                        by our board of historians and scholars.
+                                    </p>
+                                    <ul className="mt-8 space-y-4">
+                                        {[
+                                            'Peer-reviewed status preferred',
+                                            'Institutional affiliation required',
+                                            'Open access compliance'
+                                        ].map((item, idx) => (
+                                            <li key={idx} className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-primary">
+                                                <div className="w-1.5 h-1.5 bg-secondary rounded-full" />
+                                                {item}
+                                            </li>
+                                        ))}
                                     </ul>
+                                </div>
+
+                                <div className="p-10 border border-divider bg-white shadow-sm">
+                                    <h3 className="text-primary font-bold uppercase tracking-widest text-sm mb-6 flex items-center">
+                                        <FileText className="w-4 h-4 mr-2" />
+                                        Review Process
+                                    </h3>
+                                    <div className="space-y-8 relative before:absolute before:left-3 before:top-2 before:bottom-2 before:w-px before:bg-divider">
+                                        {[
+                                            { step: 'Initial Screening', time: '2-3 Days' },
+                                            { step: 'Expert Verification', time: '1-2 Weeks' },
+                                            { step: 'Public Archiving', time: 'Immediate' }
+                                        ].map((item, idx) => (
+                                            <div key={idx} className="relative pl-10">
+                                                <div className="absolute left-0 top-1 w-6 h-6 bg-white border-2 border-divider rounded-full flex items-center justify-center z-10">
+                                                    <div className="w-2 h-2 bg-primary rounded-full" />
+                                                </div>
+                                                <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.step}</p>
+                                                <p className="text-[10px] text-text-muted mt-1 italic">{item.time}</p>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                    Article Title <span className="text-red-500">*</span>
-                                </label>
-                                <Input placeholder="Enter the title of your article" required />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                    Category <span className="text-red-500">*</span>
-                                </label>
-                                <select className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                                    <option value="">Select a category</option>
-                                    {categories.map((cat) => (
-                                        <option key={cat} value={cat}>{cat}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                    Abstract / Summary <span className="text-red-500">*</span>
-                                </label>
-                                <textarea rows={3} className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Provide a brief summary" required />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                    Full Content <span className="text-red-500">*</span>
-                                </label>
-                                <textarea rows={12} className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-mono text-sm" placeholder="Write your article content here" required />
-                            </div>
-
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        Your Name <span className="text-red-500">*</span>
-                                    </label>
-                                    <Input placeholder="Your full name" required />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                                        Email Address <span className="text-red-500">*</span>
-                                    </label>
-                                    <Input type="email" placeholder="your@email.com" required />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">References</label>
-                                <textarea rows={4} className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm" placeholder="List your references" />
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1.5">Attach Files</label>
-                                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                                    <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                                    <p className="text-sm text-gray-600">Drag and drop files here, or click to browse</p>
-                                    <p className="text-xs text-gray-400 mt-1">PDF, DOC, DOCX up to 10MB</p>
-                                </div>
-                            </div>
-
-                            <div className="flex justify-end gap-4 pt-4">
-                                <Button type="button" variant="outline">Save as Draft</Button>
-                                <Button type="submit" disabled={isSubmitting} className="bg-indigo-600 hover:bg-indigo-700">
-                                    {isSubmitting ? 'Submitting...' : 'Submit for Review'}
-                                </Button>
-                            </div>
-                        </form>
-                    </CardContent>
-                </Card>
+                    </div>
+                </div>
             </section>
         </div>
     );
