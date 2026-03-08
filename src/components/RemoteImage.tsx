@@ -18,5 +18,8 @@ export default function RemoteImage({ src, alt, width = '100%', height = 'auto',
         );
     }
 
-    return <img src={src} alt={alt} width={width} height={height} className={className} loading="lazy" />;
+    return (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={src} alt={alt} width={width} height={height} className={className} loading="lazy" />
+    );
 }

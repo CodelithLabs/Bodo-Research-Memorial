@@ -2,6 +2,15 @@
 
 A production-ready digital encyclopedia for Bodo civilization, culture, religion, leaders, language, and history.
 
+## ✨ Features
+
+- Responsive, accessible layout with Tailwind CSS and Framer Motion animations.
+- Dynamic leaders archive with search, region filters, and individual metadata-rich pages.
+- Research portal with submission form, searchable papers listing, and PDF downloads.
+- Contact page with validated form, honeypot anti-spam, rate-limited API route, and map.
+- Dark mode toggle persists user preference and follows system setting.
+- Remote image component for external assets and placeholder handling.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -135,6 +144,13 @@ src/
 
 ## 🎨 Design System
 
+### Theme and Styles
+- Light blue‑gray background tint (#EFF2F7) replaces earlier ivory shade
+- Tailwind configuration extended with custom color palette, spacing, shadows
+- Subtle woven pattern overlay and gradient orbs used throughout
+- Header shrunk down, background blurs on scroll, and nav icons added for compactness
+
+
 ### Colors
 - Primary: Amber (#b45309)
 - Secondary: Indigo (#1e3a5f)
@@ -150,17 +166,37 @@ src/
 
 ## 📱 Features
 
+### Additional Pages
+- **About** page with institutional description and sample image credit
+- **Contact** page with interactive form, map iframe, email/phone/WhatsApp info, office hours, and social links
+
+### Components
+- `RemoteImage` handles optional external images with placeholder fallback
+- `Hero` component includes decorative orbs, particles, and optional linked image
+- `LeaderCard` now supports loading portraits and displays martyr badge
+
+### API & Form Handling
+- New `/api/contact` POST route for handling contact form submissions; stubbed mailer ready for integration
+- Client-side form sends JSON payload and shows success message
+
+### Constants & Configuration
+- Centralized constants file (`src/lib/constants.ts`) for contact details and social URLs
+- Next.js image domains configured to allow Unsplash
+
+
 ### Homepage
-- Hero section with stats
-- Category cards
-- Featured leaders
-- Call-to-action sections
+- Hero section with animated background and rotating emblem (includes external photo credit example)
+- Category cards with rich, realistic descriptions for each research domain
+- Featured leaders grid (now supports optional portraits via `imageUrl` and placeholder initials)
+- Research domains rewritten with actual Bodo research topics
+- Compact, responsive header with icon-only menu on mobile
+- Call-to-action buttons and stats
 
 ### Leaders Section
 - Grid/list view with filtering
-- Search functionality
-- Region filtering
-- Individual leader pages with timeline
+- Search functionality and region filters
+- Individual leader pages with timeline, citations and related profiles
+- Portrait handling: local initials placeholder or remote image via `RemoteImage` component
 
 ### Culture & Religion
 - Category-based organization
@@ -176,9 +212,30 @@ src/
 - Statistics overview
 - Pending submissions
 - Recent activity feed
+- Quick‑action buttons for adding leaders/articles/users
 - User management
 
 ## 🔧 Configuration
+
+### Environment Variables
+
+```env
+# Contact form (example providers)
+# SENDGRID_API_KEY=...
+# MAILGUN_API_KEY=...
+
+# Database
+MONGODB_URI=mongodb+srv://...
+
+# Auth
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret
+JWT_SECRET=your-jwt-secret
+
+# App
+NEXT_PUBLIC_APP_NAME=Bodo Research Archive
+```
+
 
 ### Environment Variables
 

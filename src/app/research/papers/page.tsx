@@ -20,7 +20,7 @@ export default function ResearchPapersPage() {
     });
 
     return (
-        <div className="min-h-screen bg-background font-body">
+        <div className="min-h-screen bg-background dark:bg-slate-900 font-body">
             {/* Header */}
             <section className="bg-primary text-white pt-24 pb-16 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-weave" />
@@ -46,7 +46,7 @@ export default function ResearchPapersPage() {
             </section>
 
             {/* Filters & Search */}
-            <section className="bg-white border-b border-divider py-6 sticky top-0 z-30 shadow-sm">
+            <section className="bg-white dark:bg-slate-800 border-b border-divider dark:border-slate-700 py-6 sticky top-0 z-30 shadow-sm">
                 <div className="container-institutional">
                     <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
                         <div className="relative w-full lg:max-w-md">
@@ -56,7 +56,7 @@ export default function ResearchPapersPage() {
                                 placeholder="Search by title, author, or keyword..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-12 pr-4 py-3 bg-background border border-divider focus:outline-none focus:border-secondary transition-colors text-sm font-medium"
+                                className="w-full pl-12 pr-4 py-3 bg-background dark:bg-slate-800 border border-divider dark:border-slate-700 focus:outline-none focus:border-secondary transition-colors text-sm font-medium dark:text-white"
                             />
                         </div>
                         <div className="flex items-center gap-4 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0">
@@ -65,8 +65,8 @@ export default function ResearchPapersPage() {
                                     key={cat}
                                     onClick={() => setSelectedCategory(cat)}
                                     className={`px-6 py-2 text-xs font-bold uppercase tracking-widest whitespace-nowrap border transition-all ${selectedCategory === cat
-                                        ? 'bg-primary text-white border-primary'
-                                        : 'bg-transparent text-text-muted border-divider hover:border-secondary'
+                                        ? 'bg-primary text-white border-primary dark:bg-primary dark:text-white'
+                                        : 'bg-transparent text-text-muted dark:text-white border-divider dark:border-slate-700 hover:border-secondary dark:hover:border-secondary'
                                         }`}
                                 >
                                     {cat}
@@ -87,7 +87,7 @@ export default function ResearchPapersPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 key={paper.id}
-                                className="bg-white border border-divider p-8 md:p-10 hover:border-secondary transition-all group"
+                                className="bg-white dark:bg-slate-800 border border-divider dark:border-slate-700 p-8 md:p-10 hover:border-secondary transition-all group"
                             >
                                 <div className="flex flex-col md:flex-row gap-8">
                                     <div className="w-16 h-16 bg-primary/5 flex items-center justify-center shrink-0 border border-divider group-hover:bg-primary transition-colors">
@@ -128,7 +128,7 @@ export default function ResearchPapersPage() {
                         ))}
 
                         {filteredPapers.length === 0 && (
-                            <div className="text-center py-24 bg-white border border-divider">
+                            <div className="text-center py-24 bg-white dark:bg-slate-800 border border-divider dark:border-slate-700">
                                 <Search className="w-16 h-16 text-text-muted mx-auto mb-6 opacity-20" />
                                 <h3 className="text-2xl font-display font-bold text-primary">No research found</h3>
                                 <p className="text-text-muted mt-2">Adjust your search or filter to find relevant papers.</p>

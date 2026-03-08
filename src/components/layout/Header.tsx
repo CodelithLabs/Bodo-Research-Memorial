@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Landmark, Search, Home, Archive, Clock, Calendar, BookOpen, Heart, Mail } from 'lucide-react';
+import { Menu, X, Landmark, Search, Home, Archive, Clock, Calendar, BookOpen, Heart, Mail, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -20,7 +20,20 @@ const navLinks = [
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+        if (typeof window !== 'undefined') {
+            const stored = localStorage.getItem('theme');
+            if (stored === 'dark' || stored === 'light') return stored;
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        return 'light';
+    });
     const pathname = usePathname();
+
+    useEffect(() => {
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        localStorage.setItem('theme', theme);
+    }, [theme]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -32,7 +45,7 @@ export default function Header() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2' : 'bg-white py-4 border-b border-divider'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-md py-2' : 'bg-white dark:bg-slate-900 py-4 border-b border-divider'
                 }`}
         >
             <div className="container-institutional">
@@ -62,7 +75,8 @@ export default function Header() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className={`relative px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-secondary flex items-center justify-center sm:justify-start gap-1 ${isActive ? 'text-primary' : 'text-text-muted'
+                                    aria-label={link.label}
+                                    className={`relative px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-secondary flex items-center justify-center sm:justify-start gap-1 ${isActive ? 'text-primary dark:text-secondary' : 'text-text-muted dark:text-white'
                                         }`}
                                 >
                                     {Icon && <Icon className="w-4 h-4 sm:hidden" />}
@@ -80,6 +94,14 @@ export default function Header() {
 
                     {/* Action Area */}
                     <div className="flex items-center gap-4">
+                        <button
+                            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                            className="p-2 text-primary hover:text-secondary transition-colors"
+                            aria-label="Toggle theme"
+                        >
+                            {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                        </button>
+
                         <button className="hidden md:flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary bg-primary/5 px-4 py-2 hover:bg-primary hover:text-white transition-all">
                             <Search className="w-4 h-4" />
                             <span className="hidden xl:inline">Library Search</span>
@@ -104,7 +126,7 @@ export default function Header() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="lg:hidden bg-white border-t border-divider overflow-hidden"
+                        className="lg:hidden bg-white dark:bg-slate-900 border-t border-divider overflow-hidden"
                     >
                         <div className="container-institutional py-8 space-y-4">
                             {navLinks.map((link) => {

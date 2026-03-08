@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Landmark, Mail, MapPin, Github, Twitter, Heart, ExternalLink, ShieldCheck, Phone } from 'lucide-react';
-import { CONTACT_EMAIL, CONTACT_ADDRESS, CONTACT_PHONE, SOCIAL_GITHUB, SOCIAL_TWITTER } from '@/lib/constants';
+import { Landmark, Mail, MapPin, Github, Twitter, Heart, ExternalLink, ShieldCheck } from 'lucide-react';
+import { CONTACT_EMAIL, CONTACT_ADDRESS } from '@/lib/constants';
 
 const t = {
   brandTitle: "Bodo Research Memorial",

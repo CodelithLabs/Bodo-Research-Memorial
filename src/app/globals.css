@@ -20,6 +20,7 @@
     /* Light Blue‑Gray Tint */
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
+    @apply dark:bg-slate-900 dark:text-white;
   }
 
   /* Academic Typography */
@@ -35,6 +36,7 @@
     color: #0F3D2E;
     /* Primary Green */
     letter-spacing: -0.02em;
+    @apply dark:text-secondary;
   }
 
   h1 {
@@ -57,6 +59,7 @@
   a {
     @apply text-primary transition-colors duration-200 border-b border-transparent;
     text-decoration: none;
+    @apply dark:text-secondary;
   }
 
   a:hover {
@@ -91,6 +94,7 @@
   .card-academic {
     @apply bg-white border border-divider transition-all duration-300;
     @apply hover:shadow-academic hover:border-secondary/30;
+    @apply dark:bg-slate-800 dark:border-slate-700;
   }
 
   /* Buttons */

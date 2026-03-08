@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
 import RemoteImage from '@/components/RemoteImage';
+
+export const metadata: Metadata = {
+  title: 'About – Bodo Research Memorial',
+  description: 'Learn about the mission and vision of the Bodo Research Memorial digital archive.',
+};
 
 export default function AboutPage() {
     return (

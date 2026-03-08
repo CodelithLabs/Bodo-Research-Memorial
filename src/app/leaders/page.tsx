@@ -1,6 +1,12 @@
 'use client';
 
+import type { Metadata } from 'next';
 import { useState } from 'react';
+
+export const metadata: Metadata = {
+  title: 'Leaders & Martyrs – Bodo Research Memorial',
+  description: 'Browse biographies of influential Bodo leaders and martyrs in our archive.',
+};
 import Link from 'next/link';
 import RemoteImage from '@/components/RemoteImage';
 import {
@@ -42,7 +48,7 @@ export default function LeadersPage() {
             </section>
 
             {/* Discovery & Filters */}
-            <section className="sticky top-0 z-30 bg-white border-b border-divider shadow-sm py-6">
+            <section className="sticky top-0 z-30 bg-white dark:bg-slate-800 border-b border-divider dark:border-slate-700 shadow-sm py-6">
                 <div className="container-institutional">
                     <div className="flex flex-col lg:flex-row gap-8 items-center justify-between">
                         {/* Search */}
@@ -51,7 +57,7 @@ export default function LeadersPage() {
                             <input
                                 type="text"
                                 placeholder="Search by name, title, or movement..."
-                                className="w-full pl-12 pr-4 py-3 bg-background border border-divider rounded-sm focus:outline-none focus:border-secondary transition-colors"
+                                className="w-full pl-12 pr-4 py-3 bg-background dark:bg-slate-800 border border-divider dark:border-slate-700 rounded-sm focus:outline-none focus:border-secondary transition-colors dark:text-white"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
@@ -68,8 +74,8 @@ export default function LeadersPage() {
                                     key={region}
                                     onClick={() => setActiveRegion(region)}
                                     className={`px-4 py-2 text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${activeRegion === region
-                                        ? 'bg-secondary text-primary'
-                                        : 'bg-background text-text-muted hover:bg-divider'
+                                        ? 'bg-secondary text-primary dark:bg-secondary dark:text-primary'
+                                        : 'bg-background text-text-muted dark:bg-slate-800 dark:text-white hover:bg-divider dark:hover:bg-slate-700'
                                         }`}
                                 >
                                     {region}

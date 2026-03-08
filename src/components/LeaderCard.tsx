@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Calendar, MapPin, Star, ArrowRight } from 'lucide-react';
 import { Leader } from '@/types';
 import { formatDate, calculateAge } from '@/lib/utils';
+import RemoteImage from '@/components/RemoteImage';
 import styles from './LeaderCard.module.css';
 
 interface LeaderCardProps {
@@ -17,11 +18,10 @@ export default function LeaderCard({ leader }: LeaderCardProps) {
         <article className={styles.card}>
             <div className={styles.imageContainer}>
                 {leader.imageUrl ? (
-                    <img
+                    <RemoteImage
                         src={leader.imageUrl}
                         alt={leader.name}
                         className={styles.leaderImage}
-                        loading="lazy"
                     />
                 ) : (
                     <div className={styles.imagePlaceholder}>

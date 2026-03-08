@@ -1,7 +1,32 @@
 'use client';
 
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import RemoteImage from '@/components/RemoteImage';
+
+export const metadata: Metadata = {
+  title: 'Bodo Research Memorial – Digital Heritage Repository',
+  description: 'An institutional archive of Bodo history, culture, and scholarly research.',
+  openGraph: {
+    title: 'Bodo Research Memorial',
+    description: 'Explore the Bodo digital heritage archive including leaders, research, and timelines.',
+    url: 'https://yourdomain.com',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Bodo Research Memorial',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Bodo Research Memorial',
+    description: 'Explore the Bodo digital heritage archive including leaders, research, and timelines.',
+  },
+};
 import {
   ArrowRight,
   Users,
@@ -60,7 +85,7 @@ export default function HomePage() {
       {/* ============================================
           FEATURED LEADERS - Institutional Grid
           ============================================ */}
-      <section className="section-padding bg-white relative">
+      <section className="section-padding bg-white dark:bg-slate-800 relative">
         <div className="container-institutional">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
