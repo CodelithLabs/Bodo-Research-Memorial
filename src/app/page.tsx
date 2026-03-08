@@ -198,10 +198,21 @@ export default function HomePage() {
                 <cat.icon className="w-10 h-10 text-primary mb-8 group-hover:scale-110 transition-transform" />
                 <h3 className="text-xl font-bold mb-4">{cat.title}</h3>
                 <p className="text-text-secondary text-sm leading-relaxed mb-6">
-                  Structured datasets and academic papers exploring {cat.title.toLowerCase()} in the Bodo context.
+                  {cat.title === 'Historical Archives' &&
+                    'Explore digitized colonial records, census data, and early manuscripts documenting Bodo settlements, land rights and administrative history.'}
+                  {cat.title === 'Cultural Sociology' &&
+                    'Study ethnographic surveys, village case studies, and oral interviews that illuminate caste, marriage, and festival life among the Bodo people.'}
+                  {cat.title === 'Linguistic Studies' &&
+                    'Access grammars, lexicons and audio corpora that capture the phonetics, dialectal variation and script history of the Bodo language.'}
+                  {cat.title === 'Religious Philosophy' &&
+                    'Read ritual manuals, theological essays, and field notes on Bathouism, Todaism and syncretic practices across Bodo communities.'}
+                  {cat.title === 'Biographical Studies' &&
+                    'Browse biographies, autobiographies and oral histories of political leaders, writers and activists central to the Bodo movement.'}
+                  {cat.title === 'Movement Analysis' &&
+                    'Review timelines, policy papers and protest archives that trace the evolution of the Bodoland statehood struggle.'}
                 </p>
                 <span className="text-primary text-xs font-bold uppercase tracking-widest flex items-center">
-                  Browse Domain <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  Explore <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             ))}
