@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import RemoteImage from '@/components/RemoteImage';
 import {
   ArrowRight,
   Users,
@@ -80,11 +80,10 @@ export default function HomePage() {
               <div key={leader.id} className="reveal group">
                 <Link href={`/leaders/${leader.id}`} className="block overflow-hidden relative aspect-[3/4] mb-6 card-academic">
                   {leader.imageUrl ? (
-                    <Image
+                    <RemoteImage
                       src={leader.imageUrl}
                       alt={leader.name}
-                      fill
-                      className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                      className="absolute inset-0 object-cover grayscale hover:grayscale-0 transition-all duration-700"
                     />
                   ) : (
                     <div className="absolute inset-0 bg-background flex items-center justify-center">

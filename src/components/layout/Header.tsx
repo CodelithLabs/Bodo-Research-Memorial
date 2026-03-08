@@ -8,11 +8,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
     { href: '/leaders', label: 'Archive' },
     { href: '/history', label: 'History' },
     { href: '/timeline', label: 'Timeline' },
     { href: '/research', label: 'Research' },
     { href: '/tribute', label: 'Tributes' },
+    { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -30,14 +32,14 @@ export default function Header() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-3' : 'bg-white py-5 border-b border-divider'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2' : 'bg-white py-4 border-b border-divider'
                 }`}
         >
             <div className="container-institutional">
                 <div className="flex items-center justify-between">
                     {/* Logo Section */}
                     <Link href="/" className="flex items-center gap-4 group">
-                        <div className="w-12 h-12 bg-primary flex items-center justify-center relative overflow-hidden group-hover:bg-primary/90 transition-colors">
+                        <div className="w-10 h-10 bg-primary flex items-center justify-center relative overflow-hidden group-hover:bg-primary/90 transition-colors">
                             <div className="absolute inset-0 opacity-10 bg-weave" />
                             <Landmark className="w-6 h-6 text-secondary relative z-10" />
                         </div>
@@ -59,7 +61,7 @@ export default function Header() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className={`relative px-5 py-2 text-[11px] font-bold uppercase tracking-[0.2em] transition-all hover:text-secondary ${isActive ? 'text-primary' : 'text-text-muted'
+                                    className={`relative px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-secondary ${isActive ? 'text-primary' : 'text-text-muted'
                                         }`}
                                 >
                                     {link.label}

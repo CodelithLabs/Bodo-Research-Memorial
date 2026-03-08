@@ -56,11 +56,9 @@ export default function AdminDashboard() {
                                 <p className="text-white/60 text-sm">Manage content and users</p>
                             </div>
                         </div>
-                        <Link href="/admin/settings">
-                            <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white border border-white/20 px-4 py-2 hover:bg-white hover:text-primary transition-all">
-                                <Settings className="w-4 h-4" />
-                                Settings
-                            </button>
+                        <Link href="/admin/settings" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white border border-white/20 px-4 py-2 hover:bg-white hover:text-primary transition-all">
+                            <Settings className="w-4 h-4" />
+                            Settings
                         </Link>
                     </div>
                 </div>

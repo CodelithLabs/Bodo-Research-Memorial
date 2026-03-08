@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
+import RemoteImage from '@/components/RemoteImage';
 import {
     ChevronLeft,
     ChevronRight,
@@ -140,7 +140,7 @@ export default function Timeline({ events }: TimelineProps) {
                                         <div className="flex items-center gap-4">
                                             <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center border border-divider overflow-hidden grayscale">
                                                 {leader.imageUrl ? (
-                                                    <Image src={leader.imageUrl} alt={leader.name} width={64} height={64} className="object-cover" />
+                                                    <RemoteImage src={leader.imageUrl} alt={leader.name} width={64} height={64} className="object-cover" />
                                                 ) : (
                                                     <User className="w-8 h-8 text-primary/20" />
                                                 )}

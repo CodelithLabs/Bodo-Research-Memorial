@@ -11,7 +11,7 @@ const t = {
   resources: "Academic Resources",
   contact: "Institutional Contact",
   location: "Kokrajhar, Bodoland, Assam",
-  email: "archive@bodoresearch.org",
+  email: "archive@codelithlabs.in",
   copyright: "All rights reserved. Institutional Repository.",
   madeWith: "Dedicated to the Bodo People",
 };
@@ -110,10 +110,10 @@ export default function Footer() {
 
             {/* Social Record Links */}
             <div className="flex gap-4 mt-10">
-              <a href="#" className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-secondary transition-colors group" aria-label="Social">
+              <a href="https://github.com/bodoresearch" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-secondary transition-colors group" aria-label="GitHub">
                 <Github className="w-4 h-4 group-hover:text-secondary" />
               </a>
-              <a href="#" className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-secondary transition-colors group" aria-label="Social">
+              <a href="https://twitter.com/bodoresearch" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-secondary transition-colors group" aria-label="Twitter">
                 <Twitter className="w-4 h-4 group-hover:text-secondary" />
               </a>
             </div>

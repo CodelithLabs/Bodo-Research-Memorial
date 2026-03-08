@@ -16,9 +16,18 @@ export default function LeaderCard({ leader }: LeaderCardProps) {
     return (
         <article className={styles.card}>
             <div className={styles.imageContainer}>
-                <div className={styles.imagePlaceholder}>
-                    <span>{leader.name.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>
-                </div>
+                {leader.imageUrl ? (
+                    <img
+                        src={leader.imageUrl}
+                        alt={leader.name}
+                        className={styles.leaderImage}
+                        loading="lazy"
+                    />
+                ) : (
+                    <div className={styles.imagePlaceholder}>
+                        <span>{leader.name.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>
+                    </div>
+                )}
                 {leader.isMartyr && (
                     <div className={styles.martyrBadge}>
                         <Star size={14} />

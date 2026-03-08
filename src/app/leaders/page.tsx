@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import RemoteImage from '@/components/RemoteImage';
 import {
     Users,
     Search,
@@ -98,11 +98,10 @@ export default function LeadersPage() {
                             >
                                 <div className="relative aspect-[16/10] overflow-hidden bg-primary/5">
                                     {leader.imageUrl ? (
-                                        <Image
+                                        <RemoteImage
                                             src={leader.imageUrl}
                                             alt={leader.name}
-                                            fill
-                                            className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                                            className="absolute inset-0 object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                                         />
                                     ) : (
                                         <div className="absolute inset-0 flex items-center justify-center">

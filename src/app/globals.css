@@ -16,23 +16,38 @@
   body {
     font-family: 'Inter', system-ui, sans-serif;
     color: #1A1A1A;
-    background-color: #F8F7F3; /* Soft Ivory */
+    background-color: #EFF2F7;
+    /* Light Blue‑Gray Tint */
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
   }
 
   /* Academic Typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     line-height: 1.2;
-    color: #0F3D2E; /* Primary Green */
+    color: #0F3D2E;
+    /* Primary Green */
     letter-spacing: -0.02em;
   }
 
-  h1 { @apply text-4xl md:text-6xl mb-8; }
-  h2 { @apply text-3xl md:text-4xl mb-6; }
-  h3 { @apply text-2xl md:text-3xl mb-4; }
+  h1 {
+    @apply text-4xl md:text-6xl mb-8;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl mb-6;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl mb-4;
+  }
 
   p {
     @apply mb-4 text-slate;
@@ -102,8 +117,15 @@
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .reveal {

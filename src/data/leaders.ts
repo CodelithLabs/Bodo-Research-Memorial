@@ -9,6 +9,7 @@ export const leaders: Leader[] = [
     deathDate: '1990-06-20',
     birthPlace: 'Ghoramari, Kokrajhar',
     deathPlace: 'Kokrajhar, Assam',
+    imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
     biography: `Bodofa Upendra Nath Brahma was the visionary leader who spearheaded the non-violent Bodoland movement for statehood and tribal rights. Known as the "Father of the Bodos" (Bodofa), he dedicated his life to achieving a separate state for the Bodo people while advocating peaceful resistance.
 
 Born in Ghoramari village, Kokrajhar district, Brahma became a teacher but soon devoted himself entirely to the cause of Bodo nationalism. He founded the All Bodo Students Union (ABSU) in 1967 and later the Bodo People's Front (BPF).
@@ -60,6 +61,7 @@ Tragically, on June 20, 1990, Bodofa Upendra Nath Brahma was assassinated at the
     deathDate: '1990-03-15',
     birthPlace: 'Boko, Kamrup',
     deathPlace: 'Kokrajhar, Assam',
+    imageUrl: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
     biography: `Sujit Narzary was just 15 years old when he became recognized as the first martyr of the Bodoland statehood movement. A young student and activist, he demonstrated extraordinary courage in the fight for Bodo rights.
 
 Despite his young age, Sujit actively participated in the Bodoland movement led by Bodofa Upendra Nath Brahma. On March 15, 1990, during a protest demonstration, Sujit was shot dead by security forces in Kokrajhar.
@@ -84,6 +86,7 @@ At just 15 years old, Sujit Narzary's sacrifice became a powerful symbol of the 
     deathDate: '1993-11-02',
     birthPlace: 'Nalbari',
     deathPlace: 'Kokrajhar, Assam',
+    imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
     biography: `Basumati Roy was a dedicated activist and supporter of the Bodoland movement. She was married to Rwdwr Basumatary, a prominent leader of the Bodo movement.
 
 On November 2, 1993, Basumati Roy was brutally murdered by suspected ULFA militants in Kokrajhar. Her killing was part of the widespread violence that plagued the Bodoland movement during the 1990s.

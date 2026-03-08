@@ -19,6 +19,15 @@
     background: linear-gradient(135deg, #1a3c28 0%, #2d5a3d 100%);
 }
 
+.leaderImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .imagePlaceholder {
     position: absolute;
     inset: 0;

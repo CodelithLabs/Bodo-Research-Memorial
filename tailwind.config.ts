@@ -11,7 +11,7 @@ const config: Config = {
             colors: {
                 primary: '#0F3D2E', // Deep Forest Green
                 secondary: '#C9A227', // Warm Gold
-                background: '#F8F7F3', // Soft Ivory
+                background: '#EFF2F7', // Light Blue‑Gray Tint (softer than ivory)
                 accent: '#B65E3C', // Muted Terracotta
                 slate: '#1A1A1A', // Dark Slate
                 parchment: '#F8F6F1',

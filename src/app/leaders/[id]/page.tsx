@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
+import RemoteImage from '@/components/RemoteImage';
 import {
     Calendar,
     MapPin,
@@ -69,11 +69,10 @@ export default function LeaderDetailPage() {
                     <div className="flex flex-col lg:flex-row gap-12 items-start lg:items-center">
                         <div className="relative w-40 h-40 md:w-56 md:h-56 shrink-0 shadow-2xl border-4 border-secondary/20">
                             {leader.imageUrl ? (
-                                <Image
+                                <RemoteImage
                                     src={leader.imageUrl}
                                     alt={leader.name}
-                                    fill
-                                    className="object-cover grayscale"
+                                    className="absolute inset-0 object-cover grayscale"
                                 />
                             ) : (
                                 <div className="w-full h-full bg-slate-200 flex items-center justify-center">

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Heart, BookOpen, Sparkles } from 'lucide-react';
 import styles from './Hero.module.css';
+import RemoteImage from '@/components/RemoteImage';
 
 // Bodo language translations
 const translations = {
@@ -147,6 +148,20 @@ export default function Hero() {
                     className={styles.visual}
                 >
                     <div className={styles.imageContainer}>
+                        {/* External image credit example */}
+                        <a
+                            href="https://unsplash.com/photos/JKUTrJ4vK00"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.heroImageLink}
+                        >
+                            <RemoteImage
+                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80"
+                                alt="Bodo cultural scene (unsplash)"
+                                className={styles.heroImage}
+                            />
+                        </a>
+
                         {/* Glowing Ring */}
                         <div className={styles.glowingRing}></div>
 
