@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Landmark, Mail, MapPin, Github, Twitter, Heart, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Landmark, Mail, MapPin, Github, Twitter, Heart, ExternalLink, ShieldCheck, Phone } from 'lucide-react';
+import { CONTACT_EMAIL, CONTACT_ADDRESS, CONTACT_PHONE, SOCIAL_GITHUB, SOCIAL_TWITTER } from '@/lib/constants';
 
 const t = {
   brandTitle: "Bodo Research Memorial",
@@ -10,8 +11,8 @@ const t = {
   quickLinks: "Platform",
   resources: "Academic Resources",
   contact: "Institutional Contact",
-  location: "Kokrajhar, Bodoland, Assam",
-  email: "archive@codelithlabs.in",
+  location: CONTACT_ADDRESS,
+  email: CONTACT_EMAIL,
   copyright: "All rights reserved. Institutional Repository.",
   madeWith: "Dedicated to the Bodo People",
 };

@@ -1,15 +1,33 @@
+'use client';
+
+'use client';
+
 import React, { useState } from 'react';
-import { Mail, MapPin, Github, Twitter } from 'lucide-react';
+import { Mail, MapPin, Github, Twitter, Phone } from 'lucide-react';
+import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_ADDRESS, SOCIAL_GITHUB, SOCIAL_TWITTER, CONTACT_WHATSAPP } from '@/lib/constants';
 
 export default function ContactPage() {
     const [form, setForm] = useState({ name: '', email: '', message: '' });
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // TODO: wire up to backend/email service
-        setSubmitted(true);
-        setForm({ name: '', email: '', message: '' });
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            });
+            if (res.ok) {
+                setSubmitted(true);
+                setForm({ name: '', email: '', message: '' });
+            } else {
+                console.error('contact submission failed', await res.json());
+                // optionally show error to user
+            }
+        } catch (err) {
+            console.error('contact submit error', err);
+        }
     };
 
     return (
@@ -97,19 +115,28 @@ export default function ContactPage() {
                         <div className="flex items-center gap-2">
                             <Mail className="w-5 h-5 text-primary" />
                             <a
-                                href="mailto:archive@codelithlabs.in"
+                                href={`mailto:${CONTACT_EMAIL}`}
                                 className="underline text-primary"
                             >
-                                archive@codelithlabs.in
+                                {CONTACT_EMAIL}
+                            </a>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Phone className="w-5 h-5 text-primary" />
+                            <a href={`tel:${CONTACT_PHONE}`} className="underline text-primary">
+                                {CONTACT_PHONE}
                             </a>
                         </div>
                         <div className="flex items-center gap-2">
                             <MapPin className="w-5 h-5 text-primary" />
-                            Kokrajhar, Bodoland Territorial Region, Assam
+                            {CONTACT_ADDRESS}
+                        </div>
+                        <div className="text-text-muted text-[10px]">
+                            Office Hours: Mon–Fri 9&nbsp;AM – 5&nbsp;PM IST
                         </div>
                         <div className="flex items-center gap-4 mt-4">
                             <a
-                                href="https://github.com/bodoresearch"
+                                href={SOCIAL_GITHUB}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-primary hover:text-secondary transition-colors"
@@ -117,12 +144,20 @@ export default function ContactPage() {
                                 <Github className="w-6 h-6" />
                             </a>
                             <a
-                                href="https://twitter.com/bodoresearch"
+                                href={SOCIAL_TWITTER}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-primary hover:text-secondary transition-colors"
                             >
                                 <Twitter className="w-6 h-6" />
+                            </a>
+                            <a
+                                href={CONTACT_WHATSAPP}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary hover:text-secondary transition-colors"
+                            >
+                                <Phone className="w-6 h-6 rotate-45" />
                             </a>
                         </div>
                     </div>

@@ -3,18 +3,18 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Landmark, Search } from 'lucide-react';
+import { Menu, X, Landmark, Search, Home, Archive, Clock, Calendar, BookOpen, Heart, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/leaders', label: 'Archive' },
-    { href: '/history', label: 'History' },
-    { href: '/timeline', label: 'Timeline' },
-    { href: '/research', label: 'Research' },
-    { href: '/tribute', label: 'Tributes' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/', label: 'Home', icon: Home },
+    { href: '/about', label: 'About', icon: Home },
+    { href: '/leaders', label: 'Archive', icon: Archive },
+    { href: '/history', label: 'History', icon: Clock },
+    { href: '/timeline', label: 'Timeline', icon: Calendar },
+    { href: '/research', label: 'Research', icon: BookOpen },
+    { href: '/tribute', label: 'Tributes', icon: Heart },
+    { href: '/contact', label: 'Contact', icon: Mail },
 ];
 
 export default function Header() {
@@ -57,14 +57,16 @@ export default function Header() {
                     <nav className="hidden lg:flex items-center gap-2">
                         {navLinks.map((link) => {
                             const isActive = pathname === link.href;
+                            const Icon = link.icon;
                             return (
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className={`relative px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-secondary ${isActive ? 'text-primary' : 'text-text-muted'
+                                    className={`relative px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-secondary flex items-center justify-center sm:justify-start gap-1 ${isActive ? 'text-primary' : 'text-text-muted'
                                         }`}
                                 >
-                                    {link.label}
+                                    {Icon && <Icon className="w-4 h-4 sm:hidden" />}
+                                    <span className="hidden sm:inline">{link.label}</span>
                                     {isActive && (
                                         <motion.div
                                             layoutId="nav-underline"
@@ -107,14 +109,16 @@ export default function Header() {
                         <div className="container-institutional py-8 space-y-4">
                             {navLinks.map((link) => {
                                 const isActive = pathname === link.href;
+                                const Icon = link.icon;
                                 return (
                                     <Link
                                         key={link.href}
                                         href={link.href}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className={`block py-2 text-sm font-bold uppercase tracking-widest ${isActive ? 'text-secondary border-l-2 border-secondary pl-4' : 'text-text-muted pl-4'
+                                        className={`block py-2 text-sm font-bold uppercase tracking-widest flex items-center gap-2 ${isActive ? 'text-secondary border-l-2 border-secondary pl-4' : 'text-text-muted pl-4'
                                             }`}
                                     >
+                                        {Icon && <Icon className="w-5 h-5" />}
                                         {link.label}
                                     </Link>
                                 );
