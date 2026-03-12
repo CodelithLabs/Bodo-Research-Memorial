@@ -184,21 +184,21 @@ export default function Hero() {
                                 {/* Gradients */}
                                 <defs>
                                     <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#06b6d4" />
-                                        <stop offset="50%" stopColor="#8b5cf6" />
-                                        <stop offset="100%" stopColor="#ec4899" />
+                                        <stop offset="0%" stopColor="#0F3D2E" />
+                                        <stop offset="50%" stopColor="#43655F" />
+                                        <stop offset="100%" stopColor="#C9A227" />
                                     </linearGradient>
                                     <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.6" />
-                                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.6" />
+                                        <stop offset="0%" stopColor="#0F3D2E" stopOpacity="0.6" />
+                                        <stop offset="100%" stopColor="#C9A227" stopOpacity="0.6" />
                                     </linearGradient>
                                     <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#ec4899" stopOpacity="0.4" />
-                                        <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.4" />
+                                        <stop offset="0%" stopColor="#C9A227" stopOpacity="0.4" />
+                                        <stop offset="100%" stopColor="#0F3D2E" stopOpacity="0.4" />
                                     </linearGradient>
                                     <radialGradient id="symbolGradient" cx="50%" cy="50%" r="50%">
-                                        <stop offset="0%" stopColor="#22d3ee" />
-                                        <stop offset="100%" stopColor="#0891b2" />
+                                        <stop offset="0%" stopColor="#C9A227" />
+                                        <stop offset="100%" stopColor="#0F3D2E" />
                                     </radialGradient>
                                 </defs>
                             </svg>

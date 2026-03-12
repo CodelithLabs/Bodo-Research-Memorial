@@ -1,11 +1,7 @@
 'use client';
 
-'use client';
-
-import type { Metadata } from 'next';
 import React, { useState } from 'react';
 
-// metadata is dynamic inside page component using generateMetadata
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import RemoteImage from '@/components/RemoteImage';
@@ -26,17 +22,6 @@ import {
 import { leaders } from '@/data/leaders';
 import CitationModal from '@/components/CitationModal';
 import { CitationData } from '@/lib/citations';
-
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-    const leader = leaders.find(l => l.id === params.id);
-    if (!leader) {
-        return { title: 'Leader Not Found – Bodo Research Memorial' };
-    }
-    return {
-        title: `${leader.name} – Bodo Research Memorial`,
-        description: leader.biography?.slice(0, 150) || 'Bodo leader biography',
-    };
-}
 
 export default function LeaderDetailPage() {
     const params = useParams();

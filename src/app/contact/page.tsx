@@ -1,14 +1,6 @@
 'use client';
 
-'use client';
-
-import type { Metadata } from 'next';
 import React, { useState } from 'react';
-
-export const metadata: Metadata = {
-  title: 'Contact – Bodo Research Memorial',
-  description: 'Get in touch with the Bodo Research Memorial team via email, phone or visit.',
-};
 import { Mail, MapPin, Github, Twitter, Phone } from 'lucide-react';
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_ADDRESS, SOCIAL_GITHUB, SOCIAL_TWITTER, CONTACT_WHATSAPP } from '@/lib/constants';
 
@@ -103,7 +95,7 @@ export default function ContactPage() {
                             type="text"
                             name="hp"
                             value={form.hp}
-                            onChange={(e) => setForm({...form, hp: e.target.value})}
+                            onChange={(e) => setForm({ ...form, hp: e.target.value })}
                             className="hidden"
                             autoComplete="off"
                         />
@@ -115,7 +107,7 @@ export default function ContactPage() {
                                 type="text"
                                 id="name"
                                 value={form.name}
-                                onChange={(e) => setForm({...form, name: e.target.value})}
+                                onChange={(e) => setForm({ ...form, name: e.target.value })}
                                 className="w-full px-4 py-2 border border-divider rounded-sm focus:outline-none focus:border-secondary bg-white dark:bg-slate-800 text-text-primary dark:text-white"
                                 placeholder="Your name"
                                 required
@@ -129,7 +121,7 @@ export default function ContactPage() {
                                 type="email"
                                 id="email"
                                 value={form.email}
-                                onChange={(e) => setForm({...form, email: e.target.value})}
+                                onChange={(e) => setForm({ ...form, email: e.target.value })}
                                 className="w-full px-4 py-2 border border-divider rounded-sm focus:outline-none focus:border-secondary bg-white dark:bg-slate-800 text-text-primary dark:text-white"
                                 placeholder="you@example.com"
                                 required
@@ -143,7 +135,7 @@ export default function ContactPage() {
                                 id="message"
                                 rows={4}
                                 value={form.message}
-                                onChange={(e) => setForm({...form, message: e.target.value})}
+                                onChange={(e) => setForm({ ...form, message: e.target.value })}
                                 className="w-full px-4 py-2 border border-divider rounded-sm focus:outline-none focus:border-secondary bg-white dark:bg-slate-800 text-text-primary dark:text-white"
                                 placeholder="How can we help you?"
                                 required

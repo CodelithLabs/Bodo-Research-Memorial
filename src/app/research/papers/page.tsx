@@ -6,13 +6,70 @@ import { Download, Search, ArrowLeft, FileText, ChevronRight, Upload } from 'luc
 import Link from 'next/link';
 import { researchPapers } from '@/data/research';
 
+// Fallback data if import fails
+const fallbackPapers = [
+    {
+        id: 'paper-1',
+        title: 'Language, Identity and the Bodo Movement',
+        author: 'Dr. Ranjit Basumatary',
+        university: 'Bodoland University',
+        year: '2021',
+        abstract: 'An in-depth analysis of how the Bodo language acted as a primary catalyst for political mobilization.',
+        category: 'Language' as const,
+        downloadUrl: '/docs/research/language-2021.pdf'
+    },
+    {
+        id: 'paper-2',
+        title: 'Traditional Agricultural Practices of the Bodo Community',
+        author: 'Sunita Narzary',
+        university: 'Dibrugarh University',
+        year: '2019',
+        abstract: 'This research documents the indigenous irrigation systems and crop rotation patterns unique to Bodo farmers.',
+        category: 'Culture' as const,
+        downloadUrl: '/docs/research/agriculture-2019.pdf'
+    },
+    {
+        id: 'paper-3',
+        title: 'Sacrifice and Statehood: The Iconography of Martyrs in Bodoland',
+        author: 'Prof. J.K. Mushahary',
+        university: 'Jawaharlal Nehru University',
+        year: '2022',
+        abstract: 'A historical review of the commemoration of figures like Sujit Narzary and Upendra Nath Brahma.',
+        category: 'History' as const,
+        downloadUrl: '/docs/research/martyrs-2022.pdf'
+    },
+    {
+        id: 'paper-4',
+        title: 'Bathouism: The Indigenous Religious Practices of the Bodo People',
+        author: 'Dr. Dhaneswar Engtipi',
+        university: 'Tezpur University',
+        year: '2020',
+        abstract: 'An ethnographic study of Bathouism, the traditional religion of the Bodos.',
+        category: 'Religion' as const,
+        downloadUrl: '/docs/research/bathouism-2020.pdf'
+    },
+    {
+        id: 'paper-5',
+        title: 'The Bodoland Movement and Autonomy Politics in Assam',
+        author: 'Dr. B.K. Chim',
+        university: 'Gauhati University',
+        year: '2018',
+        abstract: 'A comprehensive analysis of the political movement for Bodoland statehood.',
+        category: 'Politics' as const,
+        downloadUrl: '/docs/research/autonomy-2018.pdf'
+    }
+];
+
+// Use imported data or fallback
+const papersData = typeof researchPapers !== 'undefined' ? researchPapers : fallbackPapers;
+
 export default function ResearchPapersPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
 
     const categories = ['All', 'Politics', 'Culture', 'Language', 'History'];
 
-    const filteredPapers = researchPapers.filter(paper => {
+    const filteredPapers = papersData.filter(paper => {
         const matchesSearch = paper.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             paper.author.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesCategory = selectedCategory === 'All' || paper.category === selectedCategory;

@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import typography from '@tailwindcss/typography';
 
 const config: Config = {
     darkMode: 'class',
@@ -10,11 +11,112 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                primary: '#0F3D2E', // Deep Forest Green
-                secondary: '#C9A227', // Warm Gold
-                background: '#EFF2F7', // Light Blue‑Gray Tint (softer than ivory)
-                accent: '#B65E3C', // Muted Terracotta
-                slate: '#1A1A1A', // Dark Slate
+                primary: {
+                    DEFAULT: '#0F3D2E',
+                    50: '#E8F5F0',
+                    100: '#D1EBE1',
+                    200: '#A3D7C3',
+                    300: '#75C3A5',
+                    400: '#47AF87',
+                    500: '#0F3D2E',
+                    600: '#0C3125',
+                    700: '#09251C',
+                    800: '#061913',
+                    900: '#030C09',
+                },
+                secondary: {
+                    DEFAULT: '#C9A227',
+                    50: '#FBF7E8',
+                    100: '#F7EFD1',
+                    200: '#EFDFA3',
+                    300: '#E7CF75',
+                    400: '#DFBF47',
+                    500: '#C9A227',
+                    600: '#A1821F',
+                    700: '#796117',
+                    800: '#52410F',
+                    900: '#2B2008',
+                },
+                background: '#EFF2F7',
+                accent: {
+                    DEFAULT: '#B65E3C',
+                    50: '#FDF3EF',
+                    100: '#FAE7DF',
+                    200: '#F5CFBF',
+                    300: '#F0B79F',
+                    400: '#EB9F7F',
+                    500: '#B65E3C',
+                    600: '#914B30',
+                    700: '#6C3924',
+                    800: '#472718',
+                    900: '#23140C',
+                },
+                // Semantic colors
+                success: {
+                    DEFAULT: '#059669',
+                    50: '#ECFDF5',
+                    100: '#D1FAE5',
+                    200: '#A7F3D0',
+                    300: '#6EE7B7',
+                    400: '#34D399',
+                    500: '#059669',
+                    600: '#047857',
+                    700: '#065F46',
+                    800: '#064E3B',
+                    900: '#022C22',
+                },
+                warning: {
+                    DEFAULT: '#D97706',
+                    50: '#FFFBEB',
+                    100: '#FEF3C7',
+                    200: '#FDE68A',
+                    300: '#FCD34D',
+                    400: '#FBBF24',
+                    500: '#D97706',
+                    600: '#B45309',
+                    700: '#92400E',
+                    800: '#78350F',
+                    900: '#451A03',
+                },
+                error: {
+                    DEFAULT: '#DC2626',
+                    50: '#FEF2F2',
+                    100: '#FEE2E2',
+                    200: '#FECACA',
+                    300: '#FCA5A5',
+                    400: '#F87171',
+                    500: '#DC2626',
+                    600: '#B91C1C',
+                    700: '#991B1B',
+                    800: '#7F1D1D',
+                    900: '#450A0A',
+                },
+                info: {
+                    DEFAULT: '#0284C7',
+                    50: '#F0F9FF',
+                    100: '#E0F2FE',
+                    200: '#BAE6FD',
+                    300: '#7DD3FC',
+                    400: '#38BDF8',
+                    500: '#0284C7',
+                    600: '#0369A1',
+                    700: '#075985',
+                    800: '#0C4A6E',
+                    900: '#0C4A6E',
+                },
+                slate: {
+                    50: '#f8fafc',
+                    100: '#f1f5f9',
+                    200: '#e2e8f0',
+                    300: '#cbd5e1',
+                    400: '#94a3b8',
+                    500: '#64748b',
+                    600: '#475569',
+                    700: '#334155',
+                    800: '#1e293b',
+                    900: '#0f172a',
+                    950: '#020617',
+                },
                 parchment: '#F8F6F1',
                 'parchment-light': '#FFFFFF',
                 divider: '#F1EFEA',
@@ -62,15 +164,76 @@ const config: Config = {
             borderRadius: {
                 card: '4px',
                 button: '2px',
+                '2xl': '1rem',
+                '3xl': '1.5rem',
             },
             boxShadow: {
                 academic: '0 4px 20px -5px rgba(0, 0, 0, 0.1)',
                 'card-hover': '0 10px 30px -10px rgba(0, 0, 0, 0.15)',
+                'glow-primary': '0 0 20px rgba(15, 61, 46, 0.3)',
+                'glow-secondary': '0 0 20px rgba(201, 162, 39, 0.3)',
+                'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.06)',
+            },
+            backgroundImage: {
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                'gradient-primary': 'linear-gradient(135deg, #0F3D2E 0%, #1a5c42 100%)',
+                'gradient-gold': 'linear-gradient(135deg, #C9A227 0%, #dfbf47 100%)',
+                'gradient-hero': 'linear-gradient(135deg, #0F3D2E 0%, #0C3125 50%, #09251C 100%)',
+                'gradient-mesh': 'radial-gradient(at 40% 20%, hsla(160,30%,30%,1) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(40,40%,20%,1) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(200,30%,30%,1) 0px, transparent 50%)',
+            },
+            animation: {
+                'fade-in': 'fadeIn 0.5s ease-out forwards',
+                'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                'fade-in-down': 'fadeInDown 0.5s ease-out forwards',
+                'slide-up': 'slideUp 0.5s ease-out forwards',
+                'slide-down': 'slideDown 0.5s ease-out forwards',
+                'scale-in': 'scaleIn 0.3s ease-out forwards',
+                'shimmer': 'shimmer 2s infinite',
+                'float': 'float 3s ease-in-out infinite',
+                'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+            },
+            keyframes: {
+                fadeIn: {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' },
+                },
+                fadeInUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                fadeInDown: {
+                    '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                slideUp: {
+                    '0%': { transform: 'translateY(100%)' },
+                    '100%': { transform: 'translateY(0)' },
+                },
+                slideDown: {
+                    '0%': { transform: 'translateY(-100%)' },
+                    '100%': { transform: 'translateY(0)' },
+                },
+                scaleIn: {
+                    '0%': { opacity: '0', transform: 'scale(0.9)' },
+                    '100%': { opacity: '1', transform: 'scale(1)' },
+                },
+                shimmer: {
+                    '0%': { backgroundPosition: '-200% 0' },
+                    '100%': { backgroundPosition: '200% 0' },
+                },
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-10px)' },
+                },
+                pulseSoft: {
+                    '0%, 100%': { opacity: '1' },
+                    '50%': { opacity: '0.7' },
+                },
             },
         },
     },
     plugins: [
-        require('@tailwindcss/typography'),
+        typography,
     ],
 };
 

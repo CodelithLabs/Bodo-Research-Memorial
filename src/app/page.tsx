@@ -1,23 +1,22 @@
-'use client';
-
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import RemoteImage from '@/components/RemoteImage';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bodo-research-memorial.org'),
   title: 'Bodo Research Memorial – Digital Heritage Repository',
   description: 'An institutional archive of Bodo history, culture, and scholarly research.',
   openGraph: {
     title: 'Bodo Research Memorial',
     description: 'Explore the Bodo digital heritage archive including leaders, research, and timelines.',
-    url: 'https://yourdomain.com',
+    url: 'https://bodo-research-memorial.org',
     type: 'website',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/images/og-image.svg',
         width: 1200,
         height: 630,
-        alt: 'Bodo Research Memorial',
+        alt: 'Bodo Research Memorial - Digital Heritage Repository',
       },
     ],
   },

@@ -1,14 +1,9 @@
 'use client';
 
-import type { Metadata } from 'next';
 import { useState } from 'react';
-
-export const metadata: Metadata = {
-  title: 'Leaders & Martyrs – Bodo Research Memorial',
-  description: 'Browse biographies of influential Bodo leaders and martyrs in our archive.',
-};
 import Link from 'next/link';
 import RemoteImage from '@/components/RemoteImage';
+import { useFuzzySearch } from '@/hooks/useFuzzySearch';
 import {
     Users,
     Search,
@@ -22,14 +17,19 @@ import { leaders } from '@/data/leaders';
 const regions = ['All', 'BTC', 'Assam', 'Kokrajhar', 'Chirang', 'Baksa', 'Udalguri'];
 
 export default function LeadersPage() {
-    const [searchQuery, setSearchQuery] = useState('');
     const [activeRegion, setActiveRegion] = useState('All');
 
-    const filteredLeaders = leaders.filter(leader => {
-        const matchesSearch = leader.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            leader.title.toLowerCase().includes(searchQuery.toLowerCase());
+    // Use fuzzy search for better search results
+    const { query, setQuery, results: fuzzyResults } = useFuzzySearch({
+        data: leaders,
+        keys: ['name', 'title', 'biography', 'movement', 'district', 'region'],
+        threshold: 0.3,
+    });
+
+    // Apply region filter on top of fuzzy search results
+    const filteredLeaders = fuzzyResults.filter(leader => {
         const matchesRegion = activeRegion === 'All' || leader.region === activeRegion || leader.district === activeRegion;
-        return matchesSearch && matchesRegion;
+        return matchesRegion;
     });
 
     return (
@@ -58,8 +58,8 @@ export default function LeadersPage() {
                                 type="text"
                                 placeholder="Search by name, title, or movement..."
                                 className="w-full pl-12 pr-4 py-3 bg-background dark:bg-slate-800 border border-divider dark:border-slate-700 rounded-sm focus:outline-none focus:border-secondary transition-colors dark:text-white"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
                             />
                         </div>
 

@@ -1,0 +1,30 @@
+{
+  "atDirectives": [
+    {
+      "name": "@tailwind",
+      "description": "Use the @tailwind directive to include Tailwind's base styles, component styles, and utility styles.",
+      "references": [
+        {
+          "name": "Tailwind CSS Documentation",
+          "url": "https://tailwindcss.com/docs/functions-and-directives"
+        }
+      ]
+    },
+    {
+      "name": "@apply",
+      "description": "Use the @apply directive to apply Tailwind utility classes within custom CSS."
+    },
+    {
+      "name": "@layer",
+      "description": "Use the @layer directive to group Tailwind styles into layers (base, components, utilities)."
+    },
+    {
+      "name": "@responsive",
+      "description": "Use the @responsive directive to generate responsive variants of custom styles."
+    },
+    {
+      "name": "@variants",
+      "description": "Use the @variants directive to generate state variants of custom styles."
+    }
+  ]
+}

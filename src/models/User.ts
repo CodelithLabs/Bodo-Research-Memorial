@@ -93,9 +93,7 @@ const UserSchema = new Schema<IUser, Model<IUser>, IUserMethods>(
         },
     }
 );
-
 // Index for efficient queries
-UserSchema.index({ email: 1 });
 UserSchema.index({ role: 1 });
 
 // Hash password before saving
