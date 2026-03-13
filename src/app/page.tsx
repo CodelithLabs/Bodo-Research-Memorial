@@ -39,6 +39,8 @@ import {
   Quote
 } from 'lucide-react';
 import { leaders } from '@/data/leaders';
+import HeroBackground from '@/components/ui/HeroBackground';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function HomePage() {
   const featuredLeaders = leaders.slice(0, 3);
@@ -48,15 +50,14 @@ export default function HomePage() {
       {/* ============================================
           HERO SECTION - Academic & Minimal
           ============================================ */}
-      <section className="relative overflow-hidden bg-primary text-white pt-24 pb-32">
+      <section className="relative overflow-hidden pt-24 pb-32 min-h-[90vh] flex items-center">
+        <HeroBackground />
+
         {/* Subtle Cultural Pattern Overlay */}
-        <div className="absolute inset-0 opacity-10 bg-weave pointer-events-none" />
+        <div className="absolute inset-0 opacity-10 bg-weave pointer-events-none z-10" />
 
-        {/* Decorative Gradient Falloff */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-background to-transparent opacity-20 pointer-events-none" />
-
-        <div className="container-institutional relative z-10">
-          <div className="max-w-4xl reveal">
+        <div className="container-institutional relative z-20">
+          <ScrollReveal className="max-w-4xl">
             <span className="text-secondary text-sm font-bold uppercase tracking-[0.3em] mb-6 block">
               Digital Heritage Archive
             </span>
@@ -77,32 +78,32 @@ export default function HomePage() {
                 Movement Timeline
               </Link>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* ============================================
           FEATURED LEADERS - Institutional Grid
           ============================================ */}
-      <section className="section-padding bg-white dark:bg-slate-800 relative">
+      <section className="section-padding bg-[#080808] relative" >
         <div className="container-institutional">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
               <span className="text-pretitle">Legacy & Leadership</span>
-              <h2 className="mb-0">Foundational Figures</h2>
+              <h2 className="mb-0 text-white">Foundational Figures</h2>
               <p className="text-lg text-text-secondary mt-4 mb-0">
                 Scholarly documentation of individuals who pioneered the Bodo cultural and political movements.
               </p>
             </div>
-            <Link href="/leaders" className="group inline-flex items-center text-primary font-bold border-b-2 border-primary/10 hover:border-secondary transition-all pb-1">
+            <Link href="/leaders" className="group inline-flex items-center text-accent font-bold border-b-2 border-accent/20 hover:border-secondary transition-all pb-1 hover:text-white">
               View Database <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12">
-            {featuredLeaders.map((leader) => (
-              <div key={leader.id} className="reveal group">
-                <Link href={`/leaders/${leader.id}`} className="block overflow-hidden relative aspect-[3/4] mb-6 card-academic">
+            {featuredLeaders.map((leader, index) => (
+              <ScrollReveal key={leader.id} delay={index * 0.1} className="group">
+                <Link href={`/leaders/${leader.id}`} className="block overflow-hidden relative aspect-[3/4] mb-6 card-modern">
                   {leader.imageUrl ? (
                     <RemoteImage
                       src={leader.imageUrl}
@@ -130,23 +131,25 @@ export default function HomePage() {
                 <p className="text-text-secondary line-clamp-3 leading-relaxed">
                   {leader.biography?.split('.')[0]}. {leader.biography?.split('.')[1]}.
                 </p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* ============================================
           TIMELINE PREVIEW - Dark Academic
           ============================================ */}
-      <section className="bg-primary text-white py-32 overflow-hidden">
+      <section className="bg-[#050505] text-white py-32 overflow-hidden relative" >
+        {/* Subtle separator glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="container-institutional relative">
-          <div className="absolute right-0 top-0 opacity-[0.03] scale-150 rotate-12 pointer-events-none">
+          <div className="absolute right-0 top-0 opacity-[0.02] scale-150 rotate-12 pointer-events-none">
             <History className="w-96 h-96" />
           </div>
 
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
+            <ScrollReveal delay={0.1}>
               <span className="text-secondary text-sm font-bold uppercase tracking-widest mb-6 block">Historical Milestones</span>
               <h2 className="text-white text-4xl md:text-5xl mb-8">Chronicles of the <span className="text-secondary italic">Bodoland</span> Movement</h2>
               <p className="text-xl text-white/70 leading-relaxed mb-12">
@@ -174,9 +177,9 @@ export default function HomePage() {
               <Link href="/timeline" className="btn-primary bg-secondary text-primary">
                 View Interactive Timeline
               </Link>
-            </div>
+            </ScrollReveal>
 
-            <div className="relative">
+            <ScrollReveal delay={0.3} className="relative">
               <div className="aspect-square bg-white/5 border border-white/10 p-8 rounded-full flex items-center justify-center">
                 <div className="text-center">
                   <Quote className="w-12 h-12 text-secondary mx-auto mb-6 opacity-50" />
@@ -189,20 +192,20 @@ export default function HomePage() {
                   </span>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* ============================================
           RESEARCH CATEGORIES - Structured Archive
           ============================================ */}
-      <section className="section-padding bg-background bg-weave">
+      <section className="section-padding bg-[#080808] bg-weave" >
         <div className="container-institutional">
           <div className="text-center mb-20">
             <span className="text-pretitle">Digital Repository</span>
-            <h2>Research Domains</h2>
-            <div className="w-24 h-1 bg-secondary mx-auto mt-6" />
+            <h2 className="text-white">Research Domains</h2>
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-secondary to-transparent mx-auto mt-6" />
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -214,35 +217,37 @@ export default function HomePage() {
               { title: 'Biographical Studies', icon: Users, color: 'hover:border-accent', path: '/leaders' },
               { title: 'Movement Analysis', icon: History, color: 'hover:border-secondary', path: '/timeline' },
             ].map((cat, i) => (
-              <Link
-                key={i}
-                href={cat.path}
-                className={`card-academic p-10 group transition-all duration-500 bg-white ${cat.color}`}
-              >
-                <cat.icon className="w-10 h-10 text-primary mb-8 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-bold mb-4">{cat.title}</h3>
-                <p className="text-text-secondary text-sm leading-relaxed mb-6">
-                  {cat.title === 'Historical Archives' &&
-                    'Explore digitized colonial records, census data, and early manuscripts documenting Bodo settlements, land rights and administrative history.'}
-                  {cat.title === 'Cultural Sociology' &&
-                    'Study ethnographic surveys, village case studies, and oral interviews that illuminate caste, marriage, and festival life among the Bodo people.'}
-                  {cat.title === 'Linguistic Studies' &&
-                    'Access grammars, lexicons and audio corpora that capture the phonetics, dialectal variation and script history of the Bodo language.'}
-                  {cat.title === 'Religious Philosophy' &&
-                    'Read ritual manuals, theological essays, and field notes on Bathouism, Todaism and syncretic practices across Bodo communities.'}
-                  {cat.title === 'Biographical Studies' &&
-                    'Browse biographies, autobiographies and oral histories of political leaders, writers and activists central to the Bodo movement.'}
-                  {cat.title === 'Movement Analysis' &&
-                    'Review timelines, policy papers and protest archives that trace the evolution of the Bodoland statehood struggle.'}
-                </p>
-                <span className="text-primary text-xs font-bold uppercase tracking-widest flex items-center">
-                  Explore <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
+              <ScrollReveal delay={i * 0.1} key={i}>
+                <Link
+                  href={cat.path}
+                  className={`block card-modern p-10 group transition-all duration-500 hover:border-secondary h-full relative overflow-hidden`}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <cat.icon className="w-10 h-10 text-white mb-8 group-hover:text-secondary group-hover:scale-110 transition-all duration-300 relative z-10" />
+                  <h3 className="text-xl font-bold mb-4 text-white relative z-10 group-hover:text-white">{cat.title}</h3>
+                  <p className="text-text-secondary text-sm leading-relaxed mb-6 relative z-10 group-hover:text-white/80 transition-colors duration-300">
+                    {cat.title === 'Historical Archives' &&
+                      'Explore digitized colonial records, census data, and early manuscripts documenting Bodo settlements, land rights and administrative history.'}
+                    {cat.title === 'Cultural Sociology' &&
+                      'Study ethnographic surveys, village case studies, and oral interviews that illuminate caste, marriage, and festival life among the Bodo people.'}
+                    {cat.title === 'Linguistic Studies' &&
+                      'Access grammars, lexicons and audio corpora that capture the phonetics, dialectal variation and script history of the Bodo language.'}
+                    {cat.title === 'Religious Philosophy' &&
+                      'Read ritual manuals, theological essays, and field notes on Bathouism, Todaism and syncretic practices across Bodo communities.'}
+                    {cat.title === 'Biographical Studies' &&
+                      'Browse biographies, autobiographies and oral histories of political leaders, writers and activists central to the Bodo movement.'}
+                    {cat.title === 'Movement Analysis' &&
+                      'Review timelines, policy papers and protest archives that trace the evolution of the Bodoland statehood struggle.'}
+                  </p>
+                  <span className="text-accent group-hover:text-white text-xs font-bold uppercase tracking-widest flex items-center relative z-10 transition-colors duration-300">
+                    Explore <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 group-hover:text-secondary transition-all" />
+                  </span>
+                </Link>
+              </ScrollReveal>
             ))}
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

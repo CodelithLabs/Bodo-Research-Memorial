@@ -52,12 +52,12 @@
 
   /* Border gradient */
   .border-gradient {
-    border-image: linear-gradient(135deg, #0F3D2E, #C9A227) 1;
+    border-image: linear-gradient(135deg, #050505, #D97757) 1;
   }
 
   /* Focus ring */
   .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 dark:focus:ring-offset-slate-900;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 dark:focus:ring-offset-primary;
   }
 
   /* Scrollbar styling */
@@ -159,12 +159,19 @@
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    color: #1A1A1A;
-    background-color: #EFF2F7;
-    /* Light Blue‑Gray Tint */
+    color: #FFFFFF;
+    background-color: #080808;
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
-    @apply dark:bg-slate-900 dark:text-white;
+    position: relative;
+    @apply dark:bg-primary dark:text-white;
+  }
+
+  /* Cinematic Film Grain Overlay */
+  body::before {
+    content: "";
+    @apply fixed inset-0 pointer-events-none z-10 opacity-[0.03];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   }
 
   /* Academic Typography */
@@ -177,10 +184,9 @@
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     line-height: 1.2;
-    color: #0F3D2E;
-    /* Primary Green */
+    color: #FFFFFF;
     letter-spacing: -0.02em;
-    @apply dark:text-secondary;
+    @apply dark:text-white;
   }
 
   h1 {
@@ -196,7 +202,7 @@
   }
 
   p {
-    @apply mb-4 text-slate-600;
+    @apply mb-4 text-text-secondary font-light tracking-wide;
   }
 
   /* Links */
@@ -212,7 +218,7 @@
 
   /* Selection */
   ::selection {
-    @apply bg-secondary text-white;
+    @apply bg-secondary/30 text-white;
   }
 }
 
@@ -229,9 +235,9 @@
     @apply py-24 md:py-32;
   }
 
-  /* Subtle Bodo Weaving Background Pattern */
+  /* Subtle Bodo Weaving Background Pattern - Dark Mode */
   .bg-weave {
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm20 20h20v20H20V20z' fill='%230F3D2E' fill-opacity='0.02'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h20v20H0V0zm20 20h20v20H20V20z' fill='%23FFFFFF' fill-opacity='0.015'/%3E%3C/svg%3E");
   }
 
   /* Academic Card */
@@ -243,14 +249,14 @@
 
   /* Modern Card with hover effects */
   .card-modern {
-    @apply bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl transition-all duration-300;
-    @apply hover:shadow-xl hover:-translate-y-1 hover:border-secondary/30;
+    @apply bg-[#111111] border border-white/5 rounded-2xl transition-all duration-300;
+    @apply hover:shadow-glow-primary hover:-translate-y-1 hover:border-secondary/20;
   }
 
   /* Glass Card */
   .card-glass {
-    @apply glass rounded-2xl transition-all duration-300;
-    @apply hover:shadow-lg hover:border-secondary/20;
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl transition-all duration-300;
+    @apply hover:shadow-lg hover:border-secondary/30 hover:bg-white/10;
   }
 
   /* Buttons */

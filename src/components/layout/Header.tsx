@@ -45,7 +45,7 @@ export default function Header() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-md py-2' : 'bg-white dark:bg-slate-900 py-4 border-b border-divider'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-lg border-b border-white/20 dark:border-slate-800/50 py-2' : 'bg-transparent dark:bg-transparent py-6 border-b border-transparent'
                 }`}
         >
             <div className="container-institutional">

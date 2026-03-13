@@ -1,13 +1,16 @@
 // Types for Bodo Memorial Website
 
+export type Category = 'Political' | 'Religious' | 'Cultural' | 'Social' | 'Academic' | 'Administrative' | 'Martyr';
+
 export interface Leader {
   id: string;
   name: string;
   title: string;
+  category?: Category;
   birthDate: string;
-  deathDate: string;
+  deathDate?: string;
   birthPlace: string;
-  deathPlace: string;
+  deathPlace?: string;
   biography: string;
   contributions: string[];
   slogans?: string[];
