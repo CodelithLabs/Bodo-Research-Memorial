@@ -11,46 +11,132 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
+                // ============================================
+                // INSTITUTIONAL IDENTITY (20%) - Parrot Green
+                // ============================================
+                parrot: {
+                    DEFAULT: '#44CC44',
+                    50: '#E8F5E8',
+                    100: '#D1EBD1',
+                    200: '#A3D7A3',
+                    300: '#75C375',
+                    400: '#55BB55',
+                    500: '#44CC44',
+                    600: '#33AA33',
+                    700: '#228822',
+                    800: '#116611',
+                    900: '#004400',
+                },
+
+                // ============================================
+                // CULTURAL ACCENT (7%) - Deep Maroon
+                // ============================================
+                maroon: {
+                    DEFAULT: '#800000',
+                    50: '#F5E6E6',
+                    100: '#EBCCCC',
+                    200: '#D79999',
+                    300: '#C36666',
+                    400: '#A33333',
+                    500: '#800000',
+                    600: '#660000',
+                    700: '#4D0000',
+                    800: '#330000',
+                    900: '#1A0000',
+                },
+
+                // ============================================
+                // INTERACTION HIGHLIGHT (3%) - Golden Yellow
+                // ============================================
+                gold: {
+                    DEFAULT: '#FFD700',
+                    50: '#FFFCE6',
+                    100: '#FFF8CC',
+                    200: '#FFF099',
+                    300: '#FFE866',
+                    400: '#FFE033',
+                    500: '#FFD700',
+                    600: '#CCAB00',
+                    700: '#998100',
+                    800: '#665600',
+                    900: '#332B00',
+                },
+
+                // ============================================
+                // BACKGROUND / BASE LAYER (70%)
+                // ============================================
+                ivory: {
+                    DEFAULT: '#FFFFF0',
+                    50: '#FFFFF8',
+                    100: '#FFFFF5',
+                    200: '#FFFFF0',
+                    300: '#FFFFEB',
+                    400: '#FFFFE5',
+                    500: '#FFFFF0',
+                },
+
+                // Primary text colors
+                'text-primary': '#1A1A1A',
+                'text-secondary': '#555555',
+                'text-muted': '#777777',
+                'text-light': '#999999',
+
+                // Border colors
+                border: '#E5E5E5',
+                'border-light': '#F0F0F0',
+                'border-dark': '#CCCCCC',
+
+                // White card base
+                'card-white': '#FFFFFF',
+
+                // ============================================
+                // EXISTING COLOR PALETTE (for backward compatibility)
+                // ============================================
                 primary: {
-                    DEFAULT: '#050505', // Obsidian (Pure Black)
-                    50: '#2A2A2A',
-                    100: '#242424',
-                    200: '#1E1E1E',
-                    300: '#181818',
-                    400: '#121212',
-                    500: '#0C0C0C',
+                    DEFAULT: '#1A1A1A',
+                    50: '#4A4A4A',
+                    100: '#404040',
+                    200: '#333333',
+                    300: '#262626',
+                    400: '#1A1A1A',
+                    500: '#0D0D0D',
                     600: '#0A0A0A',
                     700: '#080808',
                     800: '#050505',
                     900: '#000000',
                 },
+
                 secondary: {
-                    DEFAULT: '#D97757', // Ember / Copper
-                    50: '#FDF6F4',
-                    100: '#FBE8E2',
-                    200: '#F6CDAE',
-                    300: '#F0AD8D',
-                    400: '#E88C6B',
-                    500: '#D97757',
-                    600: '#B85C40',
-                    700: '#91432A',
-                    800: '#6D2F1B',
-                    900: '#4A1D0F',
+                    DEFAULT: '#800000',
+                    50: '#F5E6E6',
+                    100: '#EBCCCC',
+                    200: '#D79999',
+                    300: '#C36666',
+                    400: '#A33333',
+                    500: '#800000',
+                    600: '#660000',
+                    700: '#4D0000',
+                    800: '#330000',
+                    900: '#1A0000',
                 },
-                background: '#080808',
+
+                background: '#FFFFF0',
+                'background-paper': '#FDFCF8',
+
                 accent: {
-                    DEFAULT: '#A1A1AA', // Silver / Gray for accents
-                    50: '#FAFAFA',
-                    100: '#F4F4F5',
-                    200: '#E4E4E7',
-                    300: '#D4D4D8',
-                    400: '#A1A1AA',
-                    500: '#71717A',
-                    600: '#52525B',
-                    700: '#3F3F46',
-                    800: '#27272A',
-                    900: '#18181B',
+                    DEFAULT: '#44CC44',
+                    50: '#E8F5E8',
+                    100: '#D1EBD1',
+                    200: '#A3D7A3',
+                    300: '#75C375',
+                    400: '#55BB55',
+                    500: '#44CC44',
+                    600: '#33AA33',
+                    700: '#228822',
+                    800: '#116611',
+                    900: '#004400',
                 },
+
                 // Semantic colors
                 success: {
                     DEFAULT: '#059669',
@@ -65,6 +151,7 @@ const config: Config = {
                     800: '#064E3B',
                     900: '#022C22',
                 },
+
                 warning: {
                     DEFAULT: '#D97706',
                     50: '#FFFBEB',
@@ -78,6 +165,7 @@ const config: Config = {
                     800: '#78350F',
                     900: '#451A03',
                 },
+
                 error: {
                     DEFAULT: '#DC2626',
                     50: '#FEF2F2',
@@ -91,6 +179,7 @@ const config: Config = {
                     800: '#7F1D1D',
                     900: '#450A0A',
                 },
+
                 info: {
                     DEFAULT: '#0284C7',
                     50: '#F0F9FF',
@@ -104,6 +193,7 @@ const config: Config = {
                     800: '#0C4A6E',
                     900: '#0C4A6E',
                 },
+
                 slate: {
                     50: '#f8fafc',
                     100: '#f1f5f9',
@@ -117,9 +207,10 @@ const config: Config = {
                     900: '#0f172a',
                     950: '#020617',
                 },
+
                 parchment: '#F8F6F1',
                 'parchment-light': '#FFFFFF',
-                divider: '#F1EFEA',
+                divider: '#E5E5E5',
                 heritage: {
                     DEFAULT: '#0F3D2E',
                     50: '#E7ECEB',
@@ -133,54 +224,61 @@ const config: Config = {
                     800: '#061913',
                     900: '#030C09',
                 },
-                gold: {
-                    DEFAULT: '#C9A227',
-                    50: '#FBF7E8',
-                    100: '#F7EFD1',
-                    200: '#EFDFA3',
-                    300: '#E7CF75',
-                    400: '#DFBF47',
-                    500: '#C9A227',
-                    600: '#A1821F',
-                    700: '#796117',
-                    800: '#52410F',
-                    900: '#2B2008',
-                },
-                'text-primary': '#FFFFFF',
-                'text-secondary': '#A1A1AA',
-                'text-muted': '#71717A',
             },
+
             fontFamily: {
-                heading: ['Playfair Display', 'serif'],
-                display: ['Playfair Display', 'serif'],
-                serif: ['Cormorant Garamond', 'serif'],
+                // ============================================
+                // TYPOGRAPHY SYSTEM
+                // ============================================
+                // Headings - Merriweather for academic feel
+                heading: ['Merriweather', 'serif'],
+                display: ['Merriweather', 'serif'],
+
+                // Body text - Inter for readability
                 body: ['Inter', 'sans-serif'],
-                academic: ['Source Serif 4', 'serif'],
+
+                // Citations / research metadata - Source Serif Pro
+                academic: ['Source Serif Pro', 'serif'],
+                serif: ['Source Serif Pro', 'serif'],
+
+                // Legacy support
+                'sans': ['Inter', 'sans-serif'],
             },
+
             spacing: {
                 section: '6rem',
                 'section-sm': '4rem',
             },
+
             borderRadius: {
                 card: '4px',
                 button: '2px',
                 '2xl': '1rem',
                 '3xl': '1.5rem',
             },
+
             boxShadow: {
-                academic: '0 4px 20px -5px rgba(0, 0, 0, 0.5)',
-                'card-hover': '0 10px 30px -10px rgba(0, 0, 0, 0.7)',
-                'glow-primary': '0 0 30px rgba(217, 119, 87, 0.5)',
-                'glow-secondary': '0 0 25px rgba(217, 119, 87, 0.4)',
-                'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.03)',
+                academic: '0 2px 8px -2px rgba(0, 0, 0, 0.1)',
+                'card-hover': '0 4px 12px -2px rgba(0, 0, 0, 0.15)',
+                'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
+                'glow-primary': '0 0 20px rgba(68, 204, 68, 0.3)',
+                'glow-secondary': '0 0 15px rgba(128, 0, 0, 0.2)',
+                'inner-light': 'inset 0 1px 2px 0 rgba(0, 0, 0, 0.05)',
             },
+
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-primary': 'linear-gradient(135deg, #050505 0%, #111111 100%)',
-                'gradient-gold': 'linear-gradient(135deg, #D97757 0%, #B85C40 100%)',
-                'gradient-hero': 'linear-gradient(135deg, #0A0A0A 0%, #050505 50%, #000000 100%)',
-                'gradient-mesh': 'radial-gradient(at 40% 20%, hsla(15,60%,30%,0.1) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(0,0%,5%,1) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(15,40%,20%,0.05) 0px, transparent 50%)',
+                'gradient-primary': 'linear-gradient(135deg, #FFFFF0 0%, #F8F6F1 100%)',
+                'gradient-accent': 'linear-gradient(135deg, #44CC44 0%, #33AA33 100%)',
+                'gradient-hero': 'linear-gradient(180deg, #FFFFF0 0%, #F8F6F1 50%, #F0EEE8 100%)',
+
+                // Woven textile pattern - subtle
+                'textile-pattern': `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23800000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+
+                // Aronai geometric motif - subtle border pattern
+                'aronai-pattern': `url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q25 0 50 10 T100 10' stroke='%23800000' stroke-width='1' fill='none' opacity='0.1'/%3E%3C/svg%3E")`,
             },
+
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-out forwards',
                 'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
@@ -192,6 +290,7 @@ const config: Config = {
                 'float': 'float 3s ease-in-out infinite',
                 'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
             },
+
             keyframes: {
                 fadeIn: {
                     '0%': { opacity: '0' },

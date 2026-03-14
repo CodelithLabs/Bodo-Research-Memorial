@@ -18,6 +18,18 @@ export { default as Category } from './Category';
 export type { ICategory } from './Category';
 export { defaultCategories, seedCategories } from './Category';
 
+export { default as Movement } from './Movement';
+export type { IMovement } from './Movement';
+
+export { default as Organization } from './Organization';
+export type { IOrganization } from './Organization';
+
+export { default as HistoricalEvent } from './HistoricalEvent';
+export type { IHistoricalEvent } from './HistoricalEvent';
+
+export { default as ArchiveItem } from './ArchiveItem';
+export type { IArchiveItem } from './ArchiveItem';
+
 /**
  * Database connection helper
  */

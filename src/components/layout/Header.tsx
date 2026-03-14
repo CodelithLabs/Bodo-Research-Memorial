@@ -3,37 +3,27 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Landmark, Search, Home, Archive, Clock, Calendar, BookOpen, Heart, Mail, Sun, Moon } from 'lucide-react';
+import { Menu, X, Search, Home, Archive, Clock, Calendar, BookOpen, Mail, Landmark, Network, Flag, Building2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
     { href: '/', label: 'Home', icon: Home },
-    { href: '/about', label: 'About', icon: Home },
-    { href: '/leaders', label: 'Archive', icon: Archive },
-    { href: '/history', label: 'History', icon: Clock },
+    { href: '/leaders', label: 'Leaders', icon: Archive },
+    { href: '/movements', label: 'Movements', icon: Flag },
+    { href: '/organizations', label: 'Organizations', icon: Building2 },
+    { href: '/archive', label: 'Digital Archive', icon: Archive },
+    { href: '/knowledge-graph', label: 'Knowledge Graph', icon: Network },
     { href: '/timeline', label: 'Timeline', icon: Calendar },
     { href: '/research', label: 'Research', icon: BookOpen },
-    { href: '/tribute', label: 'Tributes', icon: Heart },
+    { href: '/history', label: 'History', icon: Clock },
+    { href: '/about', label: 'About', icon: Landmark },
     { href: '/contact', label: 'Contact', icon: Mail },
 ];
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-        if (typeof window !== 'undefined') {
-            const stored = localStorage.getItem('theme');
-            if (stored === 'dark' || stored === 'light') return stored;
-            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-        return 'light';
-    });
     const pathname = usePathname();
-
-    useEffect(() => {
-        document.documentElement.classList.toggle('dark', theme === 'dark');
-        localStorage.setItem('theme', theme);
-    }, [theme]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -45,46 +35,46 @@ export default function Header() {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-lg border-b border-white/20 dark:border-slate-800/50 py-2' : 'bg-transparent dark:bg-transparent py-6 border-b border-transparent'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+                ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-border py-3'
+                : 'bg-transparent py-5'
                 }`}
         >
-            <div className="container-institutional">
+            <div className="container-academic">
                 <div className="flex items-center justify-between">
                     {/* Logo Section */}
-                    <Link href="/" className="flex items-center gap-4 group">
-                        <div className="w-10 h-10 bg-primary flex items-center justify-center relative overflow-hidden group-hover:bg-primary/90 transition-colors">
-                            <div className="absolute inset-0 opacity-10 bg-weave" />
-                            <Landmark className="w-6 h-6 text-secondary relative z-10" />
+                    <Link href="/" className="flex items-center gap-3 group">
+                        <div className="w-10 h-10 bg-parrot flex items-center justify-center rounded-card shadow-sm group-hover:shadow-glow-primary transition-shadow">
+                            <Landmark className="w-5 h-5 text-white" />
                         </div>
                         <div className="hidden sm:block">
-                            <span className="block text-primary font-bold text-lg uppercase tracking-wider leading-none mb-1">
-                                Bodo Research <span className="text-secondary italic">Memorial</span>
+                            <span className="block text-text-primary font-heading font-bold text-lg leading-tight">
+                                Bodo Research <span className="text-parrot">Memorial</span>
                             </span>
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-text-muted">
-                                Digital Heritage Repository
+                            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-text-muted">
+                                Digital Heritage Archive
                             </span>
                         </div>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-2">
+                    <nav className="hidden lg:flex items-center gap-1">
                         {navLinks.map((link) => {
                             const isActive = pathname === link.href;
-                            const Icon = link.icon;
                             return (
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    aria-label={link.label}
-                                    className={`relative px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-secondary flex items-center justify-center sm:justify-start gap-1 ${isActive ? 'text-primary dark:text-secondary' : 'text-text-muted dark:text-white'
+                                    className={`relative px-4 py-2 text-sm font-medium transition-colors ${isActive
+                                        ? 'text-parrot'
+                                        : 'text-text-secondary hover:text-parrot'
                                         }`}
                                 >
-                                    {Icon && <Icon className="w-4 h-4 sm:hidden" />}
-                                    <span className="hidden sm:inline">{link.label}</span>
+                                    {link.label}
                                     {isActive && (
                                         <motion.div
                                             layoutId="nav-underline"
-                                            className="absolute bottom-0 left-5 right-5 h-0.5 bg-secondary"
+                                            className="absolute bottom-0 left-4 right-4 h-0.5 bg-parrot"
                                         />
                                     )}
                                 </Link>
@@ -93,23 +83,18 @@ export default function Header() {
                     </nav>
 
                     {/* Action Area */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
+                        {/* Search Button */}
                         <button
-                            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-                            className="p-2 text-primary hover:text-secondary transition-colors"
-                            aria-label="Toggle theme"
+                            className="hidden md:flex items-center gap-2 text-sm text-text-muted bg-background-paper border border-border px-4 py-2 rounded-card hover:border-parrot hover:text-parrot transition-all"
                         >
-                            {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-                        </button>
-
-                        <button className="hidden md:flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-primary bg-primary/5 px-4 py-2 hover:bg-primary hover:text-white transition-all">
                             <Search className="w-4 h-4" />
-                            <span className="hidden xl:inline">Library Search</span>
+                            <span className="hidden xl:inline">Search Archive</span>
                         </button>
 
                         {/* Mobile Menu Toggle */}
                         <button
-                            className="lg:hidden p-2 text-primary hover:text-secondary transition-colors"
+                            className="lg:hidden p-2 text-text-primary hover:text-parrot transition-colors"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             aria-label="Toggle menu"
                         >
@@ -126,9 +111,9 @@ export default function Header() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="lg:hidden bg-white dark:bg-slate-900 border-t border-divider overflow-hidden"
+                        className="lg:hidden bg-white border-t border-border overflow-hidden"
                     >
-                        <div className="container-institutional py-8 space-y-4">
+                        <div className="container-academic py-6 space-y-1">
                             {navLinks.map((link) => {
                                 const isActive = pathname === link.href;
                                 const Icon = link.icon;
@@ -137,7 +122,9 @@ export default function Header() {
                                         key={link.href}
                                         href={link.href}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className={`block py-2 text-sm font-bold uppercase tracking-widest flex items-center gap-2 ${isActive ? 'text-secondary border-l-2 border-secondary pl-4' : 'text-text-muted pl-4'
+                                        className={`block py-3 px-4 text-sm font-medium rounded-card flex items-center gap-3 ${isActive
+                                            ? 'text-parrot bg-parrot/5'
+                                            : 'text-text-secondary hover:text-parrot hover:bg-parrot/5'
                                             }`}
                                     >
                                         {Icon && <Icon className="w-5 h-5" />}
@@ -145,9 +132,9 @@ export default function Header() {
                                     </Link>
                                 );
                             })}
-                            <div className="pt-4 mt-4 border-t border-divider">
-                                <button className="w-full bg-primary text-white py-4 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-                                    <Search className="w-4 h-4" /> Global Search
+                            <div className="pt-4 mt-2 border-t border-border">
+                                <button className="w-full flex items-center justify-center gap-2 text-sm font-medium text-white bg-parrot py-3 rounded-card hover:bg-parrot-dark transition-colors">
+                                    <Search className="w-4 h-4" /> Search Archive
                                 </button>
                             </div>
                         </div>

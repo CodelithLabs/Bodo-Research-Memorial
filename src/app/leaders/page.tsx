@@ -10,28 +10,11 @@ import {
     MapPin,
     ChevronRight,
     Filter,
-    History,
-    Crown,
-    BookOpen,
-    Music,
-    Heart,
-    GraduationCap,
-    Building,
-    Star
+    History
 } from 'lucide-react';
 import { leaders } from '@/data/leaders';
 
 const regions = ['All', 'BTC', 'Assam', 'Kokrajhar', 'Chirang', 'Baksa', 'Udalguri'];
-
-const categories = [
-    { name: 'Political', icon: Crown, color: 'bg-blue-500' },
-    { name: 'Religious', icon: Star, color: 'bg-yellow-500' },
-    { name: 'Cultural', icon: Music, color: 'bg-purple-500' },
-    { name: 'Social', icon: Heart, color: 'bg-pink-500' },
-    { name: 'Academic', icon: GraduationCap, color: 'bg-green-500' },
-    { name: 'Administrative', icon: Building, color: 'bg-gray-500' },
-    { name: 'Martyr', icon: Star, color: 'bg-red-500' }
-];
 
 export default function LeadersPage() {
     const [activeRegion, setActiveRegion] = useState('All');
