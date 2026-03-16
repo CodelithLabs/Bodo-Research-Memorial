@@ -1,0 +1,164 @@
+{
+    "bodo_festivals": [
+        {
+            "id": "bwisagu",
+            "name": "Bwisagu",
+            "type": "New Year Festival",
+            "description": "Bwisagu is the most important traditional festival of the Bodo people, celebrated as the Bodo New Year. It marks the beginning of the new year according to the Bodo calendar and is celebrated with great enthusiasm and traditional fervor. The festival usually falls in the month of April (mid-April) and is celebrated over several days. Bwisagu is a time for family reunions, cultural performances, and traditional rituals that reflect the agricultural heritage of the Bodo people.",
+            "season": "Spring",
+            "rituals": [
+                "Preparation of special traditional dishes",
+                "Wearing new clothes (Fagri)",
+                "Visiting relatives and exchanging gifts",
+                "Traditional dance performances (Bagurumba)",
+                "Singing traditional Bwisagu songs",
+                "Cleaning and decorating homes",
+                "Offering prayers to deities"
+            ],
+            "cultural_significance": "Bwisagu represents the renewal of life and the agricultural cycle. It is a time when the Bodo community comes together to celebrate their cultural heritage and strengthen social bonds. The festival reflects the deep connection between the Bodo people and nature, as it marks the spring harvest season.",
+            "related_dances": [
+                "Bagurumba",
+                "Bwrwigita"
+            ],
+            "sources": [
+                "Wikipedia - Bodo festivals",
+                "Cultural Archives of Assam",
+                "Bodo Sahitya Sabha"
+            ]
+        },
+        {
+            "id": "kherai",
+            "name": "Kherai",
+            "type": "Religious Festival",
+            "description": "Kherai is the most important religious festival of the Bodo people, celebrated in honor of the deity 'Bathou' (the supreme god in Bodo religion). It is a week-long festival that typically falls in the months of November-December. During Kherai, the Bodo people offer prayers to Bathou and other deities for prosperity, good health, and bumper harvests. The festival involves elaborate rituals performed by the 'Deodhai' (priest) and 'Yajman' (sponsor of the ritual).",
+            "season": "Winter",
+            "rituals": [
+                "Cleaning of the 'Ghor Chang Ghar' (ritual hut)",
+                "Invocation of deity Bathou",
+                "Offering of sacrifices (traditionally animal sacrifices)",
+                "Performance of traditional dances by priest",
+                "Feasting with community members",
+                "Lighting of traditional lamps",
+                "Reading of sacred texts"
+            ],
+            "cultural_significance": "Kherai is central to the religious identity of the Bodo people as it reinforces their indigenous faith in Bathouism. The festival showcases the unique religious traditions and rituals of the Bodo community that have been preserved for centuries. It serves as a means of transmitting religious knowledge and cultural practices to younger generations.",
+            "related_dances": [
+                "Kherai Dance",
+                "Deodhai Dance"
+            ],
+            "sources": [
+                "Wikipedia - Bathouism",
+                "Religious Archives of Assam",
+                "Bodo Cultural Research Institute"
+            ]
+        },
+        {
+            "id": "garja",
+            "name": "Garja",
+            "type": "Agricultural Festival",
+            "description": "Garja is a traditional agricultural festival celebrated by the Bodo people after the harvest is completed. It is a way of expressing gratitude to the gods for a successful harvest. The festival is characterized by traditional songs, dances, and feasting. Garja is particularly important for farmers as it marks the end of the agricultural year and the beginning of a period of rest and celebration.",
+            "season": "Autumn",
+            "rituals": [
+                "Thanksgiving prayers for harvest",
+                "Traditional dance performances",
+                "Feasting with harvested produce",
+                "Singing harvest songs",
+                "Community gatherings"
+            ],
+            "cultural_significance": "Garja reflects the agricultural roots of the Bodo people and their close relationship with nature. The festival demonstrates the community's gratitude for the bounty of nature and reinforces the importance of agriculture in Bodo society.",
+            "related_dances": [
+                "Bagurumba",
+                "Agricultural Folk Dances"
+            ],
+            "sources": [
+                "Cultural Archives of Assam",
+                "Agricultural Department Records",
+                "Bodo Sahitya Sabha"
+            ]
+        },
+        {
+            "id": "domashi",
+            "name": "Domashi",
+            "type": "Harvest Festival",
+            "description": "Domashi is another important harvest festival celebrated by the Bodo people, typically in the month of March. It marks the harvesting of the winter crops and is a time of joy and celebration. Domashi is closely associated with the agricultural cycle and is celebrated with traditional songs, dances, and feasting.",
+            "season": "Spring",
+            "rituals": [
+                "Harvest rituals",
+                "Traditional cooking of new harvest produce",
+                "Community feasting",
+                "Traditional dance performances",
+                "Offering prayers for next season's harvest"
+            ],
+            "cultural_significance": "Domashi represents the prosperity and abundance of the Bodo agricultural society. It is a time when the community comes together to celebrate the fruits of their labor and pray for future prosperity.",
+            "related_dances": [
+                "Bagurumba",
+                "Folk Dances"
+            ],
+            "sources": [
+                "Wikipedia - Bodo festivals",
+                "Cultural Archives of Assam"
+            ]
+        },
+        {
+            "id": "sankranti",
+            "name": "Sankranti",
+            "type": "Seasonal Festival",
+            "description": "Sankranti is an important seasonal festival celebrated by the Bodo people, marking the transition from one season to another. It is particularly important as it marks the winter solstice and the beginning of longer days. The festival is characterized by traditional foods, kite flying, and community gatherings.",
+            "season": "Winter",
+            "rituals": [
+                "Preparation of special foods (Pitha)",
+                "Kite flying",
+                "Bonfires",
+                "Community gatherings",
+                "Offering prayers to Sun God"
+            ],
+            "cultural_significance": "Sankranti celebrates the changing of seasons and the cyclical nature of time in agricultural societies. It reflects the Bodo people's awareness of astronomical phenomena and their integration with natural cycles.",
+            "related_dances": [],
+            "sources": [
+                "Cultural Archives of Assam",
+                "Regional Festival Records"
+            ]
+        },
+        {
+            "id": "aathar",
+            "name": "Aathar",
+            "type": "Religious Festival",
+            "description": "Aathar is a traditional Bodo festival dedicated to the worship of ancestors and spirits. It is observed as a time to honor and remember departed ancestors. The festival involves rituals performed by the family elder to ensure the peaceful journey of ancestors and to seek their blessings.",
+            "season": "Autumn",
+            "rituals": [
+                "Ancestor worship rituals",
+                "Offering of food to ancestors",
+                "Family gatherings",
+                "Memorial prayers",
+                "Lighting of lamps"
+            ],
+            "cultural_significance": "Aathar reflects the importance of ancestral worship in Bodo culture. It demonstrates the strong family ties and respect for traditions that characterize Bodo society.",
+            "related_dances": [],
+            "sources": [
+                "Cultural Archives of Assam",
+                "Religious Traditions of Bodo People"
+            ]
+        },
+        {
+            "id": "nw-khrung-khrung",
+            "name": "Nwandw Khrung Khrung",
+            "type": "Traditional Festival",
+            "description": "Nwandw Khrung Khrung is a unique Bodo festival that celebrates the completion of the sowing season. It is a prayers for a good harvest and is celebrated with traditional songs and dances. The festival brings together the community to celebrate the agricultural cycle and seek divine blessings for a bountiful harvest.",
+            "season": "Summer",
+            "rituals": [
+                "Sowing completion prayers",
+                "Traditional dance performances",
+                "Community feasting",
+                "Agricultural rituals"
+            ],
+            "cultural_significance": "This festival represents the hope and aspirations of farmers for a successful agricultural season. It reinforces the community's connection to the land and their reliance on natural cycles.",
+            "related_dances": [
+                "Bagurumba"
+            ],
+            "sources": [
+                "Regional Cultural Records",
+                "Bodo Sahitya Sabha"
+            ]
+        }
+    ]
+}

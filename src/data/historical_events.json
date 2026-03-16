@@ -1,0 +1,258 @@
+{
+  "historical_events": [
+    {
+      "id": "founding-absu",
+      "title": "Founding of All Bodo Students Union (ABSU)",
+      "year": 1967,
+      "description": "The All Bodo Students Union (ABSU) was founded on 18th October 1967 at a conference held in Kokrajhar, Assam. The organization was founded by Upendranath Brahma (Bodofa) and other Bodo students with the aim of uniting the Bodo community and working for their educational, cultural, and political advancement. ABSU became the primary organization for the Bodo movement and has played a crucial role in raising awareness about Bodo rights and identity.",
+      "related_leaders": [
+        "Upendranath Brahma"
+      ],
+      "related_movements": [
+        "Bodo Movement",
+        "Cultural Preservation Movement"
+      ],
+      "sources": [
+        "All Bodo Students Union Official Records",
+        "Wikipedia - All Bodo Students Union",
+        "Bodo Political History Archives"
+      ]
+    },
+    {
+      "id": "first-bodo-conference",
+      "title": "First Bodo Conference",
+      "year": 1929,
+      "description": "The first Bodo Conference was held in 1929, marking a significant milestone in the organized Bodo movement. The conference provided a platform for Bodo leaders to discuss issues affecting the community and to formulate strategies for addressing them. It helped in uniting the Bodo community under a common agenda and raised awareness about Bodo identity and rights.",
+      "related_leaders": [
+        "Upendranath Brahma",
+        "Madaram Brahma"
+      ],
+      "related_movements": [
+        "Bodo Movement"
+      ],
+      "sources": [
+        "Bodo Political History",
+        "Cultural Archives of Assam"
+      ]
+    },
+    {
+      "id": "bodo-language-development",
+      "title": "Development and Standardization of Bodo Language",
+      "year": 1947,
+      "description": "After India's independence, significant efforts were made to develop and standardize the Bodo language. This included the standardization of the Devanagari script for Bodo, development of educational materials, and introduction of Bodo in schools. These efforts laid the foundation for the growth of Bodo literature and education.",
+      "related_leaders": [
+        "Satish Chandra Basumatary",
+        "Chandra Brahma"
+      ],
+      "related_movements": [
+        "Language Movement",
+        "Educational Development"
+      ],
+      "sources": [
+        "Linguistic Records of Assam",
+        "Bodo Sahitya Sabha Publications"
+      ]
+    },
+    {
+      "id": "first-bodo-mla",
+      "title": "First Bodo Member in Assam Legislative Assembly",
+      "year": 1952,
+      "description": "The first Bodo representative was elected to the Assam Legislative Assembly in 1952, marking the entry of Bodo leaders into mainstream politics. This was an important milestone in the political empowerment of the Bodo community and opened doors for Bodo participation in governance.",
+      "related_leaders": [
+        "Rupnath Brahma"
+      ],
+      "related_movements": [
+        "Tribal Political Movement"
+      ],
+      "sources": [
+        "Assam Legislative Assembly Records",
+        "Political Archives of Assam"
+      ]
+    },
+    {
+      "id": "rupnath-brahma-cm",
+      "title": "Rupnath Brahma becomes First Tribal Chief Minister",
+      "year": 1967,
+      "description": "Rupnath Brahma became the first tribal Chief Minister of Assam in 1967, serving until 1970. This was a historic achievement for the tribal communities of Assam and represented a significant milestone in tribal political empowerment. His tenure focused on addressing tribal land rights and development issues.",
+      "related_leaders": [
+        "Rupnath Brahma"
+      ],
+      "related_movements": [
+        "Tribal Politics in Assam"
+      ],
+      "sources": [
+        "Wikipedia - List of Chief Ministers of Assam",
+        "Assam Government Archives"
+      ]
+    },
+    {
+      "id": "bodoland-movement-1980s",
+      "title": "Bodoland Movement Intensifies (1980s)",
+      "year": 1987,
+      "description": "The demand for a separate Bodoland state gained momentum in the 1980s. The All Bodo Students Union (ABSU) led by leaders like Upendranath Brahma and later Pramod Boro intensified the movement for a separate state within the Indian Union. This period saw increased political activism and negotiations with the government.",
+      "related_leaders": [
+        "Pramod Boro",
+        "Upendranath Brahma"
+      ],
+      "related_movements": [
+        "Bodoland Movement",
+        "ABSU Movement"
+      ],
+      "sources": [
+        "Political Reports on Bodoland",
+        "News Archives on Bodoland Movement"
+      ]
+    },
+    {
+      "id": "bodoland-accord-1993",
+      "title": "Bodoland Peace Accord (First Accord)",
+      "year": 1993,
+      "description": "The first Bodoland Peace Accord was signed in 1993 between the Government of India and various Bodo organizations. The accord aimed to bring peace to the Bodoland region and address some of the demands of the Bodo movement. However, the implementation of the accord faced challenges and disputes.",
+      "related_leaders": [
+        "Hagrama Mohilary",
+        "Pramod Boro"
+      ],
+      "related_movements": [
+        "Bodoland Movement",
+        "Peace Process"
+      ],
+      "sources": [
+        "Government of India Archives",
+        "Peace Accord Documentation"
+      ]
+    },
+    {
+      "id": "bodoland-accord-2003",
+      "title": "Bodoland Peace Accord (Second Accord)",
+      "year": 2003,
+      "description": "The second Bodoland Peace Accord was signed in 2003, leading to the creation of the Bodoland Territorial Council (BTC). The BTC was granted autonomous governance within the framework of the Indian Constitution. This accord was more successful in bringing peace to the region compared to the 1993 accord.",
+      "related_leaders": [
+        "Hagrama Mohilary",
+        "Bir Chilagang Basumatary"
+      ],
+      "related_movements": [
+        "Bodoland Movement",
+        "Peace Process"
+      ],
+      "sources": [
+        "Government of India Archives",
+        "Bodoland Territorial Council Records",
+        "Peace Accord Documentation"
+      ]
+    },
+    {
+      "id": "btc-creation",
+      "title": "Creation of Bodoland Territorial Council",
+      "year": 2003,
+      "description": "Following the 2003 Peace Accord, the Bodoland Territorial Council (BTC) was created with its headquarters in Kokrajhar. The BTC was given powers to govern on subjects like education, health, agriculture, and cultural affairs. Hagrama Mohilary became the first Chief Executive Member of the BTC.",
+      "related_leaders": [
+        "Hagrama Mohilary"
+      ],
+      "related_movements": [
+        "Bodoland Movement",
+        "Autonomous Governance"
+      ],
+      "sources": [
+        "Bodoland Territorial Council Official Records",
+        "Government of Assam Archives"
+      ]
+    },
+    {
+      "id": "language-schedule",
+      "title": "Bodo Language in Eighth Schedule",
+      "year": 1975,
+      "description": "Bodo was included in the Eighth Schedule of the Indian Constitution in 1975, giving it official recognition as a major language of India. This was a significant achievement for the Bodo language movement and paved the way for the development of Bodo language in education, media, and administration.",
+      "related_leaders": [
+        "Upendranath Brahma",
+        "Satish Chandra Basumatary"
+      ],
+      "related_movements": [
+        "Language Movement"
+      ],
+      "sources": [
+        "Constitution of India",
+        "Linguistic Records"
+      ]
+    },
+    {
+      "id": "bodo-literary-award",
+      "title": "First Sahitya Akademi Award for Bodo",
+      "year": 1988,
+      "description": "In 1988, Satish Chandra Basumatary became the first Bodo writer to receive the Sahitya Akademi Award, India's highest literary honor. This was a landmark achievement for Bodo literature and brought national recognition to Bodo literary works.",
+      "related_leaders": [
+        "Satish Chandra Basumatary"
+      ],
+      "related_movements": [
+        "Bodo Literary Movement"
+      ],
+      "sources": [
+        "Sahitya Akademi Awards List",
+        "Literary Archives"
+      ]
+    },
+    {
+      "id": "sangeet-nataka-award-bodo",
+      "title": "National Recognition for Bodo Folk Arts",
+      "year": 1974,
+      "description": "Kanakeswar Narzary received the Sangeet Natak Akademi Award in 1974 for his contributions to Bodo folk music. This was the first national recognition for Bodo performing arts and helped in popularizing Bodo folk traditions across India.",
+      "related_leaders": [
+        "Kanakeswar Narzary"
+      ],
+      "related_movements": [
+        "Cultural Preservation Movement"
+      ],
+      "sources": [
+        "Sangeet Natak Akademi Records",
+        "Cultural Archives of Assam"
+      ]
+    },
+    {
+      "id": "bodo-autonomous-council-1971",
+      "title": "Creation of North Assam Autonomous Council",
+      "year": 1971,
+      "description": "The North Assam (Bodo) Autonomous District Council was created in 1971 under the Sixth Schedule of the Indian Constitution. This was an important step towards regional autonomy for the Bodo people and provided a platform for local governance.",
+      "related_leaders": [
+        "Rupnath Brahma",
+        "Bineswar Brahma"
+      ],
+      "related_movements": [
+        "Tribal Autonomy Movement"
+      ],
+      "sources": [
+        "Constitution of India - Sixth Schedule",
+        "Assam Government Archives"
+      ]
+    },
+    {
+      "id": "sanitation-campaign",
+      "title": "Bodo Social Reform Movement",
+      "year": 1900,
+      "description": "The Bodo Social Reform Movement began in the late 19th and early 20th centuries, led by reformers like Madaram Brahma and Guruswami Boro. The movement focused on eliminating social evils, promoting education, and improving the status of women in Bodo society.",
+      "related_leaders": [
+        "Madaram Brahma",
+        "Guruswami Boro"
+      ],
+      "related_movements": [
+        "Social Reform Movement"
+      ],
+      "sources": [
+        "Social History of Bodo People",
+        "Historical Records of Assam"
+      ]
+    },
+    {
+      "id": "first-bodo-radio",
+      "title": "Introduction of Bodo in All India Radio",
+      "year": 1956,
+      "description": "Bodo language broadcasts began on All India Radio in 1956, marking a significant milestone in the development of Bodo media. This provided a platform for Bodo cultural expression and helped in reaching a wider audience with Bodo programs.",
+      "related_leaders": [],
+      "related_movements": [
+        "Media Development"
+      ],
+      "sources": [
+        "All India Radio Archives",
+        "Media Records of Assam"
+      ]
+    }
+  ]
+}

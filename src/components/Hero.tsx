@@ -21,25 +21,31 @@ const translations = {
     statsCommunity: "Community Members",
 };
 
+// Pre-computed particle positions for better performance (reduced from 20 to 8)
+const particlePositions = Array.from({ length: 8 }, (_, i) => ({
+    left: `${(i * 12.5) % 100}%`,
+    top: `${(i * 20) % 100}%`,
+    delay: `${i * 0.5}s`,
+    duration: `${4 + (i % 3)}s`
+}));
+
 export default function Hero() {
     return (
         <section className={styles.hero}>
-            {/* Animated Background */}
+            {/* Optimized background - reduced particles from 20 to 8 */}
             <div className={styles.backgroundPattern}>
                 <div className={styles.gridOverlay}></div>
                 <div className={styles.gradientOrbs}>
                     <div className={styles.orb1}></div>
                     <div className={styles.orb2}></div>
-                    <div className={styles.orb3}></div>
                 </div>
                 <div className={styles.floatingParticles}>
-                    {[...Array(20)].map((_, i) => (
-                        <div key={i} className={styles.particle} style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 5}s`,
-                            animationDuration: `${3 + Math.random() * 4}s`
-                        }}></div>
+                    {particlePositions.map((pos, i) => (
+                        <div
+                            key={i}
+                            className={styles.particle}
+                            style={pos}
+                        />
                     ))}
                 </div>
             </div>
@@ -173,9 +179,8 @@ export default function Hero() {
                                 <circle cx="100" cy="100" r="70" fill="none" stroke="url(#gradient2)" strokeWidth="1" className={styles.ring2} />
                                 <circle cx="100" cy="100" r="50" fill="none" stroke="url(#gradient3)" strokeWidth="0.5" className={styles.ring3} />
 
-                                {/* Bodo Symbol - Simplified纹样 */}
+                                {/* Bodo Symbol */}
                                 <g className={styles.symbolGroup}>
-                                    {/* Central Design */}
                                     <circle cx="100" cy="100" r="25" fill="url(#symbolGradient)" />
                                     <path d="M100 75 L100 125 M75 100 L125 100" stroke="white" strokeWidth="2" opacity="0.5" />
                                     <circle cx="100" cy="100" r="10" fill="none" stroke="white" strokeWidth="1" opacity="0.7" />
@@ -204,7 +209,7 @@ export default function Hero() {
                             </svg>
                         </div>
 
-                        {/* Floating Cards */}
+                        {/* Floating Cards - Simplified animations */}
                         <motion.div
                             className={styles.floatingCard1}
                             animate={{ y: [-10, 10, -10] }}

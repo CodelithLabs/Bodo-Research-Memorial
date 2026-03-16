@@ -10,6 +10,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB, Leader, Movement, Organization, HistoricalEvent, ArchiveItem, Article } from '@/models';
 
+// Simple in-memory cache for search results
+const searchCache = new Map<string, { data: unknown; timestamp: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes cache TTL
+
+function getCachedResults(key: string) {
+    const cached = searchCache.get(key);
+    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+        return cached.data;
+    }
+    return null;
+}
+
+function setCachedResults(key: string, data: unknown) {
+    searchCache.set(key, { data, timestamp: Date.now() });
+}
+
 /**
  * GET /api/search
  * Search across all collections
@@ -28,6 +44,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 { error: 'Search query must be at least 2 characters' },
                 { status: 400 }
             );
+        }
+
+        // Check cache first
+        const cacheKey = query.toLowerCase().trim();
+        const cachedResults = getCachedResults(cacheKey);
+        if (cachedResults) {
+            return NextResponse.json(cachedResults);
         }
 
         // Limit results per collection
@@ -92,7 +115,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             archiveItems.length +
             articles.length;
 
-        return NextResponse.json({
+        const response = {
             query,
             results: {
                 leaders: {
@@ -122,7 +145,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             },
             totalResults,
             suggestions: query.split(' ').filter(Boolean)
-        });
+        };
+
+        // Cache the results
+        setCachedResults(cacheKey, response);
+
+        return NextResponse.json(response);
     } catch (error) {
         console.error('Search error:', error);
         return NextResponse.json(

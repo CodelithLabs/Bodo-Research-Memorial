@@ -1,5 +1,6 @@
 'use client';
 
+import { memo, useMemo } from 'react';
 import Link from 'next/link';
 import { Calendar, MapPin, Star, ArrowRight } from 'lucide-react';
 import { Leader } from '@/types';
@@ -11,8 +12,19 @@ interface LeaderCardProps {
     leader: Leader;
 }
 
-export default function LeaderCard({ leader }: LeaderCardProps) {
-    const age = calculateAge(leader.birthDate, leader.deathDate);
+// Memoized component to prevent unnecessary re-renders
+export default memo(function LeaderCard({ leader }: LeaderCardProps) {
+    // Memoize age calculation
+    const age = useMemo(() =>
+        calculateAge(leader.birthDate, leader.deathDate),
+        [leader.birthDate, leader.deathDate]
+    );
+
+    // Memoize initials for placeholder
+    const initials = useMemo(() =>
+        leader.name.split(' ').map(n => n[0]).join('').slice(0, 2),
+        [leader.name]
+    );
 
     return (
         <article className={styles.card}>
@@ -25,7 +37,7 @@ export default function LeaderCard({ leader }: LeaderCardProps) {
                     />
                 ) : (
                     <div className={styles.imagePlaceholder}>
-                        <span>{leader.name.split(' ').map(n => n[0]).join('').slice(0, 2)}</span>
+                        <span>{initials}</span>
                     </div>
                 )}
                 {leader.isMartyr && (
@@ -71,4 +83,4 @@ export default function LeaderCard({ leader }: LeaderCardProps) {
             </div>
         </article>
     );
-}
+});

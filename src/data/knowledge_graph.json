@@ -1,0 +1,344 @@
+{
+    "knowledge_graph": [
+        {
+            "source": "Upendranath Brahma",
+            "target": "All Bodo Students Union",
+            "relationship": "founder_of"
+        },
+        {
+            "source": "Upendranath Brahma",
+            "target": "Bodo Movement",
+            "relationship": "leader_of"
+        },
+        {
+            "source": "Upendranath Brahma",
+            "target": "Bathouism",
+            "relationship": "follower_of"
+        },
+        {
+            "source": "Upendranath Brahma",
+            "target": "Cultural Preservation Movement",
+            "relationship": "leader_of"
+        },
+        {
+            "source": "Rupnath Brahma",
+            "target": "Indian National Congress",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Rupnath Brahma",
+            "target": "Assam Legislative Assembly",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Rupnath Brahma",
+            "target": "Chief Minister of Assam",
+            "relationship": "served_as"
+        },
+        {
+            "source": "Kanakeswar Narzary",
+            "target": "Bodo Folk Music",
+            "relationship": "pioneer_of"
+        },
+        {
+            "source": "Kanakeswar Narzary",
+            "target": "Bagurumba Dance",
+            "relationship": "promoter_of"
+        },
+        {
+            "source": "Kanakeswar Narzary",
+            "target": "Bodo Sahitya Sabha",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Madaram Brahma",
+            "target": "Social Reform Movement",
+            "relationship": "leader_of"
+        },
+        {
+            "source": "Madaram Brahma",
+            "target": "All Bodo Students Union",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Bineswar Brahma",
+            "target": "Indian National Congress",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Bineswar Brahma",
+            "target": "Lok Sabha",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Satish Chandra Basumatary",
+            "target": "Bodo Literature",
+            "relationship": "author_of"
+        },
+        {
+            "source": "Satish Chandra Basumatary",
+            "target": "Bodo Sahitya Sabha",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Satish Chandra Basumatary",
+            "target": "Sahitya Akademi Award",
+            "relationship": "recipient_of"
+        },
+        {
+            "source": "Pramod Boro",
+            "target": "All Bodo Students Union",
+            "relationship": "president_of"
+        },
+        {
+            "source": "Pramod Boro",
+            "target": "Bodoland Movement",
+            "relationship": "leader_of"
+        },
+        {
+            "source": "Pramod Boro",
+            "target": "Bodoland People's Front",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Hagrama Mohilary",
+            "target": "Bodoland Territorial Council",
+            "relationship": "chief_executive_member_of"
+        },
+        {
+            "source": "Hagrama Mohilary",
+            "target": "Bodoland Peace Accord 2003",
+            "relationship": "signatory_of"
+        },
+        {
+            "source": "Hagrama Mohilary",
+            "target": "Bodoland Movement",
+            "relationship": "leader_of"
+        },
+        {
+            "source": "Hagrama Mohilary",
+            "target": "All Bodo Students Union",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Bir Chilagang Basumatary",
+            "target": "Bodoland Liberation Force",
+            "relationship": "commander_of"
+        },
+        {
+            "source": "Bir Chilagang Basumatary",
+            "target": "Bodoland Movement",
+            "relationship": "participant_in"
+        },
+        {
+            "source": "Bir Chilagang Basumatary",
+            "target": "National Democratic Front of Boroland",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Urkhao Gwra Brahma",
+            "target": "Bodo Folk Art",
+            "relationship": "artist_of"
+        },
+        {
+            "source": "Urkhao Gwra Brahma",
+            "target": "Bodo Sahitya Sabha",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Lakhinandan Brahma",
+            "target": "Indian National Congress",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Lakhinandan Brahma",
+            "target": "Lok Sabha",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Lakhinandan Brahma",
+            "target": "All Bodo Students Union",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Kameswar Brahma",
+            "target": "Indian National Congress",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Kameswar Brahma",
+            "target": "Lok Sabha",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Dhaneswar Engtipi",
+            "target": "Bodo Folklore",
+            "relationship": "documentor_of"
+        },
+        {
+            "source": "Dhaneswar Engtipi",
+            "target": "Bodo Sahitya Sabha",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Chandra Brahma",
+            "target": "Bodo Literature",
+            "relationship": "author_of"
+        },
+        {
+            "source": "Chandra Brahma",
+            "target": "Bodo Sahitya Sabha",
+            "relationship": "member_of"
+        },
+        {
+            "source": "Guruswami Boro",
+            "target": "Social Reform Movement",
+            "relationship": "leader_of"
+        },
+        {
+            "source": "Guruswami Boro",
+            "target": "Brahmo Samaj",
+            "relationship": "member_of"
+        },
+        {
+            "source": "All Bodo Students Union",
+            "target": "Bodoland Movement",
+            "relationship": "involved_in"
+        },
+        {
+            "source": "All Bodo Students Union",
+            "target": "Cultural Preservation Movement",
+            "relationship": "involved_in"
+        },
+        {
+            "source": "All Bodo Students Union",
+            "target": "Language Movement",
+            "relationship": "involved_in"
+        },
+        {
+            "source": "All Bodo Students Union",
+            "target": "Bodo Sahitya Sabha",
+            "relationship": "connected_to"
+        },
+        {
+            "source": "All Bodo Students Union",
+            "target": "Bodoland People's Front",
+            "relationship": "connected_to"
+        },
+        {
+            "source": "Bodo Sahitya Sabha",
+            "target": "Bodo Literature",
+            "relationship": "promotes"
+        },
+        {
+            "source": "Bodo Sahitya Sabha",
+            "target": "Cultural Preservation Movement",
+            "relationship": "involved_in"
+        },
+        {
+            "source": "Bodoland Territorial Council",
+            "target": "Bodoland Peace Accord 2003",
+            "relationship": "established_by"
+        },
+        {
+            "source": "Bodoland Territorial Council",
+            "target": "Autonomous Governance",
+            "relationship": "form_of"
+        },
+        {
+            "source": "Bodoland People's Front",
+            "target": "Bodoland Movement",
+            "relationship": "involved_in"
+        },
+        {
+            "source": "Bodoland Liberation Force",
+            "target": "Bodoland Movement",
+            "relationship": "involved_in"
+        },
+        {
+            "source": "Bodo Peace Accord 1993",
+            "target": "Bodoland Movement",
+            "relationship": "outcome_of"
+        },
+        {
+            "source": "Bodo Peace Accord 2003",
+            "target": "Bodoland Movement",
+            "relationship": "outcome_of"
+        },
+        {
+            "source": "Bodo Peace Accord 2003",
+            "target": "Bodo Peace Accord 1993",
+            "relationship": "follows"
+        },
+        {
+            "source": "Bwisagu",
+            "target": "Bodo New Year",
+            "relationship": "celebration_of"
+        },
+        {
+            "source": "Bwisagu",
+            "target": "Bagurumba Dance",
+            "relationship": "features"
+        },
+        {
+            "source": "Kherai",
+            "target": "Bathouism",
+            "relationship": "festival_of"
+        },
+        {
+            "source": "Kherai",
+            "target": "Bodo Religion",
+            "relationship": "festival_of"
+        },
+        {
+            "source": "Bathouism",
+            "target": "Bodo Religion",
+            "relationship": "is_a"
+        },
+        {
+            "source": "Bagurumba Dance",
+            "target": "Bodo Folk Music",
+            "relationship": "accompanied_by"
+        },
+        {
+            "source": "Bagurumba Dance",
+            "target": "Bodo Cultural Heritage",
+            "relationship": "part_of"
+        },
+        {
+            "source": "Bodo Language",
+            "target": "Eighth Schedule",
+            "relationship": "included_in"
+        },
+        {
+            "source": "Bodo Language",
+            "target": "Tibeto-Burman Family",
+            "relationship": "belongs_to"
+        },
+        {
+            "source": "Bodo Language",
+            "target": "Language Movement",
+            "relationship": "central_to"
+        },
+        {
+            "source": "North Assam Autonomous Council",
+            "target": "Sixth Schedule",
+            "relationship": "established_under"
+        },
+        {
+            "source": "North Assam Autonomous Council",
+            "target": "Autonomous Governance",
+            "relationship": "form_of"
+        },
+        {
+            "source": "Garja",
+            "target": "Agricultural Festival",
+            "relationship": "is_a"
+        },
+        {
+            "source": "Domashi",
+            "target": "Harvest Festival",
+            "relationship": "is_a"
+        }
+    ]
+}
