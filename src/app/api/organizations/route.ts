@@ -4,6 +4,8 @@
  * ============================================
  * GET /api/organizations - List all organizations (public)
  * POST /api/organizations - Create new organization (auth required)
+ * 
+ * Uses MongoDB if available, falls back to local JSON data
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -12,6 +14,7 @@ import jwt from 'jsonwebtoken';
 import slugify from 'slugify';
 import { connectDB, Organization } from '@/models';
 import { withAuth } from '@/lib/auth';
+import { getOrganizations, getOrganization } from '@/data/organizations';
 
 // Validation schema for creating organization
 const createOrganizationSchema = z.object({
@@ -66,11 +69,10 @@ const createOrganizationSchema = z.object({
 /**
  * GET /api/organizations
  * List all published organizations with optional filters
+ * Falls back to local data if MongoDB is not available
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        await connectDB();
-
         const { searchParams } = new URL(request.url);
 
         // Parse query parameters
@@ -79,43 +81,84 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const type = searchParams.get('type');
         const featured = searchParams.get('featured') === 'true';
         const search = searchParams.get('search');
-        const tag = searchParams.get('tag');
+        const slug = searchParams.get('slug');
         const region = searchParams.get('region');
-        const sort = searchParams.get('sort') || '-createdAt';
 
-        // Build query
-        const query: Record<string, unknown> = { status: 'published' };
-
-        if (type) query.type = type;
-        if (featured) query.featured = true;
-        if (tag) query.tags = tag;
-        if (region) query.region = region;
-        if (search) {
-            query.$text = { $search: search };
+        // If slug is provided, return single item
+        if (slug) {
+            const item = getOrganization(slug);
+            if (item) {
+                return NextResponse.json(item);
+            }
+            // Try MongoDB
+            try {
+                await connectDB();
+                const mongoItem = await Organization.findOne({ slug, status: 'published' });
+                if (mongoItem) {
+                    return NextResponse.json(mongoItem);
+                }
+            } catch {
+                // MongoDB not available
+            }
+            return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
         }
 
-        // Execute query with pagination
-        const skip = (page - 1) * limit;
+        // Try to use MongoDB first
+        try {
+            await connectDB();
 
-        const [organizations, total] = await Promise.all([
-            Organization.find(query)
-                .sort(sort)
-                .skip(skip)
-                .limit(limit)
-                .populate('movements', 'name slug')
-                .lean(),
-            Organization.countDocuments(query),
-        ]);
+            // Build query
+            const query: Record<string, unknown> = { status: 'published' };
 
-        return NextResponse.json({
-            organizations,
-            pagination: {
+            if (type) query.type = type;
+            if (featured) query.featured = true;
+            if (region) query.region = region;
+            if (search) {
+                query.$or = [
+                    { name: { $regex: search, $options: 'i' } },
+                    { acronym: { $regex: search, $options: 'i' } },
+                    { description: { $regex: search, $options: 'i' } },
+                ];
+            }
+
+            // Execute query with pagination
+            const skip = (page - 1) * limit;
+
+            const [organizations, total] = await Promise.all([
+                Organization.find(query)
+                    .sort('-createdAt')
+                    .skip(skip)
+                    .limit(limit)
+                    .populate('movements', 'name slug')
+                    .lean(),
+                Organization.countDocuments(query),
+            ]);
+
+            return NextResponse.json({
+                organizations,
+                pagination: {
+                    page,
+                    limit,
+                    total,
+                    pages: Math.ceil(total / limit),
+                },
+            });
+        } catch {
+            // MongoDB not available, use local data
+            const result = getOrganizations({
+                type: type || undefined,
+                search: search || undefined,
+                featured,
                 page,
                 limit,
-                total,
-                pages: Math.ceil(total / limit),
-            },
-        });
+            });
+
+            return NextResponse.json({
+                organizations: result.organizations,
+                pagination: result.pagination,
+                _dataSource: 'local',
+            });
+        }
     } catch (error) {
         console.error('Get organizations error:', error);
         return NextResponse.json(

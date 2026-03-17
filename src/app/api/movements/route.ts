@@ -4,6 +4,8 @@
  * ============================================
  * GET /api/movements - List all movements (public)
  * POST /api/movements - Create new movement (auth required)
+ * 
+ * Uses MongoDB if available, falls back to local JSON data
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -12,6 +14,7 @@ import jwt from 'jsonwebtoken';
 import slugify from 'slugify';
 import { connectDB, Movement } from '@/models';
 import { withAuth } from '@/lib/auth';
+import { getMovements, getMovement } from '@/data/movements';
 
 // Validation schema for creating movement
 const createMovementSchema = z.object({
@@ -47,11 +50,10 @@ const createMovementSchema = z.object({
 /**
  * GET /api/movements
  * List all published movements with optional filters
+ * Falls back to local data if MongoDB is not available
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        await connectDB();
-
         const { searchParams } = new URL(request.url);
 
         // Parse query parameters
@@ -60,51 +62,93 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const type = searchParams.get('type');
         const featured = searchParams.get('featured') === 'true';
         const search = searchParams.get('search');
+        const slug = searchParams.get('slug');
         const tag = searchParams.get('tag');
         const yearFrom = searchParams.get('yearFrom');
         const yearTo = searchParams.get('yearTo');
-        const sort = searchParams.get('sort') || '-createdAt';
 
-        // Build query
-        const query: Record<string, unknown> = { status: 'published' };
-
-        if (type) query.type = type;
-        if (featured) query.featured = true;
-        if (tag) query.tags = tag;
-        if (search) {
-            query.$text = { $search: search };
+        // If slug is provided, return single item
+        if (slug) {
+            const item = getMovement(slug);
+            if (item) {
+                return NextResponse.json(item);
+            }
+            // Try MongoDB
+            try {
+                await connectDB();
+                const mongoItem = await Movement.findOne({ slug, status: 'published' });
+                if (mongoItem) {
+                    return NextResponse.json(mongoItem);
+                }
+            } catch {
+                // MongoDB not available
+            }
+            return NextResponse.json({ error: 'Movement not found' }, { status: 404 });
         }
 
-        // Year range filter
-        if (yearFrom || yearTo) {
-            query.startYear = {};
-            if (yearFrom) (query.startYear as Record<string, number>).$gte = parseInt(yearFrom);
-            if (yearTo) (query.startYear as Record<string, number>).$lte = parseInt(yearTo);
-        }
+        // Try to use MongoDB first
+        try {
+            await connectDB();
 
-        // Execute query with pagination
-        const skip = (page - 1) * limit;
+            // Build query
+            const query: Record<string, unknown> = { status: 'published' };
 
-        const [movements, total] = await Promise.all([
-            Movement.find(query)
-                .sort(sort)
-                .skip(skip)
-                .limit(limit)
-                .populate('leaders', 'name slug')
-                .populate('organizations', 'name slug acronym')
-                .lean(),
-            Movement.countDocuments(query),
-        ]);
+            if (type) query.type = type;
+            if (featured) query.featured = true;
+            if (tag) query.tags = tag;
+            if (search) {
+                query.$or = [
+                    { name: { $regex: search, $options: 'i' } },
+                    { description: { $regex: search, $options: 'i' } },
+                ];
+            }
 
-        return NextResponse.json({
-            movements,
-            pagination: {
+            // Year range filter
+            if (yearFrom || yearTo) {
+                query.startYear = {};
+                if (yearFrom) (query.startYear as Record<string, number>).$gte = parseInt(yearFrom);
+                if (yearTo) (query.startYear as Record<string, number>).$lte = parseInt(yearTo);
+            }
+
+            // Execute query with pagination
+            const skip = (page - 1) * limit;
+
+            const [movements, total] = await Promise.all([
+                Movement.find(query)
+                    .sort('-createdAt')
+                    .skip(skip)
+                    .limit(limit)
+                    .populate('leaders', 'name slug')
+                    .populate('organizations', 'name slug acronym')
+                    .lean(),
+                Movement.countDocuments(query),
+            ]);
+
+            return NextResponse.json({
+                movements,
+                pagination: {
+                    page,
+                    limit,
+                    total,
+                    pages: Math.ceil(total / limit),
+                },
+            });
+        } catch {
+            // MongoDB not available, use local data
+            const result = getMovements({
+                type: type || undefined,
+                search: search || undefined,
+                featured,
                 page,
                 limit,
-                total,
-                pages: Math.ceil(total / limit),
-            },
-        });
+            });
+
+            return NextResponse.json({
+                movements: result.movements,
+                pagination: result.pagination,
+                _dataSource: 'local',
+            });
+        }
     } catch (error) {
         console.error('Get movements error:', error);
         return NextResponse.json(

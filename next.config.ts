@@ -17,11 +17,23 @@ const nextConfig: NextConfig = {
     domains: [
       'images.unsplash.com',
       'unsplash.com',
+      'upload.wikimedia.org',
+      'commons.wikimedia.org',
     ],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'commons.wikimedia.org',
         pathname: '/**',
       },
     ],

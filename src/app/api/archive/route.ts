@@ -4,6 +4,8 @@
  * ============================================
  * GET /api/archive - List all archive items (public)
  * POST /api/archive - Create new archive item (auth required)
+ * 
+ * Uses MongoDB if available, falls back to local JSON data
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -12,6 +14,7 @@ import jwt from 'jsonwebtoken';
 import slugify from 'slugify';
 import { connectDB, ArchiveItem } from '@/models';
 import { withAuth } from '@/lib/auth';
+import { getArchiveItems, getArchiveItem } from '@/data/archive';
 
 // Validation schema for creating archive item
 const createArchiveItemSchema = z.object({
@@ -71,11 +74,10 @@ const createArchiveItemSchema = z.object({
 /**
  * GET /api/archive
  * List all published archive items with optional filters
+ * Falls back to local data if MongoDB is not available
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        await connectDB();
-
         const { searchParams } = new URL(request.url);
 
         // Parse query parameters
@@ -85,51 +87,86 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const category = searchParams.get('category');
         const featured = searchParams.get('featured') === 'true';
         const search = searchParams.get('search');
-        const yearFrom = searchParams.get('yearFrom');
-        const yearTo = searchParams.get('yearTo');
-        const sort = searchParams.get('sort') || '-dateItem';
+        const slug = searchParams.get('slug');
 
-        // Build query
-        const query: Record<string, unknown> = { status: 'published' };
-
-        if (type) query.type = type;
-        if (category) query.category = category;
-        if (featured) query.featured = true;
-        if (search) {
-            query.$text = { $search: search };
+        // If slug is provided, return single item
+        if (slug) {
+            const item = getArchiveItem(slug);
+            if (item) {
+                return NextResponse.json(item);
+            }
+            // Try MongoDB if not found in local data
+            try {
+                await connectDB();
+                const mongoItem = await ArchiveItem.findOne({ slug, status: 'published' });
+                if (mongoItem) {
+                    return NextResponse.json(mongoItem);
+                }
+            } catch {
+                // MongoDB not available, continue
+            }
+            return NextResponse.json({ error: 'Item not found' }, { status: 404 });
         }
-        
-        // Year range filter
-        if (yearFrom || yearTo) {
-            query.year = {};
-            if (yearFrom) (query.year as Record<string, number>).$gte = parseInt(yearFrom);
-            if (yearTo) (query.year as Record<string, number>).$lte = parseInt(yearTo);
-        }
 
-        // Execute query with pagination
-        const skip = (page - 1) * limit;
+        // Try to use MongoDB first
+        try {
+            await connectDB();
 
-        const [items, total] = await Promise.all([
-            ArchiveItem.find(query)
-                .sort(sort)
-                .skip(skip)
-                .limit(limit)
-                .populate('relatedLeaders', 'name slug')
-                .populate('relatedOrganizations', 'name slug acronym')
-                .populate('relatedMovements', 'name slug')
-                .lean(),
-            ArchiveItem.countDocuments(query),
-        ]);
+            // Build query
+            const query: Record<string, unknown> = { status: 'published' };
 
-        return NextResponse.json({
-            items,
-            pagination: {
+            if (type) query.type = type;
+            if (category) query.category = category;
+            if (featured) query.featured = true;
+            if (search) {
+                query.$or = [
+                    { title: { $regex: search, $options: 'i' } },
+                    { description: { $regex: search, $options: 'i' } },
+                    { tags: { $in: [new RegExp(search, 'i')] } },
+                ];
+            }
+
+            // Execute query with pagination
+            const skip = (page - 1) * limit;
+
+            const [items, total] = await Promise.all([
+                ArchiveItem.find(query)
+                    .sort('-dateItem')
+                    .skip(skip)
+                    .limit(limit)
+                    .populate('relatedLeaders', 'name slug')
+                    .populate('relatedOrganizations', 'name slug acronym')
+                    .populate('relatedMovements', 'name slug')
+                    .lean(),
+                ArchiveItem.countDocuments(query),
+            ]);
+
+            return NextResponse.json({
+                items,
+                pagination: {
+                    page,
+                    limit,
+                    total,
+                    pages: Math.ceil(total / limit),
+                },
+            });
+        } catch {
+            // MongoDB not available, use local data
+            const result = getArchiveItems({
+                type: type || undefined,
+                category: category || undefined,
+                search: search || undefined,
+                featured,
                 page,
                 limit,
-                total,
-                pages: Math.ceil(total / limit),
-            },
-        });
+            });
+
+            return NextResponse.json({
+                items: result.items,
+                pagination: result.pagination,
+                _dataSource: 'local',
+            });
+        }
     } catch (error) {
         console.error('Get archive items error:', error);
         return NextResponse.json(

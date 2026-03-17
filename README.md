@@ -10,6 +10,31 @@ A production-ready digital encyclopedia for Bodo civilization, culture, religion
 - Contact page with validated form, honeypot anti-spam, rate-limited API route, and map.
 - Dark mode toggle persists user preference and follows system setting.
 - Remote image component for external assets and placeholder handling.
+- **Google Knowledge Graph integration** for fetching real verified data about Bodo leaders.
+
+## 🔍 Google Knowledge Graph API
+
+This project integrates with Google's Knowledge Graph API to fetch real, verified information about Bodo leaders.
+
+### Setup
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable **Knowledge Graph API** from the API Library
+4. Go to **Credentials** → **Create Credentials** → **API Key**
+5. Add the key to `.env.local`:
+
+```env
+GOOGLE_KNOWLEDGE_GRAPH_API_KEY=your_api_key_here
+```
+
+### API Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `/api/leaders/google?query=Name` | Search for a leader by name |
+| `/api/leaders/google?leaderId=id` | Get Google data for a specific leader |
+| `/api/leaders/google?all=true` | Get Google data for all leaders |
 
 ## 🚀 Quick Start
 

@@ -4,6 +4,8 @@
  * ============================================
  * GET /api/events - List all events (public)
  * POST /api/events - Create new event (auth required)
+ * 
+ * Uses MongoDB if available, falls back to local JSON data
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -12,6 +14,7 @@ import jwt from 'jsonwebtoken';
 import slugify from 'slugify';
 import { connectDB, HistoricalEvent } from '@/models';
 import { withAuth } from '@/lib/auth';
+import { getEvents, getEvent } from '@/data/events';
 
 // Validation schema for creating event
 const createEventSchema = z.object({
@@ -51,11 +54,10 @@ const createEventSchema = z.object({
 /**
  * GET /api/events
  * List all published events with optional filters
+ * Falls back to local data if MongoDB is not available
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
-        await connectDB();
-
         const { searchParams } = new URL(request.url);
 
         // Parse query parameters
@@ -65,50 +67,94 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const category = searchParams.get('category');
         const featured = searchParams.get('featured') === 'true';
         const search = searchParams.get('search');
+        const slug = searchParams.get('slug');
         const yearFrom = searchParams.get('yearFrom');
         const yearTo = searchParams.get('yearTo');
-        const sort = searchParams.get('sort') || '-date';
 
-        // Build query
-        const query: Record<string, unknown> = { status: 'published' };
-
-        if (type) query.type = type;
-        if (category) query.category = category;
-        if (featured) query.featured = true;
-        if (search) {
-            query.$text = { $search: search };
+        // If slug is provided, return single item
+        if (slug) {
+            const item = getEvent(slug);
+            if (item) {
+                return NextResponse.json(item);
+            }
+            // Try MongoDB
+            try {
+                await connectDB();
+                const mongoItem = await HistoricalEvent.findOne({ slug, status: 'published' });
+                if (mongoItem) {
+                    return NextResponse.json(mongoItem);
+                }
+            } catch {
+                // MongoDB not available
+            }
+            return NextResponse.json({ error: 'Event not found' }, { status: 404 });
         }
 
-        // Year range filter
-        if (yearFrom || yearTo) {
-            query.year = {};
-            if (yearFrom) (query.year as Record<string, number>).$gte = parseInt(yearFrom);
-            if (yearTo) (query.year as Record<string, number>).$lte = parseInt(yearTo);
-        }
+        // Try to use MongoDB first
+        try {
+            await connectDB();
 
-        // Execute query with pagination
-        const skip = (page - 1) * limit;
+            // Build query
+            const query: Record<string, unknown> = { status: 'published' };
 
-        const [events, total] = await Promise.all([
-            HistoricalEvent.find(query)
-                .sort(sort)
-                .skip(skip)
-                .limit(limit)
-                .populate('movements', 'name slug')
-                .populate('participants.leaders', 'name slug')
-                .lean(),
-            HistoricalEvent.countDocuments(query),
-        ]);
+            if (type) query.type = type;
+            if (category) query.category = category;
+            if (featured) query.featured = true;
+            if (search) {
+                query.$or = [
+                    { title: { $regex: search, $options: 'i' } },
+                    { description: { $regex: search, $options: 'i' } },
+                ];
+            }
 
-        return NextResponse.json({
-            events,
-            pagination: {
+            // Year range filter
+            if (yearFrom || yearTo) {
+                query.year = {};
+                if (yearFrom) (query.year as Record<string, number>).$gte = parseInt(yearFrom);
+                if (yearTo) (query.year as Record<string, number>).$lte = parseInt(yearTo);
+            }
+
+            // Execute query with pagination
+            const skip = (page - 1) * limit;
+
+            const [events, total] = await Promise.all([
+                HistoricalEvent.find(query)
+                    .sort('-date')
+                    .skip(skip)
+                    .limit(limit)
+                    .populate('movements', 'name slug')
+                    .lean(),
+                HistoricalEvent.countDocuments(query),
+            ]);
+
+            return NextResponse.json({
+                events,
+                pagination: {
+                    page,
+                    limit,
+                    total,
+                    pages: Math.ceil(total / limit),
+                },
+            });
+        } catch {
+            // MongoDB not available, use local data
+            const result = getEvents({
+                type: type || undefined,
+                category: category || undefined,
+                search: search || undefined,
+                featured,
                 page,
                 limit,
-                total,
-                pages: Math.ceil(total / limit),
-            },
-        });
+                yearFrom: yearFrom ? parseInt(yearFrom) : undefined,
+                yearTo: yearTo ? parseInt(yearTo) : undefined,
+            });
+
+            return NextResponse.json({
+                events: result.events,
+                pagination: result.pagination,
+                _dataSource: 'local',
+            });
+        }
     } catch (error) {
         console.error('Get events error:', error);
         return NextResponse.json(

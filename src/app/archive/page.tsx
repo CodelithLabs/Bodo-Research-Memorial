@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Search, Filter, Image as ImageIcon, FileText, Map, Film, Music, BookOpen, Calendar, MapPin, Eye } from 'lucide-react';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 
 interface ArchiveItem {
     id: string;
@@ -106,7 +104,6 @@ export default function ArchivePage() {
 
     return (
         <div className="min-h-screen bg-[#FFFFF0]">
-            <Header />
 
             {/* Hero Section */}
             <section className="bg-gradient-to-r from-[#44CC44] to-[#2d8f2d] py-16">
@@ -144,8 +141,8 @@ export default function ArchivePage() {
                             <button
                                 onClick={() => setSelectedType('')}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedType === ''
-                                        ? 'bg-[#44CC44] text-white'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    ? 'bg-[#44CC44] text-white'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
                                 All Types
@@ -155,8 +152,8 @@ export default function ArchivePage() {
                                     key={type.value}
                                     onClick={() => setSelectedType(type.value)}
                                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 ${selectedType === type.value
-                                            ? 'bg-[#44CC44] text-white'
-                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                        ? 'bg-[#44CC44] text-white'
+                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                         }`}
                                 >
                                     <type.icon className="w-4 h-4" />
@@ -176,8 +173,8 @@ export default function ArchivePage() {
                                     setPage(1);
                                 }}
                                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${selectedCategory === category
-                                        ? 'bg-[#800000] text-white'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    ? 'bg-[#800000] text-white'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
                                 {category}
@@ -289,8 +286,6 @@ export default function ArchivePage() {
                     )}
                 </div>
             </section>
-
-            <Footer />
         </div>
     );
 }
