@@ -7,60 +7,47 @@
 
 import Link from 'next/link';
 import { Sparkles, BookOpen, Star, Users, Flame, ArrowRight } from 'lucide-react';
+import { ALL_RELIGION_ARTICLES } from '@/data/religion';
 
 const religionTopics = [
     {
-        name: 'Bathou Religion',
+        name: 'Bathouism',
         description: 'The indigenous faith of the Bodo people, centered on the supreme deity Bathoubwrai (Lord of the Three Worlds)',
         icon: Star,
-        href: '/religion/bathou',
-        articles: 20,
+        href: '/religion/bathouism',
+        articles: ALL_RELIGION_ARTICLES.filter(a => a.category === 'bathouism').length,
         color: 'bg-amber-100 text-amber-600',
     },
     {
-        name: 'Rituals & Ceremonies',
-        description: 'Traditional rituals including the Bathou Puja, Bwisagu, and other sacred ceremonies',
+        name: 'Kherai Puja',
+        description: 'The most important religious ceremony in Bathouism, featuring traditional rituals and community participation',
         icon: Flame,
-        href: '/religion/rituals',
-        articles: 25,
+        href: '/religion/kherai-puja',
+        articles: ALL_RELIGION_ARTICLES.filter(a => a.category === 'kherai').length,
         color: 'bg-orange-100 text-orange-600',
     },
     {
-        name: 'Sacred Symbols',
-        description: 'The significance of the Dongkreng, Ora, and other sacred symbols in Bodo spirituality',
+        name: 'Brahma Dharma',
+        description: 'The reform movement within Bathouism founded by Kalicharan Brahma',
         icon: Sparkles,
-        href: '/religion/symbols',
-        articles: 15,
+        href: '/religion/brahma-dharma',
+        articles: ALL_RELIGION_ARTICLES.filter(a => a.category === 'brahmadharma').length,
         color: 'bg-yellow-100 text-yellow-600',
     },
     {
-        name: 'Sacred Figures',
-        description: 'Important deities, priests (Deodhai), and spiritual leaders in Bathou tradition',
+        name: 'Religious Diversity',
+        description: 'Christianity, Buddhism and other faiths practiced among the Bodo community',
         icon: Users,
-        href: '/religion/figures',
-        articles: 18,
+        href: '/religion/other-religions',
+        articles: ALL_RELIGION_ARTICLES.filter(a => a.category === 'buddhism' || a.category === 'christianity').length,
         color: 'bg-purple-100 text-purple-600',
     },
 ];
 
-const keyConcepts = [
-    {
-        title: 'Bathoubwrai',
-        description: 'The supreme deity in Bathou religion, meaning "Lord of the Three Worlds" - the creator of the universe.',
-    },
-    {
-        title: 'Bathou Puja',
-        description: 'The main religious ceremony dedicated to Bathoubwrai, performed by the Deodhai (high priest).',
-    },
-    {
-        title: 'Dongkreng',
-        description: 'A sacred bamboo staff used in Bathou rituals, symbolizing the connection to the divine.',
-    },
-    {
-        title: 'Bwisagu',
-        description: 'A ceremonial worship of nature and ancestors, marking the beginning of the Bodo calendar year.',
-    },
-];
+const keyConcepts = ALL_RELIGION_ARTICLES.slice(0, 4).map((article) => ({
+    title: article.title.split(' - ')[0],
+    description: article.summary,
+}));
 
 export default function ReligionPage() {
     return (

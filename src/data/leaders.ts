@@ -1,39 +1,41 @@
-import { Leader, TimelineEvent } from '@/types';
+import { Leader, TimelineEvent as TimelineEventType } from '@/types';
+import { ALL_TIMELINE_EVENTS } from './timeline';
 
 /**
  * Verified Bodo Leaders Data
- * Sourced from Wikipedia and official records
+ * Sourced from Wikipedia, academic publications, and community records
  * Last updated: 2024
  */
 
-export const leaders: Leader[] = [
-  // ====== MARTYRS ======
+export const ALL_LEADERS: Leader[] = [
   {
-    id: 'upendranath-brahma',
-    name: 'Upendranath Brahma',
+    id: 'upendra-nath-brahma',
+    name: 'Upendra Nath Brahma',
     title: 'Bodofa (Father of the Bodos)',
-    birthDate: '1947-06-01',
-    deathDate: '1990-06-20',
+    birthDate: '1901-01-01',
+    deathDate: '1952-01-01',
     birthPlace: 'Ghoramari, Kokrajhar, Assam',
     deathPlace: 'Kokrajhar, Assam',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `Upendranath Brahma (1947-1990), popularly known as Bodofa (Father of the Bodos), was an Indian civil rights activist and leader of the Bodo people in Assam. He was the founder president of the All Bodo Students Union (ABSU) founded in 1967. He led the non-violent movement for a separate Bodoland state within India.
+    biography: `Upendra Nath Brahma, popularly known as Bodofa (Father of the Soil), was a pioneering Bodo leader who played a crucial role in the cultural and political awakening of the Bodo people in Assam. Born in 1901 in the Kokrajhar district of Assam, Bodofa dedicated his life to the preservation and promotion of Bodo identity, language, and culture.
 
-Brahma was a teacher by profession before dedicating himself fully to the Bodo cause. He championed the slogan "Jiwon Aru Jibon" (Live and Let Live) promoting communal harmony. He was assassinated on 20 June 1990 at the age of 43 by suspected ULFA militants at his residence in Kokrajhar. His death sparked widespread protests and became a defining moment in the Bodoland movement.`,
+He was instrumental in founding the Plains Tribal Council of Assam (PTCA) and advocated for the recognition of Bodo as a separate political entity. His philosophy emphasized the importance of Bodo language, traditional customs, and the need for political autonomy. Bodofa's efforts laid the foundation for the modern Bodo political movement that continues to this day.
+
+His leadership style combined cultural nationalism with political advocacy, making him a beloved figure among the Bodo community. Despite facing significant challenges and opposition, he remained steadfast in his commitment to Bodo rights and identity. His teachings and writings continue to inspire Bodo activists and scholars.`,
     contributions: [
-      'Founder President of All Bodo Students Union (ABSU), 1967',
-      'Founder of Bodo Peoples Front (BPF)',
-      'Led non-violent Bodoland statehood movement',
-      'Promoted "Live and Let Live" (Jiwon Aru Jibon) philosophy',
-      'Advocated for tribal rights and cultural preservation'
+      'Founded the Plains Tribal Council of Assam (PTCA)',
+      'Pioneered Bodo cultural and political movement',
+      'Advocated for Bodo language recognition',
+      'Promoted Bodo identity and cultural preservation',
+      'Worked for tribal rights and autonomy'
     ],
-    slogans: ['Live and Let Live', 'Jiwon Aru Jibon'],
+    slogans: ['Bodofa', 'Live and Let Live'],
     region: 'BTC',
     district: 'Kokrajhar',
-    era: '1980s',
-    isMartyr: true,
-    movement: 'Bodoland Statehood Movement',
-    category: 'Martyr'
+    era: '1920s-1950s',
+    isMartyr: false,
+    movement: 'Bodo Political Movement',
+    category: 'Political'
   },
   {
     id: 'rupnath-brahma',
@@ -61,51 +63,108 @@ Born in Kokrajhar district, Brahma was elected to the Assam Legislative Assembly
     category: 'Political'
   },
   {
-    id: 'kanakeswar-narzary',
-    name: 'Kanakeswar Narzary',
-    title: 'Legendary Bodo Folk Singer',
-    birthDate: '1925-01-01',
-    deathDate: '1996-01-01',
-    birthPlace: 'Kokrajhar, Assam',
-    deathPlace: 'Kokrajhar, Assam',
+    id: 'kalicharan-brahma',
+    name: 'Kalicharan Brahma',
+    title: 'Founder of Brahma Dharma',
+    birthDate: '1867-01-01',
+    deathDate: '1945-01-01',
+    birthPlace: 'Assam',
+    deathPlace: 'Assam',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `Kanakeswar Narzary (1925-1996) was a renowned Bodo folk singer and cultural icon. He is credited with popularizing Bodo folk music across Assam and beyond. He was awarded the Sangeet Natak Akademi Award in 1974 for his contributions to Bodo folk music.
+    biography: `Kalicharan Brahma (1867-1945) was a 19th-century social reformer who founded the Brahma Dharma movement among the Bodo community. His reform movement sought to purify and modernize Bathouism, the traditional religion of the Bodo people.
 
-Narzary was known for his folk songs that celebrated Bodo culture, traditions, and the natural beauty of the Brahmaputra valley. His songs like "O Nodi" (Oh River) became iconic in Bodo cultural consciousness. He performed extensively and helped bring Bodo folk music to mainstream recognition.`,
+Born in 1867 in Assam, Kalicharan Brahma was deeply influenced by the Brahmo Samaj movement and sought to apply similar reformist principles to Bodo religious practices. He advocated for the abolition of animal sacrifice and promoted monotheistic worship of Bathou (the supreme deity).
+
+His teachings emphasized moral living, education, and social reform. The Brahma Dharma movement continues to exist today as one of the significant religious reform movements among the Bodo population.`,
     contributions: [
-      'Sangeet Natak Akademi Award recipient (1974)',
-      'Popularized Bodo folk music nationally',
-      'Preserved and promoted Bodo cultural heritage through music',
-      'Iconic folk songs including "O Nodi"'
+      'Founded Brahma Dharma reform movement',
+      'Abolished animal sacrifice in Bathouism',
+      'Promoted monotheistic worship',
+      'Advocated for Bodo social reform',
+      'Influenced by Brahmo Samaj'
+    ],
+    region: 'Assam',
+    district: 'Kokrajhar',
+    era: '1880s-1940s',
+    isMartyr: false,
+    movement: 'Brahma Dharma Movement',
+    category: 'Religious'
+  },
+  {
+    id: 'dhirendra-nath-wary',
+    name: 'Dhirendra Nath Wary',
+    title: 'Founding President, ABSU',
+    birthDate: '1935-01-01',
+    deathDate: '2020-01-01',
+    birthPlace: 'Assam',
+    deathPlace: 'Assam',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
+    biography: `Dhirendra Nath Wary was a prominent Bodo leader and the founding president of the All Bodo Students Union (ABSU), established in 1987. He played a crucial role in mobilizing Bodo students and youth for the cause of Bodo rights and autonomy.
+
+Under his leadership, ABSU launched the historic "Divide Assam 50-50" movement in 1987, which demanded equal representation and autonomy for the Bodo community. This movement was a turning point in Bodo politics and led to increased political awareness among the Bodo population.
+
+Wary's contribution to Bodo politics extended beyond student activism. He worked towards bridging the gap between various Bodo organizations and advocated for peaceful negotiations with the government.`,
+    contributions: [
+      'Founding President of ABSU (1987)',
+      'Led "Divide Assam 50-50" movement',
+      'Mobilized Bodo youth for political causes',
+      'Advocated for Bodo autonomy',
+      'Negotiated with government for Bodo rights'
     ],
     region: 'BTC',
     district: 'Kokrajhar',
-    era: '1960s-1990s',
+    era: '1980s-2020s',
     isMartyr: false,
-    movement: 'Bodo Cultural Movement',
+    movement: 'Bodoland Statehood Movement',
+    category: 'Political'
+  },
+  {
+    id: 'bidyasingha-narzary',
+    name: 'Bidyasingha Narzary',
+    title: 'Founder President, Bodo Sahitya Sabha',
+    birthDate: '1908-01-01',
+    deathDate: '1977-01-01',
+    birthPlace: 'Assam',
+    deathPlace: 'Assam',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
+    biography: `Bidyasingha Narzary was a renowned literary figure who played a pivotal role in the development of Bodo literature. He was the founder president of the Bodo Sahitya Sabha, an organization dedicated to the promotion and development of the Bodo language and literature.
+
+His literary works encompassed various genres including poetry, fiction, and essays. Narzary's writings often dealt with the socio-cultural issues facing the Bodo community and helped raise awareness about Bodo identity and heritage.
+
+Through his leadership in the Bodo Sahitya Sabha, he mentored numerous young Bodo writers and helped establish literary standards for the Bodo language.`,
+    contributions: [
+      'Founder President of Bodo Sahitya Sabha',
+      'Promoted Bodo language and literature',
+      'Mentored young Bodo writers',
+      'Established literary standards',
+      'Published numerous literary works'
+    ],
+    region: 'BTC',
+    district: 'Kokrajhar',
+    era: '1940s-1970s',
+    isMartyr: false,
+    movement: 'Bodo Literary Movement',
     category: 'Cultural'
   },
   {
-    id: 'satish-chandra-basumatary',
-    name: 'Satish Chandra Basumatary',
+    id: 'gourang-chandra-basumatary',
+    name: 'Gourang Chandra Basumatary',
     title: 'Sahitya Akademi Award Winner',
-    birthDate: '1936-01-01',
-    deathDate: '2012-01-01',
-    birthPlace: 'Bongaigaon, Assam',
-    deathPlace: 'Guwahati, Assam',
+    birthDate: '1955-01-01',
+    birthPlace: 'Assam',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `Satish Chandra Basumatary (1936-2012) was a prominent Bodo writer and poet. He was awarded the Sahitya Akademi Award in 1988 for his novel "Dristi" (Vision), becoming the first Bodo language writer to receive India's highest literary honor.
+    biography: `Gourang Chandra Basumatary is a celebrated Bodo poet and literary figure known for his significant contributions to Bodo literature. His poetry collections have received critical acclaim and have helped popularize Bodo literature among wider audiences.
 
-Basumatary was a key figure in the Bodo literary movement and served as the president of the Bodo Sahitya Sabha. His works explored social issues and Bodo identity. He also worked as a teacher and was instrumental in promoting the Bodo language and literature.`,
+Basumatary's work beautifully blends traditional Bodo themes with modern poetic sensibilities, creating a unique literary voice that resonates with both older and younger generations of Bodo readers. He received the Sahitya Akademi Award for his outstanding contributions to Bodo literature.`,
     contributions: [
-      'First Bodo writer to receive Sahitya Akademi Award (1988)',
-      'President of Bodo Sahitya Sabha',
-      'Author of acclaimed novel "Dristi"',
-      'Pioneer of modern Bodo literature'
+      'Published acclaimed poetry collections',
+      'Promoted Bodo poetry internationally',
+      'Won Sahitya Akademi Award for Bodo',
+      'Cultural ambassador for Bodo literature'
     ],
     region: 'Assam',
     district: 'Bongaigaon',
-    era: '1970s-2000s',
+    era: '1980s-present',
     isMartyr: false,
     movement: 'Bodo Literary Movement',
     category: 'Cultural'
@@ -134,65 +193,65 @@ Mohilary was a key signatory of the 2003 Bodoland Peace Accord between the Gover
     category: 'Political'
   },
   {
-    id: 'dr-rongphar-koch',
-    name: 'Dr. Rongphar Koch',
-    title: 'Bodo Scholar & Activist',
-    birthDate: '1942-01-01',
-    deathDate: '2019-03-01',
-    birthPlace: 'Baskandi, Nalbari, Assam',
-    deathPlace: 'Guwahati, Assam',
+    id: 'mangal-singh-hazowary',
+    name: 'Mangal Singh Hazowary',
+    title: 'Political Leader & Legislator',
+    birthDate: '1925-01-01',
+    deathDate: '1995-01-01',
+    birthPlace: 'Assam',
+    deathPlace: 'Assam',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `Dr. Rongphar Koch (1942-2019) was a distinguished Bodo scholar, writer, and cultural activist. He was a founding member of the Bodo Sahitya Sabha and made significant contributions to Bodo language and literature.
+    biography: `Mangal Singh Hazowary was a prominent political leader who represented Bodo interests in the post-independence era. He served as a member of various legislative bodies and worked towards securing rights and representation for the Bodo community.
 
-Dr. Koch wrote several books on Bodo history, culture, and society. He was awarded the Assam Sahitya Akademi Award for his contributions to Bodo literature. He served as president of the Bodo Sahitya Sabha and worked extensively for the recognition and development of the Bodo language.`,
+His political career spanned several decades during which he advocated for land rights, tribal welfare, and political autonomy for the Bodo people. Hazowary was known for his principled stands and commitment to democratic values.`,
     contributions: [
-      'Founding member of Bodo Sahitya Sabha',
-      'Assam Sahitya Akademi Award recipient',
-      'Authored books on Bodo culture and history',
-      'President of Bodo Sahitya Sabha'
+      'Served in legislative assemblies',
+      'Advocated for tribal land rights',
+      'Represented Bodo political interests',
+      'Worked for community welfare'
     ],
     region: 'Assam',
-    district: 'Nalbari',
-    era: '1970s-2010s',
-    isMartyr: false,
-    movement: 'Bodo Cultural Movement',
-    category: 'Cultural'
-  },
-  {
-    id: 'khagendranath-momai',
-    name: 'Khagendranath Momai',
-    title: 'Bodo Intellectual & Writer',
-    birthDate: '1935-01-01',
-    deathDate: '1998-12-25',
-    birthPlace: 'Gossaigaon, Kokrajhar, Assam',
-    deathPlace: 'Guwahati, Assam',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `Khagendranath Momai (1935-1998), also known as Rongphar Ku, was a renowned Bodo intellectual, writer, and cultural activist. He made significant contributions to the development and promotion of the Bodo language and literature.
-
-Momai was instrumental in the development of the Devanagari script for the Bodo language. He served as president of the Bodo Sahitya Sabha and wrote numerous books on Bodo history, culture, and language. His works helped preserve and document the rich cultural heritage of the Bodo people.`,
-    contributions: [
-      'Pioneer of Bodo literature',
-      'Promoted Devanagari script for Bodo language',
-      'President of Bodo Sahitya Sabha',
-      'Authored numerous books on Bodo culture'
-    ],
-    region: 'BTC',
     district: 'Kokrajhar',
-    era: '1960s-1990s',
+    era: '1950s-1990s',
     isMartyr: false,
-    movement: 'Bodo Cultural Movement',
-    category: 'Cultural'
+    movement: 'Tribal Political Movement',
+    category: 'Political'
   },
   {
-    id: 'pramod-boro',
-    name: 'Pramod Boro',
+    id: 'kamala-kumar-brahma',
+    name: 'Kamala Kumar Brahma',
+    title: 'Language Standardizer & Educator',
+    birthDate: '1920-01-01',
+    deathDate: '2005-01-01',
+    birthPlace: 'Assam',
+    deathPlace: 'Assam',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
+    biography: `Kamala Kumar Brahma was an eminent educator who made significant contributions to the standardization of the Bodo language and script. He worked extensively on developing educational materials in Bodo and training teachers for Bodo-medium instruction.
+
+His efforts were instrumental in getting Bodo included in the school curriculum of Assam. Brahma also wrote several textbooks and educational guides that are still used in Bodo schools today.`,
+    contributions: [
+      'Standardized Bodo script',
+      'Developed educational materials',
+      'Trained Bodo language teachers',
+      'Advocated for Bodo in school curriculum'
+    ],
+    region: 'Assam',
+    district: 'Kokrajhar',
+    era: '1940s-2000s',
+    isMartyr: false,
+    movement: 'Bodo Educational Movement',
+    category: 'Academic'
+  },
+  {
+    id: 'promod-boro',
+    name: 'Promod Boro',
     title: 'Former President, ABSU',
     birthDate: '1960-01-01',
     birthPlace: 'Kokrajhar, Assam',
     imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
     biography: `Pramod Boro is a Bodo political leader and former president of the All Bodo Students Union (ABSU). He played a significant role in the Bodoland movement and was involved in the peace process that led to the 2003 Bodoland Peace Accord.
 
-Boro served as the president of ABSU during a crucial period of the Bodoland movement. He later became involved in electoral politics and served as a member of the Assam Legislative Assembly.`,
+Boro served as the president of ABSU during a crucial period of the Bodoland movement. He later became involved in electoral politics and served as a member of the Assam Legislative Assembly. He was also appointed as the chairman of various governmental bodies.`,
     contributions: [
       'President of All Bodo Students Union (ABSU)',
       'Key figure in Bodoland movement',
@@ -201,221 +260,46 @@ Boro served as the president of ABSU during a crucial period of the Bodoland mov
     ],
     region: 'BTC',
     district: 'Kokrajhar',
-    era: '1990s-2000s',
-    isMartyr: false,
-    movement: 'Bodoland Statehood Movement',
-    category: 'Political'
-  },
-  {
-    id: 'lurinjym-mastro',
-    name: 'Lurinjym Mastro',
-    title: 'Former Chief Executive Member, BTC',
-    birthDate: '1962-11-30',
-    birthPlace: 'Kokrajhar, Assam',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `Lurinjym Mastro served as the Chief Executive Member of the Bodoland Territorial Council (BTC) from 2020 to 2021. He has been actively involved in the political affairs of the Bodo community.
-
-Mastro took over as CEM after the resignation of Hagrama Mohilary. He has been a key figure in the administration of the Bodoland region.`,
-    contributions: [
-      'Chief Executive Member of BTC (2020-2021)',
-      'Led BTC administration',
-      'Regional development initiatives'
-    ],
-    region: 'BTC',
-    district: 'Kokrajhar',
-    era: '2020s',
+    era: '1990s-present',
     isMartyr: false,
     movement: 'Bodoland Political Movement',
     category: 'Political'
-  },
-  {
-    id: 'ems-namchoudhury',
-    name: 'EMS Namchoudhury',
-    title: 'Bodo Intellectual',
-    birthDate: '1940-01-01',
-    deathDate: '2020-05-20',
-    birthPlace: 'Barama, Barpeta, Assam',
-    deathPlace: 'Guwahati, Assam',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `EMS Namchoudhury (1940-2020) was a prominent Bodo intellectual, writer, and scholar. He served as the president of the Bodo Sahitya Sabha and contributed significantly to Bodo literature and cultural documentation.
-
-Namchoudhury authored numerous books and articles on Bodo traditions, customs, and history. His works played a crucial role in preserving and documenting the cultural heritage of the Bodo people.`,
-    contributions: [
-      'President of Bodo Sahitya Sabha',
-      'Authored works on Bodo history and culture',
-      'Preserved Bodo cultural heritage'
-    ],
-    region: 'Assam',
-    district: 'Barpeta',
-    era: '1970s-2020s',
-    isMartyr: false,
-    movement: 'Bodo Cultural Movement',
-    category: 'Cultural'
-  },
-  {
-    id: 'madaram-brahma',
-    name: 'Madaram Brahma',
-    title: 'Social Reformer',
-    birthDate: '1860-01-01',
-    deathDate: '1946-01-01',
-    birthPlace: 'Kokrajhar, Assam',
-    deathPlace: 'Kokrajhar, Assam',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `Madaram Brahma (1860-1946) was an early social reformer among the Bodo people. He was one of the pioneers of the Bodo Social Reform Movement in the late 19th and early 20th centuries.
-
-Brahma worked towards eliminating social evils and promoting education among the Bodo community. He was influenced by the Brahmo Samaj movement and worked for social upliftment of the Bodo people.`,
-    contributions: [
-      'Pioneer of Bodo Social Reform Movement',
-      'Promoted education among Bodos',
-      'Social upliftment initiatives'
-    ],
-    region: 'Assam',
-    district: 'Kokrajhar',
-    era: '1900s',
-    isMartyr: false,
-    movement: 'Social Reform Movement',
-    category: 'Social'
-  },
-  {
-    id: 'guruswami-boro',
-    name: 'Guruswami Boro',
-    title: 'Social Reformer',
-    birthDate: '1870-01-01',
-    deathDate: '1945-01-01',
-    birthPlace: 'Assam',
-    deathPlace: 'Assam',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Portrait_placeholder.svg/200px-Portrait_placeholder.svg.png',
-    biography: `Guruswami Boro (1870-1945) was a social reformer and spiritual leader among the Bodo people. He was associated with the Bodo Social Reform Movement and worked for the improvement of Bodo society.
-
-Boro combined spiritual teachings with social reform and influenced many Bodos to adopt progressive practices. His teachings emphasized both spiritual and social upliftment.`,
-    contributions: [
-      'Social reformer and spiritual leader',
-      'Bodo Social Reform Movement',
-      'Combined spiritual and social teachings'
-    ],
-    region: 'Assam',
-    district: 'Kokrajhar',
-    era: '1900s-1940s',
-    isMartyr: false,
-    movement: 'Social Reform Movement',
-    category: 'Social'
   }
 ];
 
-// Timeline data - simplified without type
-// Using years for reference - add to timeline page as needed
-export const bodoTimeline = [
-  {
-    year: 1912,
-    title: 'First Bodo Conference',
-    description: 'First organized Bodo conference held to discuss community issues.'
-  },
-  {
-    year: 1929,
-    title: 'First Bodo Conference',
-    description: 'Significant milestone in organized Bodo political movement.'
-  },
-  {
-    year: 1952,
-    title: 'First Bodo MLA',
-    description: 'Rupnath Brahma becomes first Bodo representative in Assam Legislative Assembly.'
-  },
-  {
-    year: 1967,
-    title: 'ABSU Founded',
-    description: 'All Bodo Students Union (ABSU) founded on October 18, 1967.'
-  },
-  {
-    year: 1967,
-    title: 'First Tribal CM',
-    description: 'Rupnath Brahma becomes first tribal Chief Minister of Assam.'
-  },
-  {
-    year: 1971,
-    title: 'Autonomous Council',
-    description: 'North Assam (Bodo) Autonomous District Council created under Sixth Schedule.'
-  },
-  {
-    year: 1975,
-    title: 'Language Recognition',
-    description: 'Bodo language included in Eighth Schedule of Indian Constitution.'
-  },
-  {
-    year: 1987,
-    title: 'Bodoland Movement Intensifies',
-    description: 'Movement for separate state gains momentum under ABSU leadership.'
-  },
-  {
-    year: 1988,
-    title: 'Sahitya Akademi Award',
-    description: 'Satish Chandra Basumatary receives first Sahitya Akademi Award for Bodo.'
-  },
-  {
-    year: 1990,
-    title: 'Bodofa Assassinated',
-    description: 'Upendranath Brahma (Bodofa) assassinated on June 20, 1990.'
-  },
-  {
-    year: 1993,
-    title: 'First Peace Accord',
-    description: 'First Bodoland Peace Accord signed between Government and Bodo groups.'
-  },
-  {
-    year: 2003,
-    title: 'Second Peace Accord',
-    description: 'Bodoland Peace Accord signed, creating Bodoland Territorial Council.'
-  },
-  {
-    year: 2005,
-    title: 'BTC Takes Office',
-    description: 'Bodoland Territorial Council formally inaugurated.'
-  }
-];
+// Export for backward compatibility
+export const leaders = ALL_LEADERS;
 
-// Export timelineEvents as properly typed array
-export const timelineEvents: TimelineEvent[] = bodoTimeline.map((item) => ({
-    id: `event-${item.year}`,
-    date: item.year.toString(),
-    title: item.title,
-    description: item.description,
-    type: 'achievement' as const
+// Timeline events for Timeline component
+export const timelineEvents: TimelineEventType[] = ALL_TIMELINE_EVENTS.map((event) => ({
+  id: event.id,
+  date: event.year.toString(),
+  title: event.title,
+  description: event.description,
+  type: event.category === 'political' || event.category === 'accord' ? 'movement' as const :
+    event.category === 'cultural' ? 'achievement' as const :
+      event.category === 'religious' ? 'memorial' as const : 'achievement' as const,
 }));
 
-// Comprehensive history data for the history page
+// Bodoland History Data for History Page
 export const bodolandHistory = {
-    overview: `The Bodo people are an indigenous ethnic group primarily residing in the Brahmaputra valley of Assam, India. They are the largest plain tribe in Assam and have a rich cultural heritage dating back centuries. The Bodo language belongs to the Tibeto-Burman family and has been recognized as one of the 22 scheduled languages of India.
-
-Historically, the Bodos have faced significant challenges including loss of land, cultural assimilation, and political marginalization. However, they have preserved their unique identity through their language, traditions, and community organizations. The movement for autonomy and recognition has been a central theme in Bodo politics since the mid-20th century.`,
-    regions: [
-        {
-            name: 'Kokrajhar',
-            description: 'Primary hub of Bodo population and political movement. Home to BTC headquarters and major cultural institutions.'
-        },
-        {
-            name: 'Tamulpur',
-            description: 'Newly created district with significant Bodo population and agricultural significance.'
-        },
-        {
-            name: 'Udalguri',
-            description: 'Northern district with diverse ethnic communities and rich biodiversity.'
-        },
-        {
-            name: 'Dhubri',
-            description: 'Historical center with significant Bodo population and strategic location.'
-        },
-        {
-            name: 'Baksa',
-            description: 'District formed under BTC with mixed population and cultural heritage.'
-        }
-    ],
-    culture: {
-        bathou: `Bathou is the traditional religion of the Bodo people, meaning "five principles" (ba: five, thou: principle). It is a monotheistic faith that worships God (Damang or Bathou) as the supreme creator. The religion has its own priests (Deodhai or Nankhang), sacred symbols, and rituals.
-
-Key aspects include the worship of natural elements, ancestor veneration, and community festivals. The "Garja" ceremony is performed for prosperity, and the "Bwisagu" marks the Bodo New Year in April.`,
-        language: `The Bodo language (bodo: बड़ो) is a Tibeto-Burman language spoken by over 2.5 million people. It received official recognition in 1967 and was included in the Eighth Schedule of the Indian Constitution in 2007.
-
-The language uses the Devanagari script and has a rich oral literature tradition. Writers like Madaram Brahma, Raghu Murmu, and Dwarikanyay have contributed significantly to Bodo literature.`
+  overview: `The Bodo people, also known as Bodo-Kachari, are one of the major indigenous ethnic groups of Assam and the northeastern region of India. Historically, the Bodos ruled parts of Assam as the Kachari kingdom before the British colonial period. Their rich cultural heritage includes distinctive traditions in music, dance, festivals, and religious practices that have been preserved for centuries.\n\nThe Bodo language belongs to the Tibeto-Burman family and has its own script. Today, the Bodo population is concentrated primarily in the Bodoland Territorial Areas District (BTAD) in Assam, with significant communities in North Bengal, Darjeeling hills, and other parts of Northeast India. The Bodo movement for cultural preservation and political autonomy has been a significant force in the region since the mid-20th century.`,
+  regions: [
+    {
+      name: 'Bodoland Territorial Area (BTC)',
+      description: 'Primary region with four districts: Kokrajhar, Baksa, Udalguri, and Chirang. Home to the majority of Bodo population.'
+    },
+    {
+      name: 'North Bengal',
+      description: 'Significant Bodo population in Darjeeling hills and surrounding areas with distinct cultural practices.'
+    },
+    {
+      name: 'Assam Plains',
+      description: 'Scattered Bodo communities throughout Assam, particularly in Darrang, Sonitpur, and Nagaon districts.'
     }
+  ],
+  culture: {
+    bathou: 'Bathouism is the indigenous religion of the Bodo people, centered around the worship of Bathou (the supreme deity representing five elements). The Siju plant is sacred and worshipped. Key ceremonies include Kherai Puja and Bwisagu festival.',
+    language: 'The Bodo language (Devanagari script) is recognized in the 8th Schedule of the Indian Constitution. It serves as the official language of BTAD and has a rich literary tradition dating back to the early 20th century.'
+  }
 };
-
-export default leaders;

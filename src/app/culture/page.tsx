@@ -7,30 +7,31 @@
 
 import Link from 'next/link';
 import { Music, Utensils, Palette, MapPin, Calendar, ArrowRight } from 'lucide-react';
+import { ALL_CULTURE_ARTICLES } from '@/data/culture';
 
 const cultureCategories = [
     {
         name: 'Festivals',
-        description: 'Bodo festivals like Baisagu, Bodoland celebrations, and traditional gatherings',
+        description: 'Bodo festivals like Bwisagu, Bodoland celebrations, and traditional gatherings',
         icon: Calendar,
         href: '/culture/festivals',
-        articles: 25,
+        articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'festival').length,
         color: 'bg-amber-100 text-amber-600',
     },
     {
         name: 'Traditional Dress',
-        description: 'The elegant Dokhona, mekhela, and other traditional Bodo attire',
+        description: 'The elegant Dokhona, Gamsa, and other traditional Bodo attire',
         icon: Palette,
-        href: '/culture/dress',
-        articles: 15,
+        href: '/culture/textiles',
+        articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'textiles').length,
         color: 'bg-purple-100 text-purple-600',
     },
     {
         name: 'Music & Dance',
         description: 'Traditional Bodo music, dances like Bagurumba, and performing arts',
         icon: Music,
-        href: '/culture/music',
-        articles: 30,
+        href: '/culture/dance',
+        articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'dance' || a.category === 'music').length,
         color: 'bg-pink-100 text-pink-600',
     },
     {
@@ -38,31 +39,17 @@ const cultureCategories = [
         description: 'Traditional Bodo food, dishes, and culinary practices',
         icon: Utensils,
         href: '/culture/cuisine',
-        articles: 20,
+        articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'cuisine').length,
         color: 'bg-orange-100 text-orange-600',
     },
 ];
 
-const featuredArticles = [
-    {
-        title: 'Baisagu - The Bodo New Year',
-        excerpt: 'Baisagu marks the beginning of the Bodo calendar year, celebrated with traditional fervor and cultural performances.',
-        category: 'Festivals',
-        readTime: '5 min read',
-    },
-    {
-        title: 'The Dokhona - Traditional Attire',
-        excerpt: "Understanding the significance and intricate designs of the traditional Bodo women's dress.",
-        category: 'Traditional Dress',
-        readTime: '8 min read',
-    },
-    {
-        title: 'Bagurumba Dance',
-        excerpt: 'The graceful serpent dance that represents the unique cultural identity of the Bodo people.',
-        category: 'Music & Dance',
-        readTime: '6 min read',
-    },
-];
+const featuredArticles = ALL_CULTURE_ARTICLES.slice(0, 3).map((article) => ({
+    title: article.title,
+    excerpt: article.summary,
+    category: article.category.charAt(0).toUpperCase() + article.category.slice(1),
+    readTime: `${article.readingTime} min read`,
+}));
 
 export default function CulturePage() {
     return (

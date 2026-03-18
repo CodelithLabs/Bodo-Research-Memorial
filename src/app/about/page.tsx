@@ -2,20 +2,19 @@ import type { Metadata } from 'next';
 import React from 'react';
 import Link from 'next/link';
 import RemoteImage from '@/components/RemoteImage';
+import { ABOUT_CONTENT } from '@/data/about';
 
 export const metadata: Metadata = {
-  title: 'About – Bodo Research Memorial',
-  description: 'Learn about the mission and vision of the Bodo Research Memorial digital archive.',
+    title: 'About – Bodo Research Memorial',
+    description: 'Learn about the mission and vision of the Bodo Research Memorial digital archive.',
 };
 
 export default function AboutPage() {
     return (
         <section className="container-institutional section-padding">
-            <h1 className="text-4xl font-heading mb-6">About the Bodo Research Memorial</h1>
+            <h1 className="text-4xl font-heading mb-6">{ABOUT_CONTENT.hero.title}</h1>
             <p className="mb-4 text-text-secondary">
-                This digital heritage platform was conceived to collect, preserve, and share the
-                stories, images and research of the Bodo people. The site combines oral histories,
-                archival documents, timelines and leader biographies into a free public resource.
+                {ABOUT_CONTENT.hero.description}
             </p>
 
             <div className="mb-8">
@@ -25,7 +24,6 @@ export default function AboutPage() {
                     rel="noopener noreferrer"
                     className="block w-full max-w-xl mx-auto overflow-hidden rounded-lg shadow-lg"
                 >
-                    {/* use RemoteImage component for placeholder handling */}
                     <RemoteImage
                         src="https://images.unsplash.com/photo-1493541010755-6b056d5e03f1?auto=format&fit=crop&w=800&q=80"
                         alt="Traditional Bodo textile pattern via Unsplash"
@@ -43,13 +41,19 @@ export default function AboutPage() {
                 </p>
             </div>
 
-            <p className="text-text-secondary">
-                The image above is pulled from Unsplash as an example; when you deploy the project you
-                can replace this with your own photographs or other resources. Similarly, leader
-                profiles include placeholder portraits that update automatically once an
-                <code className="bg-background px-1 rounded">imageUrl</code> is provided in the
-                <code className="bg-background px-1 rounded">leaders.ts</code> dataset.
-            </p>
+            <div className="my-12 p-8 bg-primary/5 rounded-lg">
+                <h2 className="text-2xl font-bold mb-4">{ABOUT_CONTENT.mission.title}</h2>
+                <p className="text-text-secondary whitespace-pre-line">
+                    {ABOUT_CONTENT.mission.content}
+                </p>
+            </div>
+
+            <div className="my-12 p-8 bg-white rounded-lg border border-divider">
+                <h2 className="text-2xl font-bold mb-4">{ABOUT_CONTENT.history.title}</h2>
+                <p className="text-text-secondary whitespace-pre-line">
+                    {ABOUT_CONTENT.history.content}
+                </p>
+            </div>
 
             <p className="mt-8">
                 For more information on how to contribute or cite material, visit our{' '}
@@ -59,7 +63,8 @@ export default function AboutPage() {
                 or{' '}
                 <Link href="/research/submit" className="text-primary underline">
                     submit a document
-                </Link>.
+                </Link>
+                .
             </p>
         </section>
     );
