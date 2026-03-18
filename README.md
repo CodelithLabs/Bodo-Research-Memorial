@@ -1,16 +1,123 @@
-# Bodo Research Archive
+# Bodo Research Memorial v2
 
-A production-ready digital encyclopedia for Bodo civilization, culture, religion, leaders, language, and history.
+A comprehensive digital archive preserving the history, culture, religion, language, and leadership of the Bodo people.
 
-## ✨ Features
+## ✨ Overview
 
-- Responsive, accessible layout with Tailwind CSS and Framer Motion animations.
-- Dynamic leaders archive with search, region filters, and individual metadata-rich pages.
-- Research portal with submission form, searchable papers listing, and PDF downloads.
-- Contact page with validated form, honeypot anti-spam, rate-limited API route, and map.
-- Dark mode toggle persists user preference and follows system setting.
-- Remote image component for external assets and placeholder handling.
-- **Google Knowledge Graph integration** for fetching real verified data about Bodo leaders.
+Bodo Research Memorial v2 is a production-ready digital encyclopedia dedicated to documenting and preserving the rich heritage of the Bodo people. This platform serves as a central repository for historical leaders, cultural traditions, religious practices, and scholarly research.
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | Next.js 15 (App Router) |
+| UI Library | React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| Database | MongoDB with Mongoose ODM |
+| Authentication | JWT-based auth with bcrypt |
+
+## 🎨 Design System
+
+### Heritage Color Palette
+
+| Color Name | Hex Code | Usage |
+|------------|----------|-------|
+| Heritage Green | #0F3D2E | Primary brand color, headers |
+| Maroon | #800000 | Accents, highlights |
+| Gold | #FFD700 | Premium elements, awards |
+| Ivory | #FFFFF0 | Background, cards |
+| Parrot Green | #44CC44 | Success states, CTAs |
+
+### Typography
+
+| Element | Font Family |
+|---------|--------------|
+| Headings | Merriweather (serif) |
+| Body Text | Inter (sans-serif) |
+| Article Content | Source Serif Pro (serif) |
+
+## 📱 Features
+
+- **Leaders Profiles** - Comprehensive biographical data on historical and contemporary Bodo leaders
+- **Culture Articles** - In-depth articles on Bodo traditions, festivals, language, and customs
+- **Religion Articles** - Documentation of religious practices, beliefs, and spiritual traditions
+- **Interactive Timeline** - Chronological journey through Bodo history with key events
+- **Research Papers** - Academic submissions and scholarly publications
+- **Tribute System** - Community members can pay respects to historical figures
+- **Digital Archive** - Repository of historical documents, images, and artifacts
+- **Advanced Search** - Full-text search across all content types
+- **Google Knowledge Graph Integration** - Real verified data about Bodo leaders
+
+## 📊 Content Data
+
+| Category | Count |
+|----------|-------|
+| Verified Historical Leaders | 10 |
+| Cultural Articles | 8 |
+| Religious Articles | 5 |
+| Timeline Events | 20 |
+| Research Papers | 10 |
+
+## 🗂️ Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage with hero, featured content, and category cards |
+| `/leaders` | Leaders directory with search and filters |
+| `/leaders/[slug]` | Individual leader profile pages |
+| `/culture` | Cultural articles listing |
+| `/culture/[slug]` | Individual culture article pages |
+| `/religion` | Religious articles listing |
+| `/religion/[slug]` | Individual religion article pages |
+| `/history` | Historical overview and context |
+| `/timeline` | Interactive timeline of Bodo history |
+| `/research` | Research hub main page |
+| `/research/papers` | Research papers listing |
+| `/research/submit` | Submit research paper form |
+| `/about` | About the project and mission |
+| `/tribute` | Pay tribute to historical figures |
+| `/contact` | Contact form and information |
+| `/archive` | Digital archive browser |
+| `/search` | Advanced search interface |
+| `/movements` | Historical movements |
+| `/organizations` | Organizations page |
+| `/knowledge-graph` | Knowledge graph visualization |
+| `/admin` | Admin dashboard |
+| `/admin/login` | Admin authentication |
+
+**Build Status**: 35 pages generated successfully
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- npm 9+
+- MongoDB (local or Atlas)
+
+### Installation
+
+```bash
+# Clone the repository
+cd "Bodo-Research-Memorial v2"
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env.local
+
+# Edit .env.local with your MongoDB URI
+# MONGODB_URI=mongodb+srv://...
+
+# Run development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## 🔍 Google Knowledge Graph API
 
@@ -36,47 +143,7 @@ GOOGLE_KNOWLEDGE_GRAPH_API_KEY=your_api_key_here
 | `/api/leaders/google?leaderId=id` | Get Google data for a specific leader |
 | `/api/leaders/google?all=true` | Get Google data for all leaders |
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm 9+
-- MongoDB (local or Atlas)
-
-### Installation
-
-```bash
-# Clone the repository
-cd bodo-memorial
-
-# Install dependencies
-npm install
-
-# Create environment file
-cp .env.example .env.local
-
-# Edit .env.local with your MongoDB URI
-# MONGODB_URI=mongodb+srv://...
-
-# Run development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the application.
-
 ## 🏗️ Architecture
-
-### Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Frontend | Next.js 15 (App Router), React 19, TypeScript |
-| Styling | Tailwind CSS v4 |
-| UI Components | Custom ShadCN-style components |
-| Database | MongoDB with Mongoose ODM |
-| Authentication | JWT-based auth with bcrypt |
-| API | RESTful Next.js API Routes |
 
 ### Project Structure
 
@@ -84,26 +151,61 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 src/
 ├── app/                    # Next.js App Router pages
 │   ├── api/               # API routes
-│   │   ├── auth/         # Authentication endpoints
-│   │   └── leaders/      # Leader CRUD endpoints
-│   ├── admin/            # Admin dashboard
-│   ├── culture/          # Culture section
-│   ├── leaders/          # Leaders section
-│   ├── religion/         # Religion section
-│   ├── research/         # Research submission
-│   └── page.tsx          # Homepage
+│   │   ├── auth/          # Authentication endpoints
+│   │   ├── leaders/       # Leader CRUD endpoints
+│   │   ├── archive/       # Archive endpoints
+│   │   ├── events/        # Historical events
+│   │   ├── movements/     # Movements data
+│   │   ├── organizations/ # Organizations data
+│   │   └── search/        # Search functionality
+│   ├── admin/             # Admin dashboard
+│   ├── culture/           # Culture section
+│   ├── leaders/           # Leaders section
+│   ├── religion/          # Religion section
+│   ├── research/          # Research submission
+│   ├── timeline/          # Timeline page
+│   ├── archive/           # Digital archive
+│   ├── tribute/           # Tribute system
+│   ├── contact/           # Contact page
+│   ├── about/             # About page
+│   ├── history/           # History page
+│   ├── search/            # Search page
+│   └── page.tsx           # Homepage
 ├── components/
-│   ├── ui/              # Reusable UI components
-│   └── layout/          # Layout components
+│   ├── ui/                # Reusable UI components
+│   ├── layout/            # Layout components (Header, Footer)
+│   ├── dashboard/         # Admin dashboard components
+│   └── creator/           # Content creation components
 ├── lib/
-│   ├── db.ts            # MongoDB connection
-│   ├── auth.ts          # Authentication utilities
-│   └── utils.ts         # Utility functions
-└── models/              # Mongoose models
-    ├── User.ts
-    ├── Leader.ts
-    ├── Article.ts
-    └── Category.ts
+│   ├── db.ts              # MongoDB connection
+│   ├── auth.ts            # Authentication utilities
+│   ├── utils.ts           # Utility functions
+│   └── constants.ts       # App constants
+├── models/                # Mongoose models
+│   ├── User.ts
+│   ├── Leader.ts
+│   ├── Article.ts
+│   ├── Category.ts
+│   ├── Movement.ts
+│   ├── Organization.ts
+│   ├── HistoricalEvent.ts
+│   └── ArchiveItem.ts
+├── data/                  # Static data files
+│   ├── leaders.ts
+│   ├── culture.ts
+│   ├── religion.ts
+│   ├── timeline.ts
+│   ├── research.ts
+│   ├── events.ts
+│   ├── movements.ts
+│   ├── organizations.ts
+│   └── archive.ts
+├── hooks/                 # Custom React hooks
+│   ├── useDebounce.ts
+│   └── useFuzzySearch.ts
+├── services/              # External services
+│   └── googleKnowledgeGraph.ts
+└── types/                 # TypeScript types
 ```
 
 ## 📦 Database Schema
@@ -167,88 +269,11 @@ src/
 | PUT | `/api/leaders/[id]` | Update leader |
 | DELETE | `/api/leaders/[id]` | Delete leader |
 
-## 🎨 Design System
-
-### Theme and Styles
-- Light blue‑gray background tint (#EFF2F7) replaces earlier ivory shade
-- Tailwind configuration extended with custom color palette, spacing, shadows
-- Subtle woven pattern overlay and gradient orbs used throughout
-- Header shrunk down, background blurs on scroll, and nav icons added for compactness
-
-
-### Colors
-- Primary: Amber (#b45309)
-- Secondary: Indigo (#1e3a5f)
-- Background: Stone (#fafaf9)
-- Success: Green (#16a34a)
-- Warning: Yellow (#ca8a04)
-- Danger: Red (#dc2626)
-
-### Typography
-- Headings: Inter Bold
-- Body: Inter Regular
-- Article Content: Merriweather (serif)
-
-## 📱 Features
-
-### Additional Pages
-- **About** page with institutional description and sample image credit
-- **Contact** page with interactive form, map iframe, email/phone/WhatsApp info, office hours, and social links
-
-### Components
-- `RemoteImage` handles optional external images with placeholder fallback
-- `Hero` component includes decorative orbs, particles, and optional linked image
-- `LeaderCard` now supports loading portraits and displays martyr badge
-
-### API & Form Handling
-- New `/api/contact` POST route for handling contact form submissions; stubbed mailer ready for integration
-- Client-side form sends JSON payload and shows success message
-
-### Constants & Configuration
-- Centralized constants file (`src/lib/constants.ts`) for contact details and social URLs
-- Next.js image domains configured to allow Unsplash
-
-
-### Homepage
-- Hero section with animated background and rotating emblem (includes external photo credit example)
-- Category cards with rich, realistic descriptions for each research domain
-- Featured leaders grid (now supports optional portraits via `imageUrl` and placeholder initials)
-- Research domains rewritten with actual Bodo research topics
-- Compact, responsive header with icon-only menu on mobile
-- Call-to-action buttons and stats
-
-### Leaders Section
-- Grid/list view with filtering
-- Search functionality and region filters
-- Individual leader pages with timeline, citations and related profiles
-- Portrait handling: local initials placeholder or remote image via `RemoteImage` component
-
-### Culture & Religion
-- Category-based organization
-- Featured articles
-- Cultural regions map
-
-### Research Portal
-- Article submission form
-- Draft → Review → Published workflow
-- Admin approval system
-
-### Admin Dashboard
-- Statistics overview
-- Pending submissions
-- Recent activity feed
-- Quick‑action buttons for adding leaders/articles/users
-- User management
-
 ## 🔧 Configuration
 
 ### Environment Variables
 
 ```env
-# Contact form (example providers)
-# SENDGRID_API_KEY=...
-# MAILGUN_API_KEY=...
-
 # Database
 MONGODB_URI=mongodb+srv://...
 
@@ -257,24 +282,11 @@ NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=your-secret
 JWT_SECRET=your-jwt-secret
 
-# App
-NEXT_PUBLIC_APP_NAME=Bodo Research Archive
-```
-
-
-### Environment Variables
-
-```env
-# Database
-MONGODB_URI=mongodb+srv://...
-
-# Auth
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your-secret
-JWT_SECRET=your-jwt-secret
+# Google Knowledge Graph
+GOOGLE_KNOWLEDGE_GRAPH_API_KEY=your_api_key_here
 
 # App
-NEXT_PUBLIC_APP_NAME=Bodo Research Archive
+NEXT_PUBLIC_APP_NAME=Bodo Research Memorial v2
 ```
 
 ## 🚢 Deployment
