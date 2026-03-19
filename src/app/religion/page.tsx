@@ -6,8 +6,13 @@
  */
 
 import Link from 'next/link';
-import { Sparkles, BookOpen, Star, Users, Flame, ArrowRight } from 'lucide-react';
+import { Sparkles, BookOpen, Star, Flame, ArrowRight, Heart, Circle } from 'lucide-react';
 import { ALL_RELIGION_ARTICLES } from '@/data/religion';
+
+export const metadata = {
+    title: 'Bodo Religion - Bathouism, Rituals & Spirituality | Bodo Research Memorial',
+    description: 'Explore the ancient Bathou religion, the indigenous faith of the Bodo people, including Kherai Puja, Brahma Dharma, and other religious traditions.',
+};
 
 const religionTopics = [
     {
@@ -35,14 +40,30 @@ const religionTopics = [
         color: 'bg-yellow-100 text-yellow-600',
     },
     {
-        name: 'Religious Diversity',
-        description: 'Christianity, Buddhism and other faiths practiced among the Bodo community',
-        icon: Users,
-        href: '/religion/other-religions',
-        articles: ALL_RELIGION_ARTICLES.filter(a => a.category === 'buddhism' || a.category === 'christianity').length,
-        color: 'bg-purple-100 text-purple-600',
+        name: 'Buddhism',
+        description: 'Buddhist traditions and practices among Bodo communities',
+        icon: Heart,
+        href: '/religion/buddhism',
+        articles: ALL_RELIGION_ARTICLES.filter(a => a.category === 'buddhism').length,
+        color: 'bg-saffron-100 text-saffron-600',
+    },
+    {
+        name: 'Christianity',
+        description: 'Christian faith and practices among the Bodo community',
+        icon: Circle,
+        href: '/religion/christianity',
+        articles: ALL_RELIGION_ARTICLES.filter(a => a.category === 'christianity').length,
+        color: 'bg-blue-100 text-blue-600',
     },
 ];
+
+const categoryIcons: Record<string, typeof Star> = {
+    bathouism: Star,
+    kherai: Flame,
+    brahmadharma: Sparkles,
+    buddhism: Heart,
+    christianity: Circle,
+};
 
 const keyConcepts = ALL_RELIGION_ARTICLES.slice(0, 4).map((article) => ({
     title: article.title.split(' - ')[0],
@@ -68,26 +89,63 @@ export default function ReligionPage() {
             {/* Religion Topics */}
             <section className="section-padding">
                 <div className="container-institutional">
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <h2 className="text-3xl font-bold text-primary mb-10 text-center">Explore Bodo Religion</h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {religionTopics.map((topic) => {
                             const Icon = topic.icon;
                             return (
                                 <Link key={topic.name} href={topic.href}>
-                                    <div className="card-academic p-10 group cursor-pointer h-full">
+                                    <div className="card-academic p-8 group cursor-pointer h-full">
                                         <div className="flex items-start justify-between mb-6">
-                                            <div className="w-16 h-16 bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                                <Icon className="w-8 h-8 text-white" />
+                                            <div className="w-14 h-14 bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                                <Icon className="w-7 h-7 text-white" />
                                             </div>
                                             <span className="text-[10px] font-black uppercase tracking-widest bg-primary/5 px-2 py-1 text-primary">
                                                 {topic.articles} articles
                                             </span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+                                        <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
                                             {topic.name}
                                         </h3>
-                                        <p className="text-text-secondary text-sm leading-relaxed mb-6">{topic.description}</p>
+                                        <p className="text-text-secondary text-sm leading-relaxed mb-4">{topic.description}</p>
                                         <div className="flex items-center text-primary text-xs font-bold uppercase tracking-widest group-hover:text-secondary transition-colors">
                                             Explore <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* All Articles Section */}
+            <section className="section-padding bg-white">
+                <div className="container-institutional">
+                    <div className="flex items-center justify-between mb-12">
+                        <h2 className="text-3xl font-bold text-primary mb-0">All Articles</h2>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {ALL_RELIGION_ARTICLES.map((article) => {
+                            const Icon = categoryIcons[article.category] || BookOpen;
+                            return (
+                                <Link key={article.id} href={`/religion/${article.slug}`}>
+                                    <div className="card-academic p-8 group h-full flex flex-col">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                                                <Icon className="w-5 h-5 text-primary" />
+                                            </div>
+                                            <span className="label-category">{article.category}</span>
+                                        </div>
+                                        <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+                                            {article.title}
+                                        </h3>
+                                        <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow">{article.summary}</p>
+                                        <div className="flex items-center justify-between pt-6 border-t border-divider mt-auto">
+                                            <span className="text-[10px] text-text-muted font-bold uppercase">{article.readingTime} min read</span>
+                                            <span className="text-primary text-xs font-bold uppercase tracking-widest flex items-center group-hover:text-secondary transition-colors">
+                                                Read <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </span>
                                         </div>
                                     </div>
                                 </Link>

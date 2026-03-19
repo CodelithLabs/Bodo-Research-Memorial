@@ -59,3 +59,70 @@ export interface LeaderSubmission {
 
 export type Region = 'BTC' | 'Assam' | 'Other';
 export type Era = '1950s' | '1960s' | '1970s' | '1980s' | '1990s' | '2000s';
+
+// Research Types
+export type ResearchCategory =
+  | 'language'
+  | 'history'
+  | 'culture'
+  | 'politics'
+  | 'sociology'
+  | 'religion'
+  | 'ecology'
+  | 'literature';
+
+export type ArticleType = 'research-paper' | 'academic-article';
+
+export interface ResearchPaper {
+  id: string;
+  slug: string;
+  type: ArticleType;
+  title: string;
+  authors: string[];
+  institution: string;
+  year: number;
+  journal?: string;
+  volume?: string;
+  issn?: string;
+  doi?: string;
+  url?: string;
+  abstract: string;
+  keywords: string[];
+  category: ResearchCategory;
+  pdfAvailable: boolean;
+  pages?: number;
+  language: 'english' | 'bodo' | 'assamese' | 'hindi';
+  isFeatured: boolean;
+}
+
+// Archive Types
+export type ArchiveType =
+  | 'historical-photo'
+  | 'document'
+  | 'manuscript'
+  | 'artifact';
+
+export type ArchiveEra =
+  | 'pre-1900'
+  | '1900-1950'
+  | '1950-1970'
+  | '1970-2003'
+  | '2003-present';
+
+export interface ArchiveItem {
+  id: string;
+  slug: string;
+  type: ArchiveType;
+  title: string;
+  description: string;
+  year: number | null;
+  yearNote?: string;
+  era: ArchiveEra;
+  location?: string;
+  source: string;
+  attribution?: string;
+  tags: string[];
+  isFeatured: boolean;
+  imageAlt: string;
+  externalUrl?: string;
+}

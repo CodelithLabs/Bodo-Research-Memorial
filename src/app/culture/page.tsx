@@ -6,8 +6,13 @@
  */
 
 import Link from 'next/link';
-import { Music, Utensils, Palette, MapPin, Calendar, ArrowRight } from 'lucide-react';
+import { Music, Utensils, Palette, MapPin, Calendar, ArrowRight, BookOpen, Building, Heart, Shirt, Sparkles } from 'lucide-react';
 import { ALL_CULTURE_ARTICLES } from '@/data/culture';
+
+export const metadata = {
+    title: 'Bodo Culture - Traditions, Festivals & Heritage | Bodo Research Memorial',
+    description: 'Explore the rich culture of the Bodo people including festivals like Bwisagu, traditional dance Bagurumba, textiles, cuisine, music, and architecture.',
+};
 
 const cultureCategories = [
     {
@@ -22,7 +27,7 @@ const cultureCategories = [
         name: 'Traditional Dress',
         description: 'The elegant Dokhona, Gamsa, and other traditional Bodo attire',
         icon: Palette,
-        href: '/culture/textiles',
+        href: '/culture?category=textiles',
         articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'textiles').length,
         color: 'bg-purple-100 text-purple-600',
     },
@@ -30,7 +35,7 @@ const cultureCategories = [
         name: 'Music & Dance',
         description: 'Traditional Bodo music, dances like Bagurumba, and performing arts',
         icon: Music,
-        href: '/culture/dance',
+        href: '/culture?category=dance',
         articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'dance' || a.category === 'music').length,
         color: 'bg-pink-100 text-pink-600',
     },
@@ -38,11 +43,56 @@ const cultureCategories = [
         name: 'Cuisine',
         description: 'Traditional Bodo food, dishes, and culinary practices',
         icon: Utensils,
-        href: '/culture/cuisine',
+        href: '/culture?category=cuisine',
         articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'cuisine').length,
         color: 'bg-orange-100 text-orange-600',
     },
+    {
+        name: 'Architecture',
+        description: 'Traditional Bodo houses and architectural heritage',
+        icon: Building,
+        href: '/culture?category=architecture',
+        articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'architecture').length,
+        color: 'bg-teal-100 text-teal-600',
+    },
+    {
+        name: 'Traditions',
+        description: 'Oral traditions, games, and cultural practices',
+        icon: Heart,
+        href: '/culture?category=traditions',
+        articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'traditions' || a.category === 'games').length,
+        color: 'bg-rose-100 text-rose-600',
+    },
+    {
+        name: 'Traditional Clothing',
+        description: 'Dokhona, Gamsa, Eri silk, and Bodo traditional garments with GI tags',
+        icon: Shirt,
+        href: '/culture?category=traditional-clothing',
+        articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'traditional-clothing').length,
+        color: 'bg-indigo-100 text-indigo-600',
+    },
+    {
+        name: 'Folklore',
+        description: 'Oral literature, myths, proverbs, riddles, and folk traditions',
+        icon: Sparkles,
+        href: '/culture?category=folklore',
+        articles: ALL_CULTURE_ARTICLES.filter(a => a.category === 'folklore').length,
+        color: 'bg-cyan-100 text-cyan-600',
+    },
 ];
+
+const categoryIcons: Record<string, typeof Calendar> = {
+    festival: Calendar,
+    dance: Music,
+    textiles: Palette,
+    cuisine: Utensils,
+    music: Music,
+    architecture: Building,
+    traditions: BookOpen,
+    games: Heart,
+    'traditional-clothing': Shirt,
+    folklore: Sparkles,
+};
 
 const featuredArticles = ALL_CULTURE_ARTICLES.slice(0, 3).map((article) => ({
     title: article.title,
@@ -70,26 +120,63 @@ export default function CulturePage() {
             {/* Culture Categories */}
             <section className="section-padding">
                 <div className="container-institutional">
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <h2 className="text-3xl font-bold text-primary mb-10 text-center">Explore Bodo Culture</h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {cultureCategories.map((category) => {
                             const Icon = category.icon;
                             return (
                                 <Link key={category.name} href={category.href}>
-                                    <div className="card-academic p-10 group cursor-pointer h-full">
+                                    <div className="card-academic p-8 group cursor-pointer h-full">
                                         <div className="flex items-start justify-between mb-6">
-                                            <div className="w-16 h-16 bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                                <Icon className="w-8 h-8 text-white" />
+                                            <div className="w-14 h-14 bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                                <Icon className="w-7 h-7 text-white" />
                                             </div>
                                             <span className="text-[10px] font-black uppercase tracking-widest bg-primary/5 px-2 py-1 text-primary">
                                                 {category.articles} articles
                                             </span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+                                        <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
                                             {category.name}
                                         </h3>
-                                        <p className="text-text-secondary text-sm leading-relaxed mb-6">{category.description}</p>
+                                        <p className="text-text-secondary text-sm leading-relaxed mb-4">{category.description}</p>
                                         <div className="flex items-center text-primary text-xs font-bold uppercase tracking-widest group-hover:text-secondary transition-colors">
                                             Explore <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </div>
+            </section>
+
+            {/* All Articles Section */}
+            <section className="section-padding bg-white">
+                <div className="container-institutional">
+                    <div className="flex items-center justify-between mb-12">
+                        <h2 className="text-3xl font-bold text-primary mb-0">All Articles</h2>
+                    </div>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {ALL_CULTURE_ARTICLES.map((article) => {
+                            const Icon = categoryIcons[article.category] || BookOpen;
+                            return (
+                                <Link key={article.id} href={`/culture/${article.slug}`}>
+                                    <div className="card-academic p-8 group h-full flex flex-col">
+                                        <div className="flex items-center gap-3 mb-4">
+                                            <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                                                <Icon className="w-5 h-5 text-primary" />
+                                            </div>
+                                            <span className="label-category">{article.category}</span>
+                                        </div>
+                                        <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-secondary transition-colors">
+                                            {article.title}
+                                        </h3>
+                                        <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow">{article.summary}</p>
+                                        <div className="flex items-center justify-between pt-6 border-t border-divider mt-auto">
+                                            <span className="text-[10px] text-text-muted font-bold uppercase">{article.readingTime} min read</span>
+                                            <span className="text-primary text-xs font-bold uppercase tracking-widest flex items-center group-hover:text-secondary transition-colors">
+                                                Read <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </span>
                                         </div>
                                     </div>
                                 </Link>
