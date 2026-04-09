@@ -39,6 +39,3 @@ export default function LeaderProfilePage({ params }: { params: { slug: string }
         </>
     );
 }
-                </div>
-
-            </div>

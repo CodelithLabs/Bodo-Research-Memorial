@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import MarkerClusterGroup from 'react-leaflet-cluster';
+import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { useSearchParams } from 'next/navigation';
 import L from 'leaflet';
+import 'leaflet.markercluster';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
@@ -93,6 +93,75 @@ export default function MemorialMap() {
         return null;
     };
 
+    const ClusteredMarkers = () => {
+        const map = useMap();
+
+        useEffect(() => {
+            const clusterGroup = (L as unknown as { markerClusterGroup: (options?: Record<string, unknown>) => L.LayerGroup }).markerClusterGroup({
+                chunkedLoading: true,
+            });
+
+            markerRefs.current = {};
+
+            const escapeHtml = (value: string) =>
+                value
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+
+            leaders.forEach((leader) => {
+                const lat = leader.location?.latitude;
+                const lng = leader.location?.longitude;
+                if (typeof lat !== 'number' || typeof lng !== 'number') return;
+
+                const marker = L.marker([lat, lng]);
+                markerRefs.current[leader.id] = marker;
+
+                const popupContent = document.createElement('div');
+                popupContent.className = 'memorial-popup';
+
+                if (leader.photo) {
+                    const img = document.createElement('img');
+                    img.src = leader.photo;
+                    img.alt = leader.name;
+                    img.className = 'memorial-popup__image';
+                    popupContent.appendChild(img);
+                }
+
+                const title = document.createElement('h3');
+                title.className = 'memorial-popup__title';
+                title.textContent = leader.name;
+                popupContent.appendChild(title);
+
+                if (leader.location?.name) {
+                    const location = document.createElement('p');
+                    location.className = 'memorial-popup__location';
+                    location.textContent = leader.location.name;
+                    popupContent.appendChild(location);
+                }
+
+                const link = document.createElement('a');
+                link.href = `/leaders/${encodeURIComponent(leader.slug)}`;
+                link.className = 'memorial-popup__link';
+                link.textContent = 'Read more';
+                popupContent.appendChild(link);
+
+                marker.bindPopup(popupContent);
+                clusterGroup.addLayer(marker);
+            });
+
+            map.addLayer(clusterGroup);
+
+            return () => {
+                map.removeLayer(clusterGroup);
+            };
+        }, [leaders, map]);
+
+        return null;
+    };
+
     return (
         <div className="w-full">
             {error && (
@@ -115,47 +184,7 @@ export default function MemorialMap() {
                         }
                     />
                     <FocusOnLeader />
-                    <MarkerClusterGroup chunkedLoading>
-                        {leaders.map((leader) => {
-                            const lat = leader.location?.latitude;
-                            const lng = leader.location?.longitude;
-                            if (typeof lat !== 'number' || typeof lng !== 'number') return null;
-
-                            return (
-                                <Marker
-                                    key={leader.id}
-                                    position={[lat, lng]}
-                                    ref={(marker) => {
-                                        if (marker) {
-                                            markerRefs.current[leader.id] = marker;
-                                        }
-                                    }}
-                                >
-                                    <Popup>
-                                        <div className="w-48">
-                                            {leader.photo && (
-                                                <img
-                                                    src={leader.photo}
-                                                    alt={leader.name}
-                                                    className="w-full h-28 object-cover rounded-md mb-2"
-                                                />
-                                            )}
-                                            <h3 className="text-sm font-semibold text-slate-900">{leader.name}</h3>
-                                            {leader.location?.name && (
-                                                <p className="text-xs text-slate-500">{leader.location.name}</p>
-                                            )}
-                                            <Link
-                                                href={`/leaders/${leader.slug}`}
-                                                className="mt-2 inline-flex text-xs font-semibold text-amber-600 hover:text-amber-700"
-                                            >
-                                                Read more
-                                            </Link>
-                                        </div>
-                                    </Popup>
-                                </Marker>
-                            );
-                        })}
-                    </MarkerClusterGroup>
+                    <ClusteredMarkers />
                 </MapContainer>
             </div>
         </div>

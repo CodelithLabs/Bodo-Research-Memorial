@@ -16,7 +16,8 @@ async function sendMail({ name, email, message }: { name: string; email: string;
 
 export async function POST(req: NextRequest) {
   try {
-    const ip = headers().get('x-forwarded-for') ?? '127.0.0.1';
+    const headerList = await headers();
+    const ip = headerList.get('x-forwarded-for') ?? '127.0.0.1';
     const { success, limit, remaining } = await rateLimitContact.limit(ip);
     if (!success) {
       return NextResponse.json(

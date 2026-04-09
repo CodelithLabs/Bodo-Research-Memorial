@@ -20,6 +20,8 @@ if (!JWT_SECRET) {
     );
 }
 
+const JWT_SECRET_VALUE = JWT_SECRET as string;
+
 const TOKEN_EXPIRY = '7d'; // 7 days
 
 /**
@@ -33,7 +35,7 @@ export function generateToken(user: Partial<IUser>): string {
         role: user.role,
     };
 
-    return jwt.sign(payload, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
+    return jwt.sign(payload, JWT_SECRET_VALUE, { expiresIn: TOKEN_EXPIRY });
 }
 
 /**
@@ -41,7 +43,7 @@ export function generateToken(user: Partial<IUser>): string {
  */
 export function verifyToken(token: string): jwt.JwtPayload | null {
     try {
-        return jwt.verify(token, JWT_SECRET) as jwt.JwtPayload;
+        return jwt.verify(token, JWT_SECRET_VALUE) as jwt.JwtPayload;
     } catch {
         return null;
     }

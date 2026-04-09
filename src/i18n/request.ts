@@ -5,6 +5,7 @@ import bodo from './bodo.json';
 const messages = { en, bodo } as const;
 
 export default getRequestConfig(async ({ locale }) => {
-  const selected = (messages as Record<string, Record<string, string>>)[locale] ?? messages.en;
-  return { messages: selected };
+  const resolvedLocale = locale ?? 'en';
+  const selected = messages[resolvedLocale as keyof typeof messages] ?? messages.en;
+  return { locale: resolvedLocale, messages: selected };
 });
