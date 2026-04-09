@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BackToTop from "@/components/ui/BackToTop";
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: "Bodo Research Memorial | Digital Heritage Archive",
@@ -23,6 +24,10 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased bg-ivory text-text-primary min-h-screen flex flex-col">
+        <Script
+          src="https://widget.cloudinary.com/v2.0/global/all.js"
+          strategy="afterInteractive"
+        />
         <Header />
         <main className="flex-1 pt-16">
           {children}

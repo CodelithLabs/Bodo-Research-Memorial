@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "discover": "Discover",
+    "leaders": "Leaders",
+    "culture": "Culture",
+    "timeline": "Timeline"
+  },
+  "leader": {
+    "readBio": "Read Full Biography",
+    "born": "Born",
+    "died": "Died",
+    "movement": "Movement"
+  }
+}

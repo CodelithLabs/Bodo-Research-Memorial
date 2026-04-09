@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next';
 import { connectDB, Leader, Article, HistoricalEvent } from '@/models';
+import { getAllLeaders } from '@/data/leaders';
+import { ALL_CULTURE_ARTICLES } from '@/data/culture';
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://bodo-research.org';
 
@@ -43,6 +45,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } catch {
         console.log('Could not fetch from database, using static sitemap only');
     }
+
+    const staticLeaders = getAllLeaders();
+    const staticArticles = ALL_CULTURE_ARTICLES;
+
+    const staticLeaderUrls = staticLeaders.map((leader) => ({
+        url: `${BASE_URL}/leaders/${leader.id}`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+    }));
+
+    const staticArticleUrls = staticArticles.map((article) => ({
+        url: `${BASE_URL}/culture/${article.category}/${article.id}`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+    }));
 
     // Static pages
     const staticUrls: MetadataRoute.Sitemap = [
@@ -120,5 +139,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    return [...staticUrls, ...dynamicUrls];
+    return [...staticUrls, ...staticLeaderUrls, ...staticArticleUrls, ...dynamicUrls];
 }

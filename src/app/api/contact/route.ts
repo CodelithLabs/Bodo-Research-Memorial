@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { headers } from 'next/headers';
+import { validateCsrfToken } from '@/lib/csrf';
+import { rateLimitContact } from '@/lib/ratelimit';
 
 // Example handler for /api/contact
 // This stub currently just logs the submission and returns 200. Replace
@@ -11,30 +14,30 @@ async function sendMail({ name, email, message }: { name: string; email: string;
   // e.g. await fetch("https://api.sendgrid.com/v3/mail/send", {...})
 }
 
-// simple in-memory rate limiter (per IP, max 5 requests per minute)
-const rateMap: Record<string, { count: number; firstTimestamp: number }> = {};
-
-function checkRateLimit(ip: string) {
-  const now = Date.now();
-  const entry = rateMap[ip];
-  if (!entry || now - entry.firstTimestamp > 60000) {
-    rateMap[ip] = { count: 1, firstTimestamp: now };
-    return true;
-  }
-  if (entry.count >= 5) return false;
-  entry.count++;
-  return true;
-}
-
 export async function POST(req: NextRequest) {
   try {
-    const ip = req.headers.get('x-forwarded-for') || 'unknown';
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
+    const ip = headers().get('x-forwarded-for') ?? '127.0.0.1';
+    const { success, limit, remaining } = await rateLimitContact.limit(ip);
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': String(limit),
+            'X-RateLimit-Remaining': String(remaining),
+          },
+        }
+      );
     }
 
     const data = await req.json();
-    const { name, email, message, hp } = data;
+    const { name, email, message, hp, csrfToken } = data;
+
+    const csrfValid = await validateCsrfToken(csrfToken);
+    if (!csrfValid) {
+      return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
+    }
 
     // honeypot should be empty
     if (hp) {

@@ -20,100 +20,88 @@ export interface TeamMember {
 export const ABOUT_CONTENT = {
     hero: {
         title: 'Bodo Research Memorial',
-        subtitle: 'Preserving History, Celebrating Culture',
-        description: 'A comprehensive digital archive dedicated to documenting and preserving the rich heritage, history, and culture of the Bodo people of Assam, India.'
+        subtitle: 'Digital Research Platform for Bodo Martyrs',
+        description: 'A dedicated digital research platform honoring Bodo leaders who sacrificed their lives for the Motherland, preserving their stories, documents, and legacy for future generations.'
     },
     mission: {
         title: 'Our Mission',
-        content: `The Bodo Research Memorial is dedicated to the preservation, documentation, and promotion of Bodo culture, history, and heritage. Our mission is to create a comprehensive digital archive that captures the essence of Bodo identity and makes it accessible to future generations.
+        content: `The Bodo Research Memorial is dedicated to documenting and honoring Bodo leaders who sacrificed their lives for the Motherland. Our mission is to build a trusted digital research platform that preserves their biographies, historical context, primary sources, and community memory.
 
 We strive to:
-- Document and preserve Bodo historical records, oral traditions, and cultural practices
-- Promote awareness and understanding of Bodo history and culture
-- Support academic research on Bodo studies
-- Foster community engagement and cultural exchange
-- Preserve the Bodo language and literary heritage`
+- Preserve verified biographies, timelines, and archival records of Bodo leaders and martyrs
+- Curate primary sources such as letters, speeches, photographs, and newspaper clippings
+- Provide context on movements, organizations, and community struggles tied to their sacrifice
+- Support academic and community-led research with citations and transparent sources
+- Enable respectful community contributions and remembrance`
     },
     history: {
         title: 'Our History',
-        content: `The Bodo Research Memorial was established to address the growing need for a centralized repository of Bodo cultural and historical knowledge. The Bodo people, one of the major ethnic groups of Assam, have a rich and diverse heritage that spans centuries.
+        content: `The Bodo Research Memorial began with a simple goal: ensure that the sacrifices of Bodo leaders are preserved with accuracy, dignity, and depth. Many of their stories were scattered across family archives, local newspapers, oral histories, and personal collections.
 
-Our journey began with the recognition that much of Bodo history and culture was scattered across various sources, with the risk of being lost to time. We set out to create a comprehensive digital platform that would bring together historical records, cultural documentation, research papers, and multimedia content.
-
-Over the years, we have collaborated with scholars, community leaders, historians, and cultural experts to build an extensive archive that serves as a valuable resource for researchers, students, and anyone interested in Bodo culture.`
+We set out to create a centralized digital research platform that brings these sources together, validates them, and makes them accessible to researchers, students, and the wider community. Through collaboration with scholars, community historians, and families, the archive continues to grow with verified records and respectful remembrance.`
     },
     sections: [
         {
             id: 'origin',
-            title: 'The Bodo People',
-            content: `The Bodos are an indigenous ethnic group primarily residing in the Brahmaputra valley of Assam, India. They are one of the oldest ethnic groups in the region, with a rich cultural heritage that includes unique traditions, customs, and a distinctive language.
+            title: 'Why This Archive Matters',
+            content: `The sacrifices of Bodo leaders shaped the political, cultural, and social destiny of the community. Yet many of their biographies remain fragmented, unverified, or inaccessible to the public.
 
-Historically, the Bodos were known as the Bodo-Kacharis and ruled over parts of Assam in ancient times. Their culture has evolved over centuries while maintaining its unique identity. The Bodo language belongs to the Tibeto-Burman family and has its own script.
-
-Today, the Bodo population is concentrated primarily in the Bodoland Territorial Areas District (BTAD) in Assam, with significant populations in other parts of Assam and neighboring states.`
+This platform exists to preserve their legacies with care, documenting what they stood for, the movements they led, and the historical context around their lives.`
         },
         {
             id: 'culture',
-            title: 'Bodo Culture',
-            content: `Bodo culture is characterized by its rich traditions in music, dance, festivals, and cuisine. The Bwisagu festival marks the traditional New Year, while the Bagurumba dance is a iconic cultural expression performed during various celebrations.
+            title: 'What We Collect',
+            content: `We prioritize primary sources and verified records, including biographies, timelines, oral histories, family archives, photographs, letters, court documents, and published research.
 
-Traditional Bodo attire includes the Dokhona for women and Gamsa for men, featuring distinctive geometric patterns known as Aronai. The cuisine features unique dishes like Napham (fermented fish paste) and Gwran (rice beer).
-
-Bathouism is the indigenous religion of the Bodo people, centered around the worship of Bathou, the supreme deity representing five elements. The Kherai Puja is the most important religious ceremony in the Bathou tradition.`
+Each record includes citations and contextual notes to help researchers understand the historical setting and the impact of each leader's sacrifice.`
         },
         {
             id: 'achievements',
             title: 'Our Achievements',
-            content: `Since our inception, we have achieved significant milestones in preserving and promoting Bodo culture:
+            content: `Since our inception, we have achieved significant milestones in documenting Bodo leaders and martyrs:
 
-- Established a comprehensive digital archive of Bodo historical documents
-- Created an extensive collection of Bodo oral traditions and folk songs
-- Documented traditional Bodo practices, ceremonies, and rituals
-- Published research papers on various aspects of Bodo history and culture
-- Developed educational resources for schools and universities
-- Organized cultural events and community engagement programs
-- Created an online platform accessible to researchers worldwide
-- Built partnerships with academic institutions and cultural organizations`
+- Built a growing digital archive of verified leader biographies
+- Cataloged primary sources from families, local publications, and institutions
+- Established citation standards for transparent research use
+- Developed resources for students and researchers focused on Bodo leadership history
+- Partnered with scholars, community historians, and cultural organizations`
         },
         {
             id: 'future',
             title: 'Future Vision',
-            content: `Looking ahead, the Bodo Research Memorial aims to expand its collection and reach:
+            content: `Looking ahead, the Bodo Research Memorial aims to expand its leader-focused archive:
 
-- Digitize more historical documents and manuscripts
-- Create interactive multimedia experiences for cultural education
-- Develop partnerships with international universities for research
-- Expand our oral history collection
-- Launch educational programs for youth
-- Preserve endangered cultural practices
-- Create virtual museum exhibits
-- Support emerging Bodo scholars and researchers`
+- Digitize additional documents and family-held materials
+- Build deeper timelines of movements and organizations tied to the leaders
+- Expand oral history interviews and community testimony
+- Create research toolkits and curriculum resources
+- Support emerging Bodo scholars and community archivists`
         }
     ] as AboutSection[],
     features: [
         {
-            title: 'Historical Archives',
-            description: 'Extensive collection of historical documents, photographs, and records'
+            title: 'Leader Biographies',
+            description: 'Verified biographies and timelines for Bodo leaders and martyrs'
         },
         {
-            title: 'Cultural Documentation',
-            description: 'Comprehensive coverage of Bodo traditions, festivals, and customs'
+            title: 'Primary Sources',
+            description: 'Letters, speeches, photographs, and archival documents'
         },
         {
             title: 'Research Resources',
-            description: 'Academic papers, articles, and scholarly works on Bodo studies'
+            description: 'Cited articles, papers, and scholarly work on Bodo leadership history'
         },
         {
             title: 'Oral History',
-            description: 'Recorded interviews and folk traditions from community members'
+            description: 'Recorded interviews and testimony from families and communities'
         },
         {
             title: 'Digital Preservation',
-            description: 'Modern digital techniques to preserve heritage for future generations'
+            description: 'Reliable digital preservation of sources and testimony'
         },
         {
-            title: 'Community Engagement',
-            description: 'Programs to involve community in preserving their heritage'
+            title: 'Community Contributions',
+            description: 'Respectful submission process for documents and memories'
         }
     ]
 };

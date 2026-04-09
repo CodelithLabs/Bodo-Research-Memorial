@@ -10,6 +10,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { Eye, EyeOff, Lock, Mail, AlertCircle, Loader2, Shield } from 'lucide-react';
 
@@ -27,32 +28,17 @@ export default function AdminLoginPage() {
         setError('');
 
         try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
+            const result = await signIn('credentials', {
+                redirect: false,
+                email,
+                password,
             });
 
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || 'Login failed');
+            if (!result || result.error) {
+                throw new Error(result?.error || 'Login failed');
             }
 
-            // Store token and user info
-            localStorage.setItem('adminToken', data.token);
-            localStorage.setItem('adminUser', JSON.stringify(data.user));
-
-            // Redirect based on role
-            if (data.user.role === 'admin') {
-                router.push('/admin');
-            } else if (data.user.role === 'editor') {
-                router.push('/admin?tab=editor');
-            } else {
-                router.push('/admin?tab=researcher');
-            }
+            router.push('/admin');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
         } finally {

@@ -21,6 +21,11 @@ export interface Leader {
   era: string;
   isMartyr: boolean;
   movement: string;
+  location?: {
+    name?: string;
+    latitude?: number;
+    longitude?: number;
+  };
   sources?: {
     type: 'book' | 'journal' | 'newspaper' | 'interview' | 'archive';
     title: string;

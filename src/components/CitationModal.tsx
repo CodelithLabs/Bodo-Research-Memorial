@@ -1,7 +1,5 @@
 'use client';
 
-'use client';
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Copy, Check, Quote } from 'lucide-react';
@@ -36,6 +34,11 @@ export default function CitationModal({ isOpen, onClose, data }: CitationModalPr
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="citation-title"
+                        tabIndex={-1}
+                        ref={(el) => el?.focus()}
                         className="bg-white max-w-2xl w-full overflow-hidden shadow-2xl border border-secondary/20"
                     >
                         {/* Header */}
@@ -45,7 +48,7 @@ export default function CitationModal({ isOpen, onClose, data }: CitationModalPr
                                     <Quote className="w-5 h-5 text-secondary" />
                                 </div>
                                 <div>
-                                    <h3 className="font-display text-xl font-bold tracking-tight">Cite This Work</h3>
+                                    <h3 id="citation-title" className="font-display text-xl font-bold tracking-tight">Cite This Work</h3>
                                     <p className="text-[10px] uppercase tracking-widest text-secondary font-bold">Academic Reference Tool</p>
                                 </div>
                             </div>

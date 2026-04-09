@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 interface RemoteImageProps {
     src?: string;
@@ -7,9 +8,20 @@ interface RemoteImageProps {
     height?: number | string;
     placeholder?: React.ReactNode;
     className?: string;
+    priority?: boolean;
+    sizes?: string;
 }
 
-export default function RemoteImage({ src, alt, width = '100%', height = 'auto', placeholder, className = '' }: RemoteImageProps) {
+export default function RemoteImage({
+    src,
+    alt,
+    width,
+    height,
+    placeholder,
+    className = '',
+    priority,
+    sizes,
+}: RemoteImageProps) {
     if (!src) {
         return (
             <div className={`bg-gray-200 flex items-center justify-center ${className}`} style={{ width, height }}>
@@ -18,8 +30,37 @@ export default function RemoteImage({ src, alt, width = '100%', height = 'auto',
         );
     }
 
+    const numericWidth = typeof width === 'number' ? width : undefined;
+    const numericHeight = typeof height === 'number' ? height : undefined;
+    const useFill = !numericWidth || !numericHeight;
+
+    if (useFill) {
+        return (
+            <div
+                className="relative"
+                style={{ width: width ?? '100%', height: height ?? '100%' }}
+            >
+                <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    sizes={sizes ?? '100vw'}
+                    priority={priority}
+                    className={className}
+                />
+            </div>
+        );
+    }
+
     return (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt={alt} width={width} height={height} className={className} loading="lazy" />
+        <Image
+            src={src}
+            alt={alt}
+            width={numericWidth}
+            height={numericHeight}
+            sizes={sizes}
+            priority={priority}
+            className={className}
+        />
     );
 }

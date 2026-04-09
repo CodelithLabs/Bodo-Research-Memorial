@@ -49,7 +49,17 @@ export default function Timeline({ events }: TimelineProps) {
     };
 
     return (
-        <div className="bg-white border border-divider shadow-sm overflow-hidden" ref={containerRef}>
+        <div
+            className="bg-white border border-divider shadow-sm overflow-hidden"
+            ref={containerRef}
+            role="region"
+            aria-label="Historical timeline"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === 'ArrowRight') setCurrentIndex((i) => Math.min(i + 1, sortedEvents.length - 1));
+                if (e.key === 'ArrowLeft') setCurrentIndex((i) => Math.max(i - 1, 0));
+            }}
+        >
             {/* Timeline Header Area */}
             <div className="bg-primary p-8 md:p-12 text-white relative overflow-hidden">
                 <div className="absolute inset-0 opacity-10 bg-weave" />

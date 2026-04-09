@@ -9,10 +9,10 @@ import RemoteImage from '@/components/RemoteImage';
 // Bodo language translations
 const translations = {
     welcome: "नमा (Nama)",
-    subtitle: "Digital Heritage Archive",
-    title: "Preserving Bodo Legacy",
-    titleHighlight: "For Future Generations",
-    description: "A comprehensive research portal dedicated to documenting and sharing the rich history, culture, religion, language, and achievements of the Bodo civilization.",
+    subtitle: "Digital Research Platform",
+    title: "Honoring Bodo Leaders",
+    titleHighlight: "Who Sacrificed for the Motherland",
+    description: "A focused research portal dedicated to preserving verified biographies, primary sources, and community memory of Bodo leaders who gave their lives for the Motherland.",
     exploreBtn: "Explore Archives",
     contributeBtn: "Contribute",
     statsLeaders: "Honored Leaders",

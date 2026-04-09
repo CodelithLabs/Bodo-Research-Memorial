@@ -8,14 +8,7 @@ import { Menu, Search, Landmark } from 'lucide-react';
 const navStructure = [
     { href: '/', label: 'Home' },
     { href: '/leaders', label: 'Leaders' },
-    { href: '/culture', label: 'Culture' },
-    { href: '/religion', label: 'Religion' },
-    { href: '/movements', label: 'Movements' },
-    { href: '/organizations', label: 'Organizations' },
-    { href: '/archive', label: 'Archive' },
-    { href: '/timeline', label: 'Timeline' },
-    { href: '/history', label: 'History' },
-    { href: '/research', label: 'Research' },
+    { href: '/tribute', label: 'Tributes' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
 ];
@@ -137,7 +130,7 @@ export default function Header() {
                                     <input
                                         ref={searchInputRef}
                                         type="text"
-                                        placeholder="Search research..."
+                                        placeholder="Search leaders..."
                                         className="w-full px-4 py-2 text-sm border border-gray-200 rounded-l-lg focus:outline-none focus:border-[#44CC44]"
                                     />
                                     <button

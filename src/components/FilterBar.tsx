@@ -13,6 +13,7 @@ interface FilterBarProps {
     onMartyrChange: (isMartyr: boolean | null) => void;
     onClear: () => void;
     hasFilters: boolean;
+    resultsCount?: number;
 }
 
 const regions: { value: Region | ''; label: string }[] = [
@@ -41,6 +42,7 @@ export default function FilterBar({
     onMartyrChange,
     onClear,
     hasFilters,
+    resultsCount,
 }: FilterBarProps) {
     return (
         <div className={styles.filterContainer}>
@@ -56,7 +58,8 @@ export default function FilterBar({
             </div>
 
             <div className={styles.filters}>
-                <div className={styles.filterGroup}>
+                <fieldset className={styles.filterGroup}>
+                    <legend className="sr-only">Filter by region</legend>
                     <label htmlFor="region-filter" className={styles.label}>Region</label>
                     <select
                         id="region-filter"
@@ -70,9 +73,10 @@ export default function FilterBar({
                             </option>
                         ))}
                     </select>
-                </div>
+                </fieldset>
 
-                <div className={styles.filterGroup}>
+                <fieldset className={styles.filterGroup}>
+                    <legend className="sr-only">Filter by era</legend>
                     <label htmlFor="era-filter" className={styles.label}>Era</label>
                     <select
                         id="era-filter"
@@ -86,7 +90,7 @@ export default function FilterBar({
                             </option>
                         ))}
                     </select>
-                </div>
+                </fieldset>
 
                 <div className={styles.filterGroup}>
                     <label className={styles.label}>Status</label>
@@ -102,6 +106,11 @@ export default function FilterBar({
                     </div>
                 </div>
             </div>
+            {typeof resultsCount === 'number' && (
+                <p aria-live="polite" aria-atomic="true" className="sr-only">
+                    {resultsCount} leaders found
+                </p>
+            )}
         </div>
     );
 }

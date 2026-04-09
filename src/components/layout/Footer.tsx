@@ -1,15 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { Landmark, Mail, MapPin, ExternalLink, Shield, BookOpen, Users, Calendar, Archive } from 'lucide-react';
+import { Landmark, Mail, MapPin, Shield, Users, Star } from 'lucide-react';
 import { CONTACT_EMAIL, CONTACT_ADDRESS } from '@/lib/constants';
 
 const t = {
   brandTitle: "Bodo Research Memorial",
   brandSubtitle: "Digital Heritage Archive",
-  description: "An institutional academic platform dedicated to the preservation of Bodo history, cultural documentation, and scholarly research.",
-  quickLinks: "Navigation",
-  resources: "Research",
+  description: "A focused digital archive preserving biographies and legacies of Bodo leaders and martyrs.",
+  quickLinks: "Leaders",
+  resources: "Community",
   contact: "Contact",
   location: CONTACT_ADDRESS,
   email: CONTACT_EMAIL,
@@ -57,16 +57,16 @@ export default function Footer() {
             </h4>
             <nav className="flex flex-col gap-3">
               <Link href="/leaders" className="text-white/70 hover:text-parrot transition-colors text-sm flex items-center gap-2">
-                <Archive className="w-4 h-4" /> Digital Archive
+                <Users className="w-4 h-4" /> Leader Archive
               </Link>
-              <Link href="/timeline" className="text-white/70 hover:text-parrot transition-colors text-sm flex items-center gap-2">
-                <Calendar className="w-4 h-4" /> Historical Timeline
+              <Link href="/leaders" className="text-white/70 hover:text-parrot transition-colors text-sm flex items-center gap-2">
+                <Star className="w-4 h-4" /> Martyrs & Heroes
               </Link>
-              <Link href="/history" className="text-white/70 hover:text-parrot transition-colors text-sm flex items-center gap-2">
-                <BookOpen className="w-4 h-4" /> History & Culture
+              <Link href="/tribute" className="text-white/70 hover:text-parrot transition-colors text-sm flex items-center gap-2">
+                <Shield className="w-4 h-4" /> Tributes
               </Link>
-              <Link href="/research" className="text-white/70 hover:text-parrot transition-colors text-sm flex items-center gap-2">
-                <Users className="w-4 h-4" /> Research Portal
+              <Link href="/about" className="text-white/70 hover:text-parrot transition-colors text-sm">
+                About the Archive
               </Link>
             </nav>
           </div>
@@ -77,17 +77,11 @@ export default function Footer() {
               {t.resources}
             </h4>
             <nav className="flex flex-col gap-3">
-              <Link href="/research/papers" className="text-white/70 hover:text-parrot transition-colors text-sm flex items-center gap-2">
-                <BookOpen className="w-4 h-4" /> Research Papers
+              <Link href="/contact" className="text-white/70 hover:text-parrot transition-colors text-sm">
+                Contact the Archive
               </Link>
-              <Link href="/research/submit" className="text-white/70 hover:text-parrot transition-colors text-sm flex items-center gap-2">
-                <ExternalLink className="w-3 h-3" /> Submit Document
-              </Link>
-              <Link href="/about" className="text-white/70 hover:text-parrot transition-colors text-sm">
-                About the Project
-              </Link>
-              <Link href="/culture" className="text-white/70 hover:text-parrot transition-colors text-sm">
-                Cultural Studies
+              <Link href="/leaders" className="text-white/70 hover:text-parrot transition-colors text-sm">
+                Browse Leaders
               </Link>
             </nav>
           </div>

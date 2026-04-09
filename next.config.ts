@@ -1,4 +1,7 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   // Enable compression
@@ -15,8 +18,13 @@ const nextConfig: NextConfig = {
       'unsplash.com',
       'upload.wikimedia.org',
       'commons.wikimedia.org',
+      'res.cloudinary.com',
     ],
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
@@ -30,6 +38,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'commons.wikimedia.org',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
         pathname: '/**',
       },
     ],
@@ -47,20 +60,19 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: 
+            value:
               "default-src 'self'; " +
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+              "script-src 'self' 'unsafe-inline' https://widget.cloudinary.com; " +
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
               "font-src 'self' https://fonts.gstatic.com; " +
-              "img-src 'self' data: blob: https://images.unsplash.com " +
-              "https://upload.wikimedia.org https://commons.wikimedia.org; " +
-              "connect-src 'self'; " +
+              "img-src 'self' data: blob: https:; " +
+              "connect-src 'self' https://api.cloudinary.com https://res.cloudinary.com; " +
               "frame-src https://www.google.com https://maps.google.com; " +
               "frame-ancestors 'self';"
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
+            value: 'DENY'
           },
           {
             key: 'X-Content-Type-Options',
@@ -112,4 +124,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

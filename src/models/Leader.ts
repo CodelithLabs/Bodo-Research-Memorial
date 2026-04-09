@@ -43,6 +43,12 @@ export interface ILeader extends Document {
     contributions: string[];
     timeline: ITimelineEvent[];
     references: IReference[];
+    sources: mongoose.Types.ObjectId[];
+    location?: {
+        name?: string;
+        latitude?: number;
+        longitude?: number;
+    };
     tags: string[];
     relatedLeaders: mongoose.Types.ObjectId[];
     relatedArticles: mongoose.Types.ObjectId[];
@@ -138,6 +144,27 @@ const LeaderSchema = new Schema<ILeader>(
         }],
         timeline: [TimelineEventSchema],
         references: [ReferenceSchema],
+        sources: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Source',
+        }],
+        location: {
+            name: {
+                type: String,
+                trim: true,
+                maxlength: [200, 'Location name cannot exceed 200 characters'],
+            },
+            latitude: {
+                type: Number,
+                min: [-90, 'Latitude must be >= -90'],
+                max: [90, 'Latitude must be <= 90'],
+            },
+            longitude: {
+                type: Number,
+                min: [-180, 'Longitude must be >= -180'],
+                max: [180, 'Longitude must be <= 180'],
+            },
+        },
         tags: [{
             type: String,
             lowercase: true,

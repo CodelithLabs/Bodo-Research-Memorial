@@ -11,6 +11,12 @@ export type { IUser } from './User';
 export { default as Leader } from './Leader';
 export type { ILeader, ITimelineEvent, IReference as ILeaderReference } from './Leader';
 
+export { default as Source } from './Source';
+export type { ISource } from './Source';
+
+export { default as LeaderRevision } from './LeaderRevision';
+export type { ILeaderRevision } from './LeaderRevision';
+
 export { default as Article } from './Article';
 export type { IArticle, IReference as IArticleReference } from './Article';
 

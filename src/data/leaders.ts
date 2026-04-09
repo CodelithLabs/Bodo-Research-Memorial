@@ -270,6 +270,22 @@ Boro served as the president of ABSU during a crucial period of the Bodoland mov
 // Export for backward compatibility
 export const leaders = ALL_LEADERS;
 
+export function getLeaderBySlug(slug: string) {
+  return ALL_LEADERS.find((leader) => leader.id === slug) ?? null;
+}
+
+export function getRelatedLeaders(leader: Leader, limit: number = 3): Leader[] {
+  return ALL_LEADERS.filter(
+    (item) =>
+      item.id !== leader.id &&
+      (item.movement === leader.movement || item.era === leader.era || item.region === leader.region)
+  ).slice(0, limit);
+}
+
+export function getAllLeaders(): Leader[] {
+  return ALL_LEADERS;
+}
+
 // Timeline events for Timeline component
 export const timelineEvents: TimelineEventType[] = ALL_TIMELINE_EVENTS.map((event) => ({
   id: event.id,

@@ -1,18 +1,35 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Mail, MapPin, Github, Twitter, Phone } from 'lucide-react';
 import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_ADDRESS, SOCIAL_GITHUB, SOCIAL_TWITTER, CONTACT_WHATSAPP } from '@/lib/constants';
 
 export default function ContactPage() {
-    const [form, setForm] = useState({ name: '', email: '', message: '', hp: '' }); // hp is honeypot
+    const [form, setForm] = useState({ name: '', email: '', message: '', hp: '', csrfToken: '' }); // hp is honeypot
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    useEffect(() => {
+        const loadCsrfToken = async () => {
+            try {
+                const res = await fetch('/api/csrf');
+                const data = await res.json();
+                setForm((prev) => ({ ...prev, csrfToken: data.token }));
+            } catch {
+                setError('Unable to initialize secure form. Please reload the page.');
+            }
+        };
+        loadCsrfToken();
+    }, []);
+
     const validate = () => {
         if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
             setError('Please fill out all fields.');
+            return false;
+        }
+        if (!form.csrfToken) {
+            setError('Secure token missing. Please reload the page.');
             return false;
         }
         const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -41,7 +58,7 @@ export default function ContactPage() {
             });
             if (res.ok) {
                 setSubmitted(true);
-                setForm({ name: '', email: '', message: '', hp: '' });
+                setForm({ name: '', email: '', message: '', hp: '', csrfToken: form.csrfToken });
             } else {
                 const data = await res.json();
                 setError(data.error || 'Submission failed.');
