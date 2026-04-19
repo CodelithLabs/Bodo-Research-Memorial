@@ -1,184 +1,221 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Menu, Search, Landmark } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Search, Menu, X, ChevronDown } from 'lucide-react';
 
-// Navigation structure for professional research portal
-const navStructure = [
-    { href: '/', label: 'Home' },
-    { href: '/leaders', label: 'Leaders' },
-    { href: '/tribute', label: 'Tributes' },
-    { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact' },
+const NAV_LINKS = [
+    { label: 'Leaders', href: '/leaders' },
+    { label: 'History', href: '/history' },
+    { label: 'Culture', href: '/culture' },
+    {
+        label: 'Archive',
+        href: '/archive',
+        children: [
+            { label: 'Documents', href: '/archive/documents' },
+            { label: 'Photographs', href: '/archive/photos' },
+            { label: 'Manuscripts', href: '/archive/manuscripts' },
+            { label: 'Artifacts', href: '/archive/artifacts' },
+        ],
+    },
+    { label: 'Research', href: '/research' },
+    { label: 'Timeline', href: '/timeline' },
+    { label: 'Map', href: '/map' },
 ];
 
 export default function Header() {
-    const _menuRef = useRef<HTMLDivElement>(null);
-    const searchFormRef = useRef<HTMLDivElement>(null);
-    const searchInputRef = useRef<HTMLInputElement>(null);
+    const pathname = usePathname();
+    const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [dropdown, setDropdown] = useState<string | null>(null);
 
-    // Use vanilla JS for all interactivity to avoid React state hydration issues
     useEffect(() => {
-        // Toggle mobile menu
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        const handleMenuToggle = () => {
-            if (mobileMenu) {
-                const isHidden = mobileMenu.classList.contains('hidden');
-                if (isHidden) {
-                    mobileMenu.classList.remove('hidden');
-                } else {
-                    mobileMenu.classList.add('hidden');
-                }
-            }
-        };
-
-        menuBtn?.addEventListener('click', handleMenuToggle);
-
-        // Toggle search form
-        const searchBtn = document.getElementById('search-toggle-btn');
-        const searchForm = document.getElementById('header-search-form');
-
-        const handleSearchToggle = () => {
-            if (searchForm) {
-                const isHidden = searchForm.classList.contains('hidden');
-                if (isHidden) {
-                    searchForm.classList.remove('hidden');
-                    searchInputRef.current?.focus();
-                } else {
-                    searchForm.classList.add('hidden');
-                }
-            }
-        };
-
-        searchBtn?.addEventListener('click', handleSearchToggle);
-
-        // Close search when clicking outside
-        const handleClickOutside = (event: MouseEvent) => {
-            if (searchFormRef.current && searchForm &&
-                !searchFormRef.current.contains(event.target as Node) &&
-                !searchBtn?.contains(event.target as Node)) {
-                searchForm.classList.add('hidden');
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            menuBtn?.removeEventListener('click', handleMenuToggle);
-            searchBtn?.removeEventListener('click', handleSearchToggle);
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
+        const handler = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handler, { passive: true });
+        return () => window.removeEventListener('scroll', handler);
     }, []);
 
-    // Handle search form submission
-    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const form = e.currentTarget;
-        const input = form.querySelector('input') as HTMLInputElement;
-        if (input && input.value.trim()) {
-            window.location.href = `/search?q=${encodeURIComponent(input.value)}`;
-        }
-    };
+    const isActive = (href: string) =>
+        href === '/' ? pathname === '/' : pathname.startsWith(href);
 
     return (
-        <header
-            className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-gradient-to-r from-white via-gray-50 to-white"
-        >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#44CC44] flex items-center justify-center rounded-l-lg">
-                            <Landmark className="w-5 h-5 text-white" />
-                        </div>
-                        <div className="hidden sm:block">
-                            <span className="block text-gray-900 font-serif font-bold text-lg leading-tight">
-                                Bodo Research <span className="text-[#44CC44]">Memorial</span>
-                            </span>
-                            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-gray-500">
-                                Digital Heritage Archive
-                            </span>
-                        </div>
-                    </Link>
-
-                    {/* Desktop Navigation - static classNames */}
-                    <nav className="hidden lg:flex items-center gap-0.5">
-                        {navStructure.map((item, index) => (
-                            <a
-                                key={index}
-                                href={item.href}
-                                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-[#44CC44] transition-colors"
-                            >
-                                {item.label}
-                            </a>
-                        ))}
-                    </nav>
-
-                    {/* Action Area */}
-                    <div className="flex items-center gap-2">
-                        {/* Search Bar - static to avoid hydration mismatch */}
-                        <div ref={searchFormRef} className="relative">
-                            {/* Search form - initially hidden */}
-                            <div id="header-search-form" className="hidden">
-                                <form
-                                    onSubmit={handleSearch}
-                                    className="flex items-center animate-in fade-in slide-in-from-right-4 duration-200"
-                                >
-                                    <input
-                                        ref={searchInputRef}
-                                        type="text"
-                                        placeholder="Search leaders..."
-                                        className="w-full px-4 py-2 text-sm border border-gray-200 rounded-l-lg focus:outline-none focus:border-[#44CC44]"
-                                    />
-                                    <button
-                                        type="submit"
-                                        className="px-3 py-2 bg-[#44CC44] text-white rounded-r-lg hover:bg-[#3db83d]"
-                                    >
-                                        <Search className="w-4 h-4" />
-                                    </button>
-                                </form>
+        <>
+            <header
+                className={`
+                    fixed top-0 left-0 right-0 z-50 transition-all duration-300
+                    ${scrolled
+                        ? 'bg-navy-950/75 backdrop-blur-2xl border-b border-amber-500/15 shadow-[0_12px_40px_rgba(0,0,0,0.35)]'
+                        : 'bg-transparent border-b border-transparent'}
+                `}
+            >
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-18 lg:h-20">
+                        <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
+                            <div className="
+                                w-10 h-10 rounded-[10px]
+                                bg-[linear-gradient(135deg,rgba(201,146,42,0.22),rgba(110,91,211,0.22))]
+                                border border-amber-500/30
+                                flex items-center justify-center
+                                font-display text-amber-300 text-xl font-bold leading-none
+                                shadow-[0_0_30px_rgba(201,146,42,0.12)]
+                                group-hover:border-amber-300 group-hover:shadow-[0_0_40px_rgba(201,146,42,0.2)]
+                                transition-all duration-200
+                            ">
+                                B
                             </div>
-                            {/* Search toggle button - always visible */}
+                            <div className="hidden sm:flex flex-col gap-0.5">
+                                <span className="font-display text-cream text-[13px] font-semibold tracking-[0.08em] uppercase leading-none">
+                                    Bodo Research Memorial
+                                </span>
+                                <span className="text-[9px] tracking-[0.3em] uppercase text-cream/35 leading-none">
+                                    Digital Heritage Archive
+                                </span>
+                            </div>
+                        </Link>
+
+                        <nav className="hidden lg:flex items-center gap-1 glass-panel px-2 py-1">
+                            {NAV_LINKS.map((link) =>
+                                link.children ? (
+                                    <div key={link.label} className="relative group">
+                                        <button
+                                            className={`
+                                                flex items-center gap-1 px-3 py-2 rounded-md text-[11px] font-medium uppercase
+                                                tracking-[0.22em] transition-colors duration-150
+                                                ${isActive(link.href)
+                                                    ? 'text-amber-300'
+                                                    : 'text-cream/45 hover:text-cream/85'}
+                                            `}
+                                            onMouseEnter={() => setDropdown(link.label)}
+                                            onMouseLeave={() => setDropdown(null)}
+                                        >
+                                            {link.label}
+                                            <ChevronDown size={11} className="opacity-60 group-hover:opacity-100 transition-transform group-hover:rotate-180 duration-200" />
+                                        </button>
+
+                                        <div
+                                            className={`
+                                                absolute top-full left-0 mt-1 w-44
+                                                bg-navy-950/95 border border-amber-500/20 rounded-xl overflow-hidden shadow-card-hover backdrop-blur-xl
+                                                transition-all duration-150 origin-top
+                                                ${dropdown === link.label
+                                                    ? 'opacity-100 scale-y-100 pointer-events-auto'
+                                                    : 'opacity-0 scale-y-95 pointer-events-none'}
+                                            `}
+                                            onMouseEnter={() => setDropdown(link.label)}
+                                            onMouseLeave={() => setDropdown(null)}
+                                        >
+                                            {link.children.map((child) => (
+                                                <Link
+                                                    key={child.href}
+                                                    href={child.href}
+                                                    className="
+                                                        block px-4 py-2.5 text-[11px] text-cream/60
+                                                        hover:text-cream hover:bg-amber-500/10
+                                                        border-b border-subtle last:border-0
+                                                        transition-colors duration-100 tracking-[0.04em]
+                                                    "
+                                                >
+                                                    {child.label}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <Link
+                                        key={link.label}
+                                        href={link.href}
+                                        className={`
+                                            px-3 py-2 rounded-md text-[11px] font-medium uppercase tracking-[0.22em]
+                                            transition-colors duration-150
+                                            ${isActive(link.href)
+                                                ? 'text-amber-300'
+                                                : 'text-cream/45 hover:text-cream/80'}
+                                        `}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                )
+                            )}
+                        </nav>
+
+                        <div className="flex items-center gap-2">
                             <button
-                                id="search-toggle-btn"
-                                className="p-2 text-gray-600 hover:text-[#44CC44] hover:bg-gray-100 rounded-lg transition-colors"
-                                title="Search"
-                                type="button"
+                                className="
+                                    flex items-center gap-2 px-3 py-1.5 rounded-md
+                                    border border-cream/10 bg-white/5 text-cream/35 text-[11px] tracking-[0.18em]
+                                    hover:border-amber-500/30 hover:text-cream/75
+                                    transition-all duration-150 hidden md:flex
+                                "
                             >
-                                <Search className="w-5 h-5" />
+                                <Search size={11} />
+                                <span>Search archive...</span>
+                                <kbd className="text-[9px] px-1.5 py-0.5 border border-cream/10 rounded font-mono text-cream/20 bg-black/20">
+                                    ⌘K
+                                </kbd>
+                            </button>
+
+                            <Link
+                                href="/tribute"
+                                className="
+                                    hidden lg:block px-4 py-1.5 rounded-md
+                                    bg-[linear-gradient(135deg,rgba(201,146,42,0.2),rgba(110,91,211,0.18))] text-amber-200 border border-amber-500/25
+                                    text-[11px] font-semibold tracking-[0.26em] uppercase
+                                    hover:bg-[linear-gradient(135deg,rgba(201,146,42,0.28),rgba(110,91,211,0.26))] hover:border-amber-400/60
+                                    transition-all duration-150
+                                "
+                            >
+                                Tribute
+                            </Link>
+
+                            <button
+                                onClick={() => setMenuOpen((p) => !p)}
+                                className="lg:hidden p-2 text-cream/50 hover:text-cream"
+                                aria-label="Toggle menu"
+                            >
+                                {menuOpen ? <X size={18} /> : <Menu size={18} />}
                             </button>
                         </div>
-
-                        {/* Mobile Menu Toggle - static classNames */}
-                        <button
-                            id="mobile-menu-btn"
-                            className="lg:hidden p-2 text-gray-700 hover:text-[#44CC44] hover:bg-gray-100 rounded-lg transition-colors"
-                            aria-label="Toggle menu"
-                            type="button"
-                        >
-                            <Menu className="w-6 h-6" />
-                        </button>
                     </div>
                 </div>
-            </div>
 
-            {/* Mobile Navigation - initially hidden */}
-            <div id="mobile-menu" className="hidden lg:hidden bg-white border-t border-gray-200">
-                <div className="max-w-7xl mx-auto px-4 py-4 space-y-1 max-h-[80vh] overflow-y-auto">
-                    {navStructure.map((item, index) => (
-                        <a
-                            key={index}
-                            href={item.href}
-                            className="block px-3 py-2 text-sm text-gray-600 hover:text-[#44CC44] hover:bg-gray-50 transition-colors"
-                        >
-                            {item.label}
-                        </a>
-                    ))}
+                {scrolled && <div className="h-px bg-gold-line opacity-60" />}
+            </header>
+
+            {menuOpen && (
+                <div className="
+                    fixed inset-0 z-40 lg:hidden
+                    bg-navy-950/96 backdrop-blur-2xl
+                    flex flex-col pt-20 px-6 pb-8
+                ">
+                    <nav className="flex flex-col gap-1 glass-panel p-4">
+                        {NAV_LINKS.map((link) => (
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                onClick={() => setMenuOpen(false)}
+                                className={`
+                                    py-3 border-b border-cream/10 text-[14px] font-medium uppercase
+                                    tracking-[0.22em] transition-colors duration-100
+                                    ${isActive(link.href) ? 'text-amber-300' : 'text-cream/55'}
+                                `}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </nav>
+                    <Link
+                        href="/tribute"
+                        className="
+                            mt-6 py-3 text-center rounded-lg
+                            bg-[linear-gradient(135deg,rgba(201,146,42,0.2),rgba(110,91,211,0.18))] text-amber-200 border border-amber-500/30
+                            text-[12px] font-semibold tracking-[0.28em] uppercase
+                        "
+                    >
+                        Pay Tribute
+                    </Link>
                 </div>
-            </div>
-        </header>
+            )}
+        </>
     );
 }

@@ -1,5 +1,7 @@
 import { Leader } from '@/types';
 
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://bodo-research-memorial.org';
+
 export function LeaderJsonLd({ leader }: { leader: Leader }) {
   const schema = {
     '@context': 'https://schema.org',
@@ -14,10 +16,17 @@ export function LeaderJsonLd({ leader }: { leader: Leader }) {
       name: leader.birthPlace,
       containedInPlace: { '@type': 'State', name: 'Assam, India' },
     },
+    deathPlace: leader.deathPlace
+      ? {
+          '@type': 'Place',
+          name: leader.deathPlace,
+          containedInPlace: { '@type': 'State', name: 'Assam, India' },
+        }
+      : undefined,
     nationality: { '@type': 'Country', name: 'India' },
     knowsAbout: leader.movement,
     image: leader.imageUrl,
-    url: `https://bodo-research-memorial.vercel.app/leaders/${leader.id}`,
+    url: `${BASE_URL}/leaders/${leader.id}`,
   };
 
   return (

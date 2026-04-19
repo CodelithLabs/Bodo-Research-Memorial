@@ -10,17 +10,13 @@ import jwt from 'jsonwebtoken';
 import { NextRequest, NextResponse } from 'next/server';
 import { IUser } from '@/models';
 
-const JWT_SECRET = process.env.JWT_SECRET ?? process.env.NEXTAUTH_SECRET;
+const JWT_SECRET_VALUE: string = process.env.JWT_SECRET ?? '';
 
-if (!JWT_SECRET) {
+if (!JWT_SECRET_VALUE) {
     throw new Error(
-        '[auth] JWT_SECRET environment variable is not set. ' +
-        'Application cannot start without it. ' +
-        'Set it in .env.local or your deployment provider.'
+        'JWT_SECRET environment variable is not set'
     );
 }
-
-const JWT_SECRET_VALUE = JWT_SECRET as string;
 
 const TOKEN_EXPIRY = '7d'; // 7 days
 

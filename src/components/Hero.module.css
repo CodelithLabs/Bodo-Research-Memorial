@@ -1,116 +1,21 @@
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
-    overflow: hidden;
-    padding: 6rem 0 4rem;
+    padding: 5rem 0 4rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(227, 225, 240, 0.8);
 }
 
-/* Background Effects */
-.backgroundPattern {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.gridOverlay {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-}
-
-.gradientOrbs {
-    position: absolute;
-    inset: 0;
-}
-
-.orb1 {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    top: -200px;
-    right: -100px;
-    background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
-    filter: blur(60px);
-    animation: float 8s ease-in-out infinite;
-}
-
-.orb2 {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    bottom: -150px;
-    left: -100px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, transparent 70%);
-    filter: blur(60px);
-    animation: float 10s ease-in-out infinite reverse;
-}
-
-.orb3 {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    top: 40%;
-    left: 30%;
-    background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 70%);
-    filter: blur(40px);
-    animation: float 12s ease-in-out infinite;
-}
-
-/* Floating Particles */
-.floatingParticles {
-    position: absolute;
-    inset: 0;
-}
-
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(6, 182, 212, 0.6);
-    border-radius: 50%;
-    animation: particle-float 5s ease-in-out infinite;
-}
-
-@keyframes particle-float {
-
-    0%,
-    100% {
-        opacity: 0;
-        transform: translateY(0) scale(0.5);
-    }
-
-    10% {
-        opacity: 1;
-    }
-
-    90% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateY(-100px) scale(1);
-    }
-}
-
-/* Container */
 .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
     align-items: center;
-    position: relative;
-    z-index: 1;
 }
 
 @media (max-width: 1024px) {
@@ -120,9 +25,8 @@
     }
 }
 
-/* Content */
 .content {
-    max-width: 600px;
+    max-width: 560px;
 }
 
 @media (max-width: 1024px) {
@@ -132,68 +36,53 @@
     }
 }
 
-/* Badge */
 .badge {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
     padding: 0.5rem 1rem;
-    background: rgba(6, 182, 212, 0.1);
-    border: 1px solid rgba(6, 182, 212, 0.3);
-    border-radius: 2rem;
+    background: rgba(143, 128, 255, 0.12);
+    border: 1px solid rgba(143, 128, 255, 0.35);
+    border-radius: 999px;
     font-size: 0.875rem;
-    color: #22d3ee;
+    color: #6f5bd3;
     margin-bottom: 1.5rem;
-    backdrop-filter: blur(10px);
-}
-
-.badgeIcon {
-    width: 16px;
-    height: 16px;
 }
 
 .badgeDivider {
     opacity: 0.5;
 }
 
-/* Title */
 .title {
-    font-family: 'Orbitron', 'Rajdhani', sans-serif;
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.02em;
-    color: #f0f9ff;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: #1f2933;
 }
 
 @media (max-width: 768px) {
     .title {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
     }
 }
 
 .highlight {
-    background: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #6f5bd3;
     display: block;
 }
 
-/* Description */
 .description {
-    font-size: 1.125rem;
-    line-height: 1.75;
-    color: #94a3b8;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #4b5563;
     margin-bottom: 2rem;
 }
 
-/* Actions */
 .actions {
     display: flex;
     gap: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
 }
 
 @media (max-width: 1024px) {
@@ -213,33 +102,15 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
-    background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+    background: #6f5bd3;
     color: white;
     font-weight: 600;
     border-radius: 0.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.primaryButton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.primaryButton:hover::before {
-    left: 100%;
+    transition: background 0.2s ease;
 }
 
 .primaryButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(6, 182, 212, 0.4);
+    background: #5946b8;
 }
 
 .secondaryButton {
@@ -248,28 +119,25 @@
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
     background: transparent;
-    color: #22d3ee;
+    color: #6f5bd3;
     font-weight: 600;
-    border: 2px solid rgba(6, 182, 212, 0.5);
+    border: 1px solid #cbd5e1;
     border-radius: 0.5rem;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .secondaryButton:hover {
-    background: rgba(6, 182, 212, 0.1);
-    border-color: #22d3ee;
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+    border-color: #6f5bd3;
+    color: #5946b8;
 }
 
-/* Stats */
 .stats {
     display: flex;
-    gap: 2rem;
-    padding: 1.5rem;
-    background: rgba(17, 24, 39, 0.6);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
+    gap: 1.5rem;
+    padding: 1.25rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
 }
 
 @media (max-width: 1024px) {
@@ -285,31 +153,6 @@
     }
 }
 
-/* Hero image credit link */
-.heroImageLink {
-    position: absolute;
-    top: 20%;
-    right: 10%;
-    width: 160px;
-    height: 160px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 12px;
-    overflow: hidden;
-    z-index: 2;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.heroImageLink:hover {
-    transform: scale(1.05);
-}
-
-.heroImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .stat {
     display: flex;
     align-items: center;
@@ -317,20 +160,20 @@
 }
 
 .statIconWrapper {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.2));
-    border-radius: 0.75rem;
-    border: 1px solid rgba(6, 182, 212, 0.3);
+    background: rgba(143, 128, 255, 0.12);
+    border-radius: 0.6rem;
+    border: 1px solid rgba(143, 128, 255, 0.25);
 }
 
 .statIcon {
-    width: 24px;
-    height: 24px;
-    color: #22d3ee;
+    width: 22px;
+    height: 22px;
+    color: #6f5bd3;
 }
 
 .statContent {
@@ -339,24 +182,23 @@
 }
 
 .statNumber {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    color: #f0f9ff;
+    color: #1f2933;
     line-height: 1;
 }
 
 .statLabel {
     font-size: 0.75rem;
-    color: #64748b;
+    color: #6b7280;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
 .statDivider {
     width: 1px;
-    height: 40px;
-    background: linear-gradient(180deg, transparent, rgba(6, 182, 212, 0.5), transparent);
+    height: 36px;
+    background: #e2e8f0;
 }
 
 @media (max-width: 640px) {
@@ -365,11 +207,8 @@
     }
 }
 
-/* Visual */
 .visual {
-    position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
@@ -379,120 +218,25 @@
     }
 }
 
-.imageContainer {
-    position: relative;
-    width: 450px;
-    height: 450px;
+.imageCard {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    width: 360px;
 }
 
-/* Glowing Ring */
-.glowingRing {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg, #06b6d4, #8b5cf6, #ec4899, #06b6d4);
-    animation: rotate 10s linear infinite;
-    filter: blur(2px);
-    opacity: 0.6;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.glowingRing::before {
-    content: '';
-    position: absolute;
-    inset: 15px;
-    background: #0a0e17;
-    border-radius: 50%;
-}
-
-/* Central Emblem */
-.centralEmblem {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 250px;
-    height: 250px;
-}
-
-.emblemSvg {
+.heroImage {
     width: 100%;
-    height: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
 }
 
-.ring1 {
-    animation: rotate 20s linear infinite reverse;
-}
-
-.ring2 {
-    animation: rotate 15s linear infinite;
-}
-
-.ring3 {
-    animation: rotate 10s linear infinite reverse;
-}
-
-/* Floating Cards */
-.floatingCard1 {
-    position: absolute;
-    top: 10%;
-    right: -20px;
-    padding: 1rem 1.5rem;
-    background: rgba(17, 24, 39, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(6, 182, 212, 0.3);
-    border-radius: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.floatingCard2 {
-    position: absolute;
-    bottom: 20%;
-    left: -30px;
-    padding: 1rem 1.5rem;
-    background: rgba(17, 24, 39, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    border-radius: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.cardText {
-    font-family: 'Noto Sans Devanagari', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #f0f9ff;
-}
-
-.cardSubtext {
-    font-size: 0.75rem;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-/* Animations */
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-20px);
-    }
+.imageCaption {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    color: #4b5563;
+    border-top: 1px solid #e2e8f0;
 }

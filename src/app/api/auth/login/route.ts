@@ -8,8 +8,9 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { connectDB, User } from '@/models';
+import { connectDB, User, AuditLog } from '@/models';
 import { generateToken } from '@/lib/auth';
+import { validateCsrfToken } from '@/lib/csrf';
 
 // Validation schema
 const loginSchema = z.object({
@@ -27,7 +28,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
         // Parse and validate request body
         const body = await request.json();
-        const validatedData = loginSchema.parse(body);
+        const { csrfToken, ...payload } = body;
+
+        const csrfValid = await validateCsrfToken(csrfToken);
+        if (!csrfValid) {
+            return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
+        }
+
+        const validatedData = loginSchema.parse(payload);
 
         // Find user by email (include password for comparison)
         const user = await User.findOne({ email: validatedData.email.toLowerCase() }).select('+password');
@@ -63,6 +71,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
         // Generate JWT token
         const token = generateToken(user);
+
+        if (user.role === 'admin') {
+            const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+                ?? request.headers.get('x-real-ip')
+                ?? 'unknown';
+
+            await AuditLog.create({
+                action: 'admin_login',
+                performedBy: user._id,
+                targetId: user._id.toString(),
+                ip,
+            });
+        }
 
         return NextResponse.json({
             message: 'Login successful',

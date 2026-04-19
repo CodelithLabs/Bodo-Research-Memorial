@@ -11,10 +11,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
+import { getServerSession } from 'next-auth';
 import slugify from 'slugify';
 import { connectDB, ArchiveItem } from '@/models';
 import { withAuth } from '@/lib/auth';
 import { getArchiveItems, getArchiveItem } from '@/data/archive';
+import { authOptions } from '@/lib/auth-options';
+import { validateCsrfToken } from '@/lib/csrf';
 
 // Validation schema for creating archive item
 const createArchiveItemSchema = z.object({
@@ -182,10 +185,28 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
  */
 async function createArchiveItem(request: NextRequest, _user: jwt.JwtPayload): Promise<NextResponse> {
     try {
-        await connectDB();
+        const session = await getServerSession(authOptions);
+        const role = (session?.user as { role?: string })?.role;
+
+        if (!session) {
+            return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+        }
+
+        if (role !== 'admin' && role !== 'editor') {
+            return NextResponse.json({ error: 'Insufficient permissions' }, { status: 403 });
+        }
 
         const body = await request.json();
-        const validatedData = createArchiveItemSchema.parse(body);
+        const { csrfToken, ...payload } = body;
+
+        const csrfValid = await validateCsrfToken(csrfToken);
+        if (!csrfValid) {
+            return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
+        }
+
+        await connectDB();
+
+        const validatedData = createArchiveItemSchema.parse(payload);
 
         // Generate unique slug
         const baseSlug = slugify(validatedData.title, { lower: true });

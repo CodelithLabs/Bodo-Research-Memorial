@@ -22,11 +22,11 @@ interface GraphRelationship {
 type EntityType = 'leader' | 'movement' | 'organization' | 'event' | 'topic';
 
 const TYPE_COLORS: Record<EntityType, string> = {
-    leader: '#8B5CF6',     // Purple
-    movement: '#44CC44',  // Green
-    organization: '#3B82F6', // Blue
-    event: '#F59E0B',      // Amber
-    topic: '#EC4899'       // Pink
+    leader: '#2F6F5F',
+    movement: '#1F3B33',
+    organization: '#3B82F6',
+    event: '#A8841F',
+    topic: '#8A4A4A'
 };
 
 const TYPE_ICONS: Record<EntityType, typeof Users> = {
@@ -113,19 +113,19 @@ export default function KnowledgeGraphPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#FFFFF0]">
+        <div className="min-h-screen bg-ivory">
             <Header />
 
             {/* Hero Section */}
-            <section className="bg-gradient-to-r from-[#44CC44] to-[#2d8f2d] py-16">
+            <section className="bg-white border-b border-divider py-16">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center gap-4 mb-4">
-                        <Network className="w-12 h-12 text-white" />
-                        <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">
+                        <Network className="w-12 h-12 text-parrot" />
+                        <h1 className="text-4xl md:text-5xl font-serif font-bold text-text-primary">
                             Knowledge Graph
                         </h1>
                     </div>
-                    <p className="text-xl text-white/90 max-w-2xl">
+                    <p className="text-lg text-text-secondary max-w-2xl">
                         Explore the interconnected relationships between Bodo leaders, movements,
                         organizations, events, and cultural topics.
                     </p>
@@ -133,7 +133,7 @@ export default function KnowledgeGraphPage() {
             </section>
 
             {/* Controls */}
-            <section className="bg-white shadow-md sticky top-16 z-30">
+            <section className="bg-white border-b border-divider sticky top-16 z-30">
                 <div className="container mx-auto px-4 py-3">
                     <div className="flex flex-wrap items-center justify-between gap-4">
                         {/* Type Filters */}
@@ -147,7 +147,7 @@ export default function KnowledgeGraphPage() {
                                         onClick={() => toggleType(type)}
                                         className={`px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-2 transition-colors ${isActive
                                             ? 'text-white'
-                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                            : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                                             }`}
                                         style={{
                                             backgroundColor: isActive ? TYPE_COLORS[type] : undefined
@@ -164,7 +164,7 @@ export default function KnowledgeGraphPage() {
                         <div className="flex items-center gap-2">
                             <button
                                 onClick={handleZoomOut}
-                                className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+                                className="p-2 bg-slate-100 rounded-lg hover:bg-slate-200"
                                 title="Zoom Out"
                             >
                                 <ZoomOut className="w-5 h-5" />
@@ -174,14 +174,14 @@ export default function KnowledgeGraphPage() {
                             </span>
                             <button
                                 onClick={handleZoomIn}
-                                className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+                                className="p-2 bg-slate-100 rounded-lg hover:bg-slate-200"
                                 title="Zoom In"
                             >
                                 <ZoomIn className="w-5 h-5" />
                             </button>
                             <button
                                 onClick={handleReset}
-                                className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200"
+                                className="p-2 bg-slate-100 rounded-lg hover:bg-slate-200"
                                 title="Reset View"
                             >
                                 <Maximize2 className="w-5 h-5" />
@@ -199,11 +199,11 @@ export default function KnowledgeGraphPage() {
                         <div className="lg:col-span-3">
                             <div
                                 ref={canvasRef}
-                                className="relative bg-white rounded-xl shadow-lg overflow-hidden h-[600px]"
+                                className="relative bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden h-[600px]"
                             >
                                 {loading ? (
                                     <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#44CC44]"></div>
+                                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-parrot"></div>
                                     </div>
                                 ) : filteredNodes.length === 0 ? (
                                     <div className="absolute inset-0 flex items-center justify-center text-gray-500">

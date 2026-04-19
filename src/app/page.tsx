@@ -3,13 +3,13 @@ import { leaders } from '@/data/leaders';
 import HomeLeaderArchiveClient from './HomeLeaderArchiveClient';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://bodo-research-memorial.org'),
-  title: 'Bodo Research Memorial – Bodo Leaders Archive',
-  description: 'A digital research platform preserving verified biographies and sources for Bodo leaders who sacrificed their lives for the Motherland.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'https://bodo-research-memorial.org'),
+  title: 'Bodo Research Memorial',
+  description: 'A digital scholarly archive documenting the history, leadership, culture, and movements of the Bodo people of Northeast India.',
   openGraph: {
     title: 'Bodo Research Memorial',
-    description: 'Explore verified biographies and sources on Bodo leaders who sacrificed for the Motherland.',
-    url: 'https://bodo-research-memorial.org',
+    description: 'Explore the Bodo archive through verified biographies, source material, and editorial knowledge systems.',
+    url: process.env.NEXT_PUBLIC_APP_URL ?? 'https://bodo-research-memorial.org',
     type: 'website',
     images: [
       {

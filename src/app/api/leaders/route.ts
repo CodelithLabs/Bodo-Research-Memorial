@@ -9,9 +9,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
+import { getServerSession } from 'next-auth';
 import slugify from 'slugify';
 import { connectDB, Leader } from '@/models';
 import { withAuth } from '@/lib/auth';
+import { validateCsrfToken } from '@/lib/csrf';
+import { authOptions } from '@/lib/auth-options';
 
 // Validation schema for creating leader
 const createLeaderSchema = z.object({
@@ -109,10 +112,28 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
  */
 async function createLeader(request: NextRequest, user: jwt.JwtPayload): Promise<NextResponse> {
     try {
-        await connectDB();
+        const session = await getServerSession(authOptions);
+        const role = (session?.user as { role?: string })?.role;
+
+        if (!session) {
+            return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+        }
+
+        if (role !== 'admin' && role !== 'editor') {
+            return NextResponse.json({ error: 'Insufficient permissions' }, { status: 403 });
+        }
 
         const body = await request.json();
-        const validatedData = createLeaderSchema.parse(body);
+        const { csrfToken, ...payload } = body;
+
+        const csrfValid = await validateCsrfToken(csrfToken);
+        if (!csrfValid) {
+            return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
+        }
+
+        await connectDB();
+
+        const validatedData = createLeaderSchema.parse(payload);
 
         // Generate unique slug
         const baseSlug = slugify(validatedData.name, { lower: true });

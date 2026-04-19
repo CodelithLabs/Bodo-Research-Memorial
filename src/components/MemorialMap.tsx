@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import Link from 'next/link';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { useSearchParams } from 'next/navigation';
 import L from 'leaflet';
@@ -103,14 +102,6 @@ export default function MemorialMap() {
 
             markerRefs.current = {};
 
-            const escapeHtml = (value: string) =>
-                value
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#039;');
-
             leaders.forEach((leader) => {
                 const lat = leader.location?.latitude;
                 const lng = leader.location?.longitude;
@@ -169,7 +160,7 @@ export default function MemorialMap() {
                     {error}
                 </div>
             )}
-            <div className="rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+            <div className="rounded-xl overflow-hidden glass-panel">
                 <MapContainer center={mapCenter} zoom={7} className="h-[520px] w-full">
                     <TileLayer
                         attribution={

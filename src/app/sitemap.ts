@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
-import { connectDB, Leader, Article, HistoricalEvent } from '@/models';
+import { connectDB, Leader } from '@/models';
 import { getAllLeaders } from '@/data/leaders';
 import { ALL_CULTURE_ARTICLES } from '@/data/culture';
+import { ALL_RELIGION_ARTICLES } from '@/data/religion';
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://bodo-research.org';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://bodo-research-memorial.org';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Try to fetch from DB, fallback to static URLs if DB unavailable
@@ -15,12 +16,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         // Fetch published leaders
         const leaders = await Leader.find({ status: 'published' }).select('slug updatedAt').lean();
 
-        // Fetch published articles  
-        const articles = await Article.find({ status: 'published' }).select('slug updatedAt').lean();
-
-        // Fetch published events
-        const events = await HistoricalEvent.find({ status: 'published' }).select('slug updatedAt').lean();
-
         // Convert to sitemap entries
         dynamicUrls = [
             ...leaders.map((leader) => ({
@@ -29,18 +24,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                 changeFrequency: 'weekly' as const,
                 priority: 0.8,
             })),
-            ...articles.map((article) => ({
-                url: `${BASE_URL}/articles/${article.slug}`,
-                lastModified: article.updatedAt ? new Date(article.updatedAt as unknown as string) : new Date(),
-                changeFrequency: 'monthly' as const,
-                priority: 0.7,
-            })),
-            ...events.map((event) => ({
-                url: `${BASE_URL}/events/${event.slug}`,
-                lastModified: event.updatedAt ? new Date(event.updatedAt as unknown as string) : new Date(),
-                changeFrequency: 'yearly' as const,
-                priority: 0.6,
-            })),
         ];
     } catch {
         console.log('Could not fetch from database, using static sitemap only');
@@ -48,6 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const staticLeaders = getAllLeaders();
     const staticArticles = ALL_CULTURE_ARTICLES;
+    const staticReligion = ALL_RELIGION_ARTICLES;
 
     const staticLeaderUrls = staticLeaders.map((leader) => ({
         url: `${BASE_URL}/leaders/${leader.id}`,
@@ -57,7 +41,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     const staticArticleUrls = staticArticles.map((article) => ({
-        url: `${BASE_URL}/culture/${article.category}/${article.id}`,
+        url: `${BASE_URL}/culture/${article.slug}`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+    }));
+
+    const staticReligionUrls = staticReligion.map((article) => ({
+        url: `${BASE_URL}/religion/${article.slug}`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
@@ -88,6 +79,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: new Date().toISOString(),
             changeFrequency: 'weekly',
             priority: 0.8,
+        },
+        {
+            url: `${BASE_URL}/culture/festivals`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
         },
         {
             url: `${BASE_URL}/religion`,
@@ -132,12 +129,66 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.7,
         },
         {
+            url: `${BASE_URL}/research/papers`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${BASE_URL}/research/submit`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'yearly',
+            priority: 0.5,
+        },
+        {
+            url: `${BASE_URL}/knowledge-graph`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${BASE_URL}/map`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${BASE_URL}/tribute`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${BASE_URL}/search`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
+        {
             url: `${BASE_URL}/contact`,
             lastModified: new Date().toISOString(),
             changeFrequency: 'yearly',
             priority: 0.5,
         },
+        {
+            url: `${BASE_URL}/privacy`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'yearly',
+            priority: 0.4,
+        },
+        {
+            url: `${BASE_URL}/terms`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: 'yearly',
+            priority: 0.4,
+        },
     ];
 
-    return [...staticUrls, ...staticLeaderUrls, ...staticArticleUrls, ...dynamicUrls];
+    return [
+        ...staticUrls,
+        ...staticLeaderUrls,
+        ...staticArticleUrls,
+        ...staticReligionUrls,
+        ...dynamicUrls,
+    ];
 }

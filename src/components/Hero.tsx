@@ -1,234 +1,187 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Heart, BookOpen, Sparkles } from 'lucide-react';
-import styles from './Hero.module.css';
-import RemoteImage from '@/components/RemoteImage';
+import { motion } from 'framer-motion';
+import { ArrowUpRight, Radar, Satellite, Sparkles, Orbit } from 'lucide-react';
 
-// Bodo language translations
-const translations = {
-    welcome: "नमा (Nama)",
-    subtitle: "Digital Research Platform",
-    title: "Honoring Bodo Leaders",
-    titleHighlight: "Who Sacrificed for the Motherland",
-    description: "A focused research portal dedicated to preserving verified biographies, primary sources, and community memory of Bodo leaders who gave their lives for the Motherland.",
-    exploreBtn: "Explore Archives",
-    contributeBtn: "Contribute",
-    statsLeaders: "Honored Leaders",
-    statsYears: "Years of Heritage",
-    statsDocuments: "Documents",
-    statsCommunity: "Community Members",
+const STATS = [
+    { value: '148', label: 'Leaders Documented' },
+    { value: '2,400+', label: 'Archive Items' },
+    { value: '320', label: 'Research Papers' },
+    { value: '19', label: 'Cultural Topics' },
+];
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: { delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    }),
 };
-
-// Pre-computed particle positions for better performance (reduced from 20 to 8)
-const particlePositions = Array.from({ length: 8 }, (_, i) => ({
-    left: `${(i * 12.5) % 100}%`,
-    top: `${(i * 20) % 100}%`,
-    delay: `${i * 0.5}s`,
-    duration: `${4 + (i % 3)}s`
-}));
 
 export default function Hero() {
     return (
-        <section className={styles.hero}>
-            {/* Optimized background - reduced particles from 20 to 8 */}
-            <div className={styles.backgroundPattern}>
-                <div className={styles.gridOverlay}></div>
-                <div className={styles.gradientOrbs}>
-                    <div className={styles.orb1}></div>
-                    <div className={styles.orb2}></div>
-                </div>
-                <div className={styles.floatingParticles}>
-                    {particlePositions.map((pos, i) => (
-                        <div
-                            key={i}
-                            className={styles.particle}
-                            style={pos}
-                        />
-                    ))}
-                </div>
+        <section className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden bg-navy-950">
+            <div className="absolute inset-0 bg-hero-radial pointer-events-none" />
+            <div className="absolute inset-0 pointer-events-none opacity-60">
+                <div className="absolute inset-x-0 top-0 h-[1px] bg-[linear-gradient(90deg,transparent,rgba(201,146,42,0.6),rgba(110,91,211,0.7),transparent)]" />
+                <div className="absolute left-[8%] top-[18%] w-72 h-72 rounded-full bg-amber-500/10 blur-3xl animate-pulse" />
+                <div className="absolute right-[10%] top-[14%] w-96 h-96 rounded-full bg-violet-500/10 blur-3xl animate-pulse" style={{ animationDelay: '1.2s' }} />
+                <div className="absolute bottom-[12%] left-[28%] w-80 h-80 rounded-full bg-cyan-400/10 blur-3xl animate-pulse" style={{ animationDelay: '2.4s' }} />
             </div>
 
-            <div className={styles.container}>
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className={styles.content}
-                >
-                    {/* Badge */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className={styles.badge}
-                    >
-                        <Sparkles className={styles.badgeIcon} />
-                        <span>{translations.welcome}</span>
-                        <span className={styles.badgeDivider}>•</span>
-                        <span>{translations.subtitle}</span>
-                    </motion.div>
+            <div
+                className="absolute inset-0 opacity-[0.08] pointer-events-none"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(rgba(201,146,42,0.8) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(201,146,42,0.8) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '72px 72px',
+                }}
+            />
 
-                    {/* Main Title */}
-                    <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className={styles.title}
-                    >
-                        {translations.title}
-                        <span className={styles.highlight}> {translations.titleHighlight}</span>
-                    </motion.h1>
-
-                    {/* Description */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className={styles.description}
-                    >
-                        {translations.description}
-                    </motion.p>
-
-                    {/* CTA Buttons */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 }}
-                        className={styles.actions}
-                    >
-                        <Link href="/leaders" className={styles.primaryButton}>
-                            <span>{translations.exploreBtn}</span>
-                            <ArrowRight size={20} />
-                        </Link>
-                        <Link href="/research/submit" className={styles.secondaryButton}>
-                            <span>{translations.contributeBtn}</span>
-                        </Link>
-                    </motion.div>
-
-                    {/* Stats */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 }}
-                        className={styles.stats}
-                    >
-                        <div className={styles.stat}>
-                            <div className={styles.statIconWrapper}>
-                                <Heart className={styles.statIcon} />
-                            </div>
-                            <div className={styles.statContent}>
-                                <span className={styles.statNumber}>8+</span>
-                                <span className={styles.statLabel}>{translations.statsLeaders}</span>
-                            </div>
-                        </div>
-                        <div className={styles.statDivider}></div>
-                        <div className={styles.stat}>
-                            <div className={styles.statIconWrapper}>
-                                <BookOpen className={styles.statIcon} />
-                            </div>
-                            <div className={styles.statContent}>
-                                <span className={styles.statNumber}>50+</span>
-                                <span className={styles.statLabel}>{translations.statsYears}</span>
-                            </div>
-                        </div>
-                        <div className={styles.statDivider}></div>
-                        <div className={styles.stat}>
-                            <div className={styles.statIconWrapper}>
-                                <Sparkles className={styles.statIcon} />
-                            </div>
-                            <div className={styles.statContent}>
-                                <span className={styles.statNumber}>500+</span>
-                                <span className={styles.statLabel}>{translations.statsDocuments}</span>
-                            </div>
-                        </div>
-                    </motion.div>
-                </motion.div>
-
-                {/* Hero Visual */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    className={styles.visual}
-                >
-                    <div className={styles.imageContainer}>
-                        {/* External image credit example */}
-                        <a
-                            href="https://unsplash.com/photos/JKUTrJ4vK00"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.heroImageLink}
-                        >
-                            <RemoteImage
-                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80"
-                                alt="Bodo cultural scene (unsplash)"
-                                className={styles.heroImage}
-                            />
-                        </a>
-
-                        {/* Glowing Ring */}
-                        <div className={styles.glowingRing}></div>
-
-                        {/* Central Emblem */}
-                        <div className={styles.centralEmblem}>
-                            <svg viewBox="0 0 200 200" className={styles.emblemSvg}>
-                                {/* Outer Ring */}
-                                <circle cx="100" cy="100" r="90" fill="none" stroke="url(#gradient1)" strokeWidth="2" className={styles.ring1} />
-                                <circle cx="100" cy="100" r="70" fill="none" stroke="url(#gradient2)" strokeWidth="1" className={styles.ring2} />
-                                <circle cx="100" cy="100" r="50" fill="none" stroke="url(#gradient3)" strokeWidth="0.5" className={styles.ring3} />
-
-                                {/* Bodo Symbol */}
-                                <g className={styles.symbolGroup}>
-                                    <circle cx="100" cy="100" r="25" fill="url(#symbolGradient)" />
-                                    <path d="M100 75 L100 125 M75 100 L125 100" stroke="white" strokeWidth="2" opacity="0.5" />
-                                    <circle cx="100" cy="100" r="10" fill="none" stroke="white" strokeWidth="1" opacity="0.7" />
-                                </g>
-
-                                {/* Gradients */}
-                                <defs>
-                                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#0F3D2E" />
-                                        <stop offset="50%" stopColor="#43655F" />
-                                        <stop offset="100%" stopColor="#C9A227" />
-                                    </linearGradient>
-                                    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#0F3D2E" stopOpacity="0.6" />
-                                        <stop offset="100%" stopColor="#C9A227" stopOpacity="0.6" />
-                                    </linearGradient>
-                                    <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#C9A227" stopOpacity="0.4" />
-                                        <stop offset="100%" stopColor="#0F3D2E" stopOpacity="0.4" />
-                                    </linearGradient>
-                                    <radialGradient id="symbolGradient" cx="50%" cy="50%" r="50%">
-                                        <stop offset="0%" stopColor="#C9A227" />
-                                        <stop offset="100%" stopColor="#0F3D2E" />
-                                    </radialGradient>
-                                </defs>
-                            </svg>
-                        </div>
-
-                        {/* Floating Cards - Simplified animations */}
+            <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-16">
+                <div className="grid lg:grid-cols-12 gap-10 items-center">
+                    <div className="lg:col-span-7">
                         <motion.div
-                            className={styles.floatingCard1}
-                            animate={{ y: [-10, 10, -10] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                            custom={0}
+                            variants={fadeUp}
+                            initial="hidden"
+                            animate="visible"
+                            className="inline-flex items-center gap-2 mb-6"
                         >
-                            <span className={styles.cardText}>बोरो</span>
-                            <span className={styles.cardSubtext}>Bodo Language</span>
+                            <span className="cyber-pill scanline">
+                                <Sparkles className="w-3 h-3" />
+                                Digital Research Platform
+                            </span>
+                        </motion.div>
+
+                        <motion.h1
+                            custom={1}
+                            variants={fadeUp}
+                            initial="hidden"
+                            animate="visible"
+                            className="hero-title text-5xl md:text-6xl xl:text-8xl mb-6 max-w-4xl"
+                        >
+                            Preserving the
+                            <br />
+                            <span className="text-amber-300 glow-text">Bodo Future</span>
+                        </motion.h1>
+
+                        <motion.p
+                            custom={2}
+                            variants={fadeUp}
+                            initial="hidden"
+                            animate="visible"
+                            className="text-cream/60 text-lg md:text-xl font-light leading-relaxed max-w-2xl mb-10 tracking-[0.02em]"
+                        >
+                            A cinematic archive for the Bodo people, combining scholarship,
+                            memory, data visualization, and editorial governance in one
+                            living knowledge system.
+                        </motion.p>
+
+                        <motion.div
+                            custom={3}
+                            variants={fadeUp}
+                            initial="hidden"
+                            animate="visible"
+                            className="flex flex-wrap gap-3 mb-12"
+                        >
+                            <Link
+                                href="/leaders"
+                                className="
+                                    inline-flex items-center gap-2 px-6 py-3 rounded-full
+                                    bg-[linear-gradient(135deg,rgba(201,146,42,0.98),rgba(110,91,211,0.9))]
+                                    text-navy-950 text-[12px] font-bold tracking-[0.22em] uppercase
+                                    hover:brightness-110 transition-all duration-150
+                                "
+                            >
+                                Explore Leaders
+                                <ArrowUpRight className="w-4 h-4" />
+                            </Link>
+                            <Link
+                                href="/archive"
+                                className="
+                                    inline-flex items-center gap-2 px-6 py-3 rounded-full
+                                    border border-cream/15 bg-white/5 text-cream/75
+                                    text-[12px] font-medium tracking-[0.18em] uppercase
+                                    hover:border-amber-500/35 hover:text-cream transition-all duration-150
+                                "
+                            >
+                                Browse Archive
+                                <Orbit className="w-4 h-4" />
+                            </Link>
                         </motion.div>
 
                         <motion.div
-                            className={styles.floatingCard2}
-                            animate={{ y: [10, -10, 10] }}
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                            custom={4}
+                            variants={fadeUp}
+                            initial="hidden"
+                            animate="visible"
+                            className="flex flex-wrap gap-3"
                         >
-                            <span className={styles.cardText}>Bathou</span>
-                            <span className={styles.cardSubtext}>Religion</span>
+                            {['Searchable', 'Curated', 'Cited', 'Responsive'].map((chip) => (
+                                <span key={chip} className="data-chip">
+                                    {chip}
+                                </span>
+                            ))}
                         </motion.div>
                     </div>
-                </motion.div>
+
+                    <motion.div
+                        custom={5}
+                        variants={fadeUp}
+                        initial="hidden"
+                        animate="visible"
+                        className="lg:col-span-5"
+                    >
+                        <div className="futuristic-shell neon-frame p-5 md:p-6 scanline">
+                            <div className="flex items-center justify-between mb-6">
+                                <div>
+                                    <p className="section-kicker mb-2">Signal Deck</p>
+                                    <h2 className="text-lg font-semibold text-cream">Archive telemetry</h2>
+                                </div>
+                                <Radar className="w-5 h-5 text-amber-300" />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-3 mb-4">
+                                <div className="glass-panel p-4">
+                                    <p className="text-[10px] uppercase tracking-[0.28em] text-cream/35 mb-2">Leaders</p>
+                                    <p className="font-display text-3xl text-cream font-bold">148</p>
+                                </div>
+                                <div className="glass-panel p-4">
+                                    <p className="text-[10px] uppercase tracking-[0.28em] text-cream/35 mb-2">Sources</p>
+                                    <p className="font-display text-3xl text-cream font-bold">2.4k</p>
+                                </div>
+                                <div className="glass-panel p-4">
+                                    <p className="text-[10px] uppercase tracking-[0.28em] text-cream/35 mb-2">Papers</p>
+                                    <p className="font-display text-3xl text-cream font-bold">320</p>
+                                </div>
+                                <div className="glass-panel p-4">
+                                    <p className="text-[10px] uppercase tracking-[0.28em] text-cream/35 mb-2">Topics</p>
+                                    <p className="font-display text-3xl text-cream font-bold">19</p>
+                                </div>
+                            </div>
+
+                            <div className="glass-panel p-4 mb-4 flex items-center gap-3">
+                                <Satellite className="w-10 h-10 text-amber-300" />
+                                <div>
+                                    <p className="text-[10px] uppercase tracking-[0.24em] text-cream/35 mb-1">Live mode</p>
+                                    <p className="text-sm text-cream/75">Editorial, research, and archival workflows online.</p>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-wrap gap-2">
+                                <span className="data-chip">Open Access</span>
+                                <span className="data-chip">SEO Ready</span>
+                                <span className="data-chip">Legally Structured</span>
+                                <span className="data-chip">Future-proof UI</span>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

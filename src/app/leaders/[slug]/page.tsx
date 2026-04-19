@@ -1,9 +1,3 @@
-'use client';
-
-import React, { useState } from 'react';
-
-import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ALL_LEADERS, getLeaderBySlug, getRelatedLeaders } from '@/data/leaders';
@@ -15,9 +9,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-    { params }: { params: { slug: string } }
+    { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
-    const leader = getLeaderBySlug(params.slug);
+    const { slug } = await params;
+    const leader = getLeaderBySlug(slug);
     if (!leader) return {};
     return {
         title: `${leader.name} | Bodo Research Memorial`,
@@ -26,8 +21,9 @@ export async function generateMetadata(
     };
 }
 
-export default function LeaderProfilePage({ params }: { params: { slug: string } }) {
-    const leader = getLeaderBySlug(params.slug);
+export default async function LeaderProfilePage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const leader = getLeaderBySlug(slug);
     if (!leader) notFound();
 
     const relatedLeaders = getRelatedLeaders(leader);

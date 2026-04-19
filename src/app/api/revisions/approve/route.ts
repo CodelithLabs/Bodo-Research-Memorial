@@ -7,10 +7,11 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { connectDB, Leader, LeaderRevision } from '@/models';
+import { connectDB, Leader, LeaderRevision, AuditLog } from '@/models';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth-options';
 import { rateLimitAdmin } from '@/lib/ratelimit';
+import { validateCsrfToken } from '@/lib/csrf';
 
 const approveRevisionSchema = z.object({
     revisionId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
@@ -40,10 +41,17 @@ async function approveRevision(request: NextRequest): Promise<NextResponse> {
             );
         }
 
+        const body = await request.json();
+        const { csrfToken, ...payload } = body;
+
+        const csrfValid = await validateCsrfToken(csrfToken);
+        if (!csrfValid) {
+            return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
+        }
+
         await connectDB();
 
-        const body = await request.json();
-        const validatedData = approveRevisionSchema.parse(body);
+        const validatedData = approveRevisionSchema.parse(payload);
 
         const revision = await LeaderRevision.findById(validatedData.revisionId);
         if (!revision) {
@@ -94,6 +102,14 @@ async function approveRevision(request: NextRequest): Promise<NextResponse> {
 
         revision.status = 'approved';
         await revision.save();
+
+        await AuditLog.create({
+            action: 'approve_revision',
+            performedBy: (session.user as { id?: string })?.id ?? leader._id.toString(),
+            targetId: revision._id.toString(),
+            ip,
+            metadata: { leaderId: leader._id.toString() },
+        });
 
         return NextResponse.json({
             message: 'Revision approved and leader updated',

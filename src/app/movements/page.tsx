@@ -78,40 +78,40 @@ export default function MovementsPage() {
 
     const getStatusColor = (status: string) => {
         switch (status) {
-            case 'active': return 'bg-green-100 text-green-800';
-            case 'achieved': return 'bg-blue-100 text-blue-800';
-            case 'ceased': return 'bg-gray-100 text-gray-800';
-            case 'suspended': return 'bg-yellow-100 text-yellow-800';
+            case 'active': return 'bg-emerald-50 text-emerald-800';
+            case 'achieved': return 'bg-slate-100 text-slate-700';
+            case 'ceased': return 'bg-gray-100 text-gray-700';
+            case 'suspended': return 'bg-amber-50 text-amber-800';
             default: return 'bg-gray-100 text-gray-800';
         }
     };
 
     const getTypeColor = (type: string) => {
         switch (type) {
-            case 'political': return 'bg-purple-100 text-purple-800';
-            case 'social': return 'bg-pink-100 text-pink-800';
-            case 'cultural': return 'bg-indigo-100 text-indigo-800';
-            case 'religious': return 'bg-amber-100 text-amber-800';
-            case 'armed': return 'bg-red-100 text-red-800';
-            case 'diplomatic': return 'bg-cyan-100 text-cyan-800';
+            case 'political': return 'bg-slate-100 text-slate-700';
+            case 'social': return 'bg-emerald-50 text-emerald-800';
+            case 'cultural': return 'bg-blue-50 text-blue-800';
+            case 'religious': return 'bg-amber-50 text-amber-800';
+            case 'armed': return 'bg-rose-50 text-rose-800';
+            case 'diplomatic': return 'bg-indigo-50 text-indigo-800';
             default: return 'bg-gray-100 text-gray-800';
         }
     };
 
     return (
-        <div className="min-h-screen bg-[#FFFFF0]">
+        <div className="min-h-screen bg-ivory">
             <Header />
 
             {/* Hero Section */}
-            <section className="bg-gradient-to-r from-[#44CC44] to-[#2d8f2d] py-16">
+            <section className="bg-white border-b border-divider py-16">
                 <div className="container mx-auto px-4">
                     <div className="flex items-center gap-4 mb-4">
-                        <Flag className="w-12 h-12 text-white" />
-                        <h1 className="text-4xl md:text-5xl font-serif font-bold text-white">
+                        <Flag className="w-12 h-12 text-parrot" />
+                        <h1 className="text-4xl md:text-5xl font-serif font-bold text-text-primary">
                             Bodo Movements
                         </h1>
                     </div>
-                    <p className="text-xl text-white/90 max-w-2xl">
+                    <p className="text-lg text-text-secondary max-w-2xl">
                         Explore the historical and contemporary movements that have shaped Bodo society,
                         politics, and cultural identity.
                     </p>
@@ -119,7 +119,7 @@ export default function MovementsPage() {
             </section>
 
             {/* Filters */}
-            <section className="bg-white shadow-md sticky top-16 z-30">
+            <section className="bg-white border-b border-divider sticky top-16 z-30">
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
                         <form onSubmit={handleSearch} className="flex-1 max-w-xl">
@@ -130,7 +130,7 @@ export default function MovementsPage() {
                                     placeholder="Search movements..."
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#44CC44] focus:border-transparent"
+                                    className="input-academic pl-10 pr-4 py-2"
                                 />
                             </div>
                         </form>
@@ -144,8 +144,8 @@ export default function MovementsPage() {
                                         setPage(1);
                                     }}
                                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${selectedType === type.value
-                                            ? 'bg-[#44CC44] text-white'
-                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                            ? 'bg-parrot text-white'
+                                            : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                                         }`}
                                 >
                                     {type.label}
@@ -185,10 +185,10 @@ export default function MovementsPage() {
                             {movements.map((movement) => (
                                 <div
                                     key={movement.id}
-                                    className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+                                    className="bg-white rounded-lg overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300"
                                 >
-                                    <div className="h-40 bg-gradient-to-br from-[#44CC44] to-[#2d8f2d] flex items-center justify-center">
-                                        <Flag className="w-16 h-16 text-white/80" />
+                                    <div className="h-32 bg-slate-50 flex items-center justify-center border-b border-slate-200">
+                                        <Flag className="w-12 h-12 text-parrot" />
                                     </div>
                                     <div className="p-6">
                                         <div className="flex items-center gap-2 mb-3">
@@ -200,7 +200,7 @@ export default function MovementsPage() {
                                             </span>
                                         </div>
 
-                                        <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-[#44CC44] transition-colors">
+                                        <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-parrot transition-colors">
                                             <Link href={`/movements/${movement.slug}`}>
                                                 {movement.name}
                                             </Link>
@@ -237,7 +237,7 @@ export default function MovementsPage() {
 
                                         <Link
                                             href={`/movements/${movement.slug}`}
-                                            className="inline-flex items-center gap-2 text-[#44CC44] font-medium hover:gap-3 transition-all"
+                                            className="inline-flex items-center gap-2 text-parrot font-medium hover:gap-3 transition-all"
                                         >
                                             Learn More <ArrowRight className="w-4 h-4" />
                                         </Link>

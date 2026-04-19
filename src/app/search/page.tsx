@@ -188,24 +188,24 @@ function SearchContent() {
 
     const getTypeColor = (type: string) => {
         switch (type) {
-            case 'leader': return 'bg-green-100 text-green-700';
-            case 'movement': return 'bg-amber-100 text-amber-700';
-            case 'organization': return 'bg-blue-100 text-blue-700';
-            case 'event': return 'bg-purple-100 text-purple-700';
-            case 'archive': return 'bg-orange-100 text-orange-700';
-            case 'article': return 'bg-cyan-100 text-cyan-700';
+            case 'leader': return 'bg-emerald-50 text-emerald-800';
+            case 'movement': return 'bg-slate-100 text-slate-700';
+            case 'organization': return 'bg-blue-50 text-blue-800';
+            case 'event': return 'bg-indigo-50 text-indigo-800';
+            case 'archive': return 'bg-amber-50 text-amber-800';
+            case 'article': return 'bg-slate-100 text-slate-700';
             default: return 'bg-gray-100 text-gray-700';
         }
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-ivory to-parchment-light">
+        <div className="min-h-screen bg-ivory">
             {/* Hero Section */}
-            <div className="bg-heritage text-white py-16">
+            <div className="bg-white border-b border-divider py-16">
                 <div className="max-w-4xl mx-auto px-4">
-                    <h1 className="text-4xl font-serif font-bold mb-4">Search Results</h1>
-                    <p className="text-heritage-100 mb-8">
-                        Search across leaders, movements, organizations, events, and archive items
+                    <h1 className="text-4xl font-serif font-bold mb-4 text-text-primary">Search Results</h1>
+                    <p className="text-text-secondary mb-8">
+                        Search across leaders, movements, organizations, events, and archive items.
                     </p>
 
                     {/* Search Form */}
@@ -215,13 +215,13 @@ function SearchContent() {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search for leaders, movements, events..."
-                            className="w-full px-6 py-4 pr-14 text-lg rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-heritage-400 shadow-lg"
+                            className="search-input pr-14 text-lg"
                         />
                         <button
                             type="submit"
-                            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-heritage hover:bg-heritage-600 rounded-lg transition-colors"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-parrot text-white rounded-md transition-colors hover:bg-parrot-600"
                         >
-                            <Search className="w-6 h-6 text-white" />
+                            <Search className="w-5 h-5" />
                         </button>
                     </form>
                 </div>

@@ -7,10 +7,11 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { connectDB, LeaderRevision } from '@/models';
+import { connectDB, LeaderRevision, AuditLog } from '@/models';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth-options';
 import { rateLimitAdmin } from '@/lib/ratelimit';
+import { validateCsrfToken } from '@/lib/csrf';
 
 const rejectRevisionSchema = z.object({
     revisionId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
@@ -41,10 +42,17 @@ async function rejectRevision(request: NextRequest): Promise<NextResponse> {
             );
         }
 
+        const body = await request.json();
+        const { csrfToken, ...payload } = body;
+
+        const csrfValid = await validateCsrfToken(csrfToken);
+        if (!csrfValid) {
+            return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
+        }
+
         await connectDB();
 
-        const body = await request.json();
-        const validatedData = rejectRevisionSchema.parse(body);
+        const validatedData = rejectRevisionSchema.parse(payload);
 
         const revision = await LeaderRevision.findById(validatedData.revisionId);
         if (!revision) {
@@ -64,6 +72,14 @@ async function rejectRevision(request: NextRequest): Promise<NextResponse> {
         revision.status = 'rejected';
         revision.notes = validatedData.reviewerNote;
         await revision.save();
+
+        await AuditLog.create({
+            action: 'reject_revision',
+            performedBy: (session.user as { id?: string })?.id ?? revision.editor?.toString(),
+            targetId: revision._id.toString(),
+            ip,
+            metadata: { leaderId: revision.leader?.toString() },
+        });
 
         return NextResponse.json({
             message: 'Revision rejected',

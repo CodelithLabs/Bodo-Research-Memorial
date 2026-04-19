@@ -10,6 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { connectDB, User } from '@/models';
 import { generateToken } from '@/lib/auth';
+import { validateCsrfToken } from '@/lib/csrf';
 
 // Validation schema
 const registerSchema = z.object({
@@ -31,7 +32,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
         // Parse and validate request body
         const body = await request.json();
-        const validatedData = registerSchema.parse(body);
+        const { csrfToken, ...payload } = body;
+
+        const csrfValid = await validateCsrfToken(csrfToken);
+        if (!csrfValid) {
+            return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
+        }
+
+        const validatedData = registerSchema.parse(payload);
 
         // Check if user already exists
         const existingUser = await User.findOne({ email: validatedData.email.toLowerCase() });

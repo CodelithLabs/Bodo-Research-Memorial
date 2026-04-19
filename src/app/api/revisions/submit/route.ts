@@ -8,9 +8,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
+import { getServerSession } from 'next-auth';
 import { connectDB, Leader, LeaderRevision, Source } from '@/models';
 import { withAuth } from '@/lib/auth';
 import { rateLimitRevisions } from '@/lib/ratelimit';
+import { authOptions } from '@/lib/auth-options';
+import { validateCsrfToken } from '@/lib/csrf';
 
 const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format');
 
@@ -35,6 +38,17 @@ const submitRevisionSchema = z.object({
 
 async function submitRevision(request: NextRequest, user: jwt.JwtPayload): Promise<NextResponse> {
     try {
+        const session = await getServerSession(authOptions);
+        const role = (session?.user as { role?: string })?.role;
+
+        if (!session) {
+            return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+        }
+
+        if (role !== 'admin' && role !== 'editor') {
+            return NextResponse.json({ error: 'Insufficient permissions' }, { status: 403 });
+        }
+
         const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
             ?? request.headers.get('x-real-ip')
             ?? 'unknown';
@@ -48,10 +62,17 @@ async function submitRevision(request: NextRequest, user: jwt.JwtPayload): Promi
             );
         }
 
+        const body = await request.json();
+        const { csrfToken, ...payload } = body;
+
+        const csrfValid = await validateCsrfToken(csrfToken);
+        if (!csrfValid) {
+            return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
+        }
+
         await connectDB();
 
-        const body = await request.json();
-        const validatedData = submitRevisionSchema.parse(body);
+        const validatedData = submitRevisionSchema.parse(payload);
 
         const leader = await Leader.findById(validatedData.leaderId);
         if (!leader) {

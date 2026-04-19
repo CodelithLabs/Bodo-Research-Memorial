@@ -36,6 +36,9 @@ export type { IHistoricalEvent } from './HistoricalEvent';
 export { default as ArchiveItem } from './ArchiveItem';
 export type { IArchiveItem } from './ArchiveItem';
 
+export { default as AuditLog } from './AuditLog';
+export type { IAuditLog } from './AuditLog';
+
 /**
  * Database connection helper
  */
