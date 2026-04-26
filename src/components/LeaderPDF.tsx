@@ -33,6 +33,8 @@ export function LeaderPDF({ leader }: { leader: Leader }) {
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           {leader.imageUrl ? (
+            // react-pdf Image doesn't support HTML alt attributes.
+            // eslint-disable-next-line jsx-a11y/alt-text
             <Image src={leader.imageUrl} style={styles.portrait} />
           ) : null}
           <View>

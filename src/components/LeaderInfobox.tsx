@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { MapPin, Calendar, Flag } from 'lucide-react';
 import RemoteImage from '@/components/RemoteImage';
 import { Leader } from '@/types';
@@ -69,9 +70,11 @@ export default function LeaderInfobox({ leader }: { leader: Leader }) {
                     <div className="border border-dashed border-slate-200 rounded-lg p-3 bg-slate-50">
                         <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400 mb-2">Map Thumbnail</p>
                         <Link href={`/map?leader=${leader.id}`} className="block">
-                            <img
+                            <Image
                                 src={staticMapUrl}
                                 alt={`Map of ${leader.name}`}
+                                width={320}
+                                height={128}
                                 className="w-full h-32 object-cover rounded-md border border-slate-200"
                                 loading="lazy"
                             />

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useMemo, useRef, useState } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -209,7 +210,13 @@ export default function LeaderRevisionEditor({
                     </p>
                     {photoUrl && (
                         <div className="mt-4 border border-divider rounded-lg overflow-hidden bg-white">
-                            <img src={photoUrl} alt="Uploaded portrait" className="w-full h-48 object-cover" />
+                            <Image
+                                src={photoUrl}
+                                alt="Uploaded portrait"
+                                width={1200}
+                                height={384}
+                                className="w-full h-48 object-cover"
+                            />
                             <button
                                 type="button"
                                 onClick={() => setPhotoUrl('')}
@@ -265,7 +272,13 @@ export default function LeaderRevisionEditor({
 
                 {mapPreviewUrl && (
                     <div className="mt-4 border border-divider rounded-lg overflow-hidden bg-white">
-                        <img src={mapPreviewUrl} alt="Location preview" className="w-full h-40 object-cover" />
+                        <Image
+                            src={mapPreviewUrl}
+                            alt="Location preview"
+                            width={1200}
+                            height={320}
+                            className="w-full h-40 object-cover"
+                        />
                     </div>
                 )}
 

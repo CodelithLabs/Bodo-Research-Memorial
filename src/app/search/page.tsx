@@ -42,22 +42,24 @@ function SearchContent() {
     // Cache for storing search results
     const searchCache = useMemo(() => new Map<string, SearchResult[]>(), []);
 
-    // Local search data
-    const localData = {
-        leaders: leaders.map(l => ({
+    const localLeaders = useMemo(() => leaders.map(l => ({
             type: 'leader' as const,
             id: l.id,
             title: l.name,
             description: l.biography?.substring(0, 150) + '...' || '',
             url: `/leaders/${l.id}`,
             category: l.title
-        })),
+        })), []);
+
+    // Local search data
+    const localData = useMemo(() => ({
+        leaders: localLeaders,
         movements: [] as SearchResult[],
         organizations: [] as SearchResult[],
         events: [] as SearchResult[],
         archive: [] as SearchResult[],
         articles: [] as SearchResult[]
-    };
+    }), [localLeaders]);
 
     // Search through local data - optimized with early returns
     const searchLocalData = useCallback((searchTerm: string): SearchResult[] => {
@@ -80,7 +82,7 @@ function SearchContent() {
         }
 
         return allResults;
-    }, []);
+    }, [localData.leaders]);
 
     // Memoized search function
     const performSearch = useCallback(async (searchTerm: string) => {

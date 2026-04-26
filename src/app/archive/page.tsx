@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Search, Filter, Image as ImageIcon, FileText, Map, Film, Music, BookOpen, Calendar, MapPin, Eye } from 'lucide-react';
@@ -55,16 +55,13 @@ export default function ArchivePage() {
     const [items, setItems] = useState<ArchiveItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [appliedSearchQuery, setAppliedSearchQuery] = useState('');
     const [selectedType, setSelectedType] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    useEffect(() => {
-        fetchArchiveItems();
-    }, [page, selectedType, selectedCategory]);
-
-    const fetchArchiveItems = async () => {
+    const fetchArchiveItems = useCallback(async () => {
         setLoading(true);
         try {
             const params = new URLSearchParams({
@@ -74,7 +71,7 @@ export default function ArchivePage() {
 
             if (selectedType) params.append('type', selectedType);
             if (selectedCategory !== 'All') params.append('category', selectedCategory);
-            if (searchQuery) params.append('search', searchQuery);
+            if (appliedSearchQuery) params.append('search', appliedSearchQuery);
 
             const response = await fetch(`/api/archive?${params}`);
             const data = await response.json();
@@ -88,12 +85,16 @@ export default function ArchivePage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [page, selectedType, selectedCategory, appliedSearchQuery]);
+
+    useEffect(() => {
+        fetchArchiveItems();
+    }, [fetchArchiveItems]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         setPage(1);
-        fetchArchiveItems();
+        setAppliedSearchQuery(searchQuery.trim());
     };
 
     const getTypeIcon = (type: string) => {

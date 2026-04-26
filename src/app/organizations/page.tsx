@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Building2, Calendar, MapPin, Users, ArrowRight, Search } from 'lucide-react';
 import Header from '@/components/layout/Header';
@@ -48,15 +48,12 @@ export default function OrganizationsPage() {
     const [organizations, setOrganizations] = useState<Organization[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [appliedSearchQuery, setAppliedSearchQuery] = useState('');
     const [selectedType, setSelectedType] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    useEffect(() => {
-        fetchOrganizations();
-    }, [page, selectedType]);
-
-    const fetchOrganizations = async () => {
+    const fetchOrganizations = useCallback(async () => {
         setLoading(true);
         try {
             const params = new URLSearchParams({
@@ -65,7 +62,7 @@ export default function OrganizationsPage() {
             });
 
             if (selectedType) params.append('type', selectedType);
-            if (searchQuery) params.append('search', searchQuery);
+            if (appliedSearchQuery) params.append('search', appliedSearchQuery);
 
             const response = await fetch(`/api/organizations?${params}`);
             const data = await response.json();
@@ -79,12 +76,16 @@ export default function OrganizationsPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [page, selectedType, appliedSearchQuery]);
+
+    useEffect(() => {
+        fetchOrganizations();
+    }, [fetchOrganizations]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         setPage(1);
-        fetchOrganizations();
+        setAppliedSearchQuery(searchQuery.trim());
     };
 
     const getStatusColor = (status: string) => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { Flag, Calendar, Users, MapPin, ArrowRight, Search, Filter } from 'lucide-react';
 import Header from '@/components/layout/Header';
@@ -37,15 +37,12 @@ export default function MovementsPage() {
     const [movements, setMovements] = useState<Movement[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState('');
+    const [appliedSearchQuery, setAppliedSearchQuery] = useState('');
     const [selectedType, setSelectedType] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    useEffect(() => {
-        fetchMovements();
-    }, [page, selectedType]);
-
-    const fetchMovements = async () => {
+    const fetchMovements = useCallback(async () => {
         setLoading(true);
         try {
             const params = new URLSearchParams({
@@ -54,7 +51,7 @@ export default function MovementsPage() {
             });
 
             if (selectedType) params.append('type', selectedType);
-            if (searchQuery) params.append('search', searchQuery);
+            if (appliedSearchQuery) params.append('search', appliedSearchQuery);
 
             const response = await fetch(`/api/movements?${params}`);
             const data = await response.json();
@@ -68,12 +65,16 @@ export default function MovementsPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [page, selectedType, appliedSearchQuery]);
+
+    useEffect(() => {
+        fetchMovements();
+    }, [fetchMovements]);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         setPage(1);
-        fetchMovements();
+        setAppliedSearchQuery(searchQuery.trim());
     };
 
     const getStatusColor = (status: string) => {

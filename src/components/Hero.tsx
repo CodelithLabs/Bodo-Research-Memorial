@@ -4,13 +4,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Radar, Satellite, Sparkles, Orbit } from 'lucide-react';
 
-const STATS = [
-    { value: '148', label: 'Leaders Documented' },
-    { value: '2,400+', label: 'Archive Items' },
-    { value: '320', label: 'Research Papers' },
-    { value: '19', label: 'Cultural Topics' },
-];
-
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
     visible: (i: number) => ({

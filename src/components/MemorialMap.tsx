@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { useSearchParams } from 'next/navigation';
 import L from 'leaflet';
@@ -29,6 +29,99 @@ interface LeaderLocation {
         latitude?: number;
         longitude?: number;
     };
+}
+
+function FocusOnLeader({
+    targetLeader,
+    leaders,
+    markerRefs,
+}: {
+    targetLeader: string | null;
+    leaders: LeaderLocation[];
+    markerRefs: MutableRefObject<Record<string, L.Marker>>;
+}) {
+    const map = useMap();
+
+    useEffect(() => {
+        if (!targetLeader) return;
+        const leader = leaders.find((item) => item.id === targetLeader || item.slug === targetLeader);
+        if (!leader || typeof leader.location?.latitude !== 'number' || typeof leader.location?.longitude !== 'number') return;
+
+        map.flyTo([leader.location.latitude, leader.location.longitude], 11, { duration: 1.2 });
+        const marker = markerRefs.current[leader.id];
+        if (marker) {
+            marker.openPopup();
+        }
+    }, [map, targetLeader, leaders, markerRefs]);
+
+    return null;
+}
+
+function ClusteredMarkers({
+    leaders,
+    markerRefs,
+}: {
+    leaders: LeaderLocation[];
+    markerRefs: MutableRefObject<Record<string, L.Marker>>;
+}) {
+    const map = useMap();
+
+    useEffect(() => {
+        const clusterGroup = (L as unknown as { markerClusterGroup: (options?: Record<string, unknown>) => L.LayerGroup }).markerClusterGroup({
+            chunkedLoading: true,
+        });
+
+        markerRefs.current = {};
+
+        leaders.forEach((leader) => {
+            const lat = leader.location?.latitude;
+            const lng = leader.location?.longitude;
+            if (typeof lat !== 'number' || typeof lng !== 'number') return;
+
+            const marker = L.marker([lat, lng]);
+            markerRefs.current[leader.id] = marker;
+
+            const popupContent = document.createElement('div');
+            popupContent.className = 'memorial-popup';
+
+            if (leader.photo) {
+                const img = document.createElement('img');
+                img.src = leader.photo;
+                img.alt = leader.name;
+                img.className = 'memorial-popup__image';
+                popupContent.appendChild(img);
+            }
+
+            const title = document.createElement('h3');
+            title.className = 'memorial-popup__title';
+            title.textContent = leader.name;
+            popupContent.appendChild(title);
+
+            if (leader.location?.name) {
+                const location = document.createElement('p');
+                location.className = 'memorial-popup__location';
+                location.textContent = leader.location.name;
+                popupContent.appendChild(location);
+            }
+
+            const link = document.createElement('a');
+            link.href = `/leaders/${encodeURIComponent(leader.slug)}`;
+            link.className = 'memorial-popup__link';
+            link.textContent = 'Read more';
+            popupContent.appendChild(link);
+
+            marker.bindPopup(popupContent);
+            clusterGroup.addLayer(marker);
+        });
+
+        map.addLayer(clusterGroup);
+
+        return () => {
+            map.removeLayer(clusterGroup);
+        };
+    }, [leaders, map, markerRefs]);
+
+    return null;
 }
 
 export default function MemorialMap() {
@@ -74,85 +167,6 @@ export default function MemorialMap() {
         return first ? [first.location!.latitude!, first.location!.longitude!] : [26.5, 91.7];
     }, [leaders]);
 
-    const FocusOnLeader = () => {
-        const map = useMap();
-
-        useEffect(() => {
-            if (!targetLeader) return;
-            const leader = leaders.find((item) => item.id === targetLeader || item.slug === targetLeader);
-            if (!leader || typeof leader.location?.latitude !== 'number' || typeof leader.location?.longitude !== 'number') return;
-
-            map.flyTo([leader.location.latitude, leader.location.longitude], 11, { duration: 1.2 });
-            const marker = markerRefs.current[leader.id];
-            if (marker) {
-                marker.openPopup();
-            }
-        }, [map, leaders, targetLeader]);
-
-        return null;
-    };
-
-    const ClusteredMarkers = () => {
-        const map = useMap();
-
-        useEffect(() => {
-            const clusterGroup = (L as unknown as { markerClusterGroup: (options?: Record<string, unknown>) => L.LayerGroup }).markerClusterGroup({
-                chunkedLoading: true,
-            });
-
-            markerRefs.current = {};
-
-            leaders.forEach((leader) => {
-                const lat = leader.location?.latitude;
-                const lng = leader.location?.longitude;
-                if (typeof lat !== 'number' || typeof lng !== 'number') return;
-
-                const marker = L.marker([lat, lng]);
-                markerRefs.current[leader.id] = marker;
-
-                const popupContent = document.createElement('div');
-                popupContent.className = 'memorial-popup';
-
-                if (leader.photo) {
-                    const img = document.createElement('img');
-                    img.src = leader.photo;
-                    img.alt = leader.name;
-                    img.className = 'memorial-popup__image';
-                    popupContent.appendChild(img);
-                }
-
-                const title = document.createElement('h3');
-                title.className = 'memorial-popup__title';
-                title.textContent = leader.name;
-                popupContent.appendChild(title);
-
-                if (leader.location?.name) {
-                    const location = document.createElement('p');
-                    location.className = 'memorial-popup__location';
-                    location.textContent = leader.location.name;
-                    popupContent.appendChild(location);
-                }
-
-                const link = document.createElement('a');
-                link.href = `/leaders/${encodeURIComponent(leader.slug)}`;
-                link.className = 'memorial-popup__link';
-                link.textContent = 'Read more';
-                popupContent.appendChild(link);
-
-                marker.bindPopup(popupContent);
-                clusterGroup.addLayer(marker);
-            });
-
-            map.addLayer(clusterGroup);
-
-            return () => {
-                map.removeLayer(clusterGroup);
-            };
-        }, [leaders, map]);
-
-        return null;
-    };
-
     return (
         <div className="w-full">
             {error && (
@@ -174,8 +188,8 @@ export default function MemorialMap() {
                                 : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                         }
                     />
-                    <FocusOnLeader />
-                    <ClusteredMarkers />
+                    <FocusOnLeader targetLeader={targetLeader} leaders={leaders} markerRefs={markerRefs} />
+                    <ClusteredMarkers leaders={leaders} markerRefs={markerRefs} />
                 </MapContainer>
             </div>
         </div>

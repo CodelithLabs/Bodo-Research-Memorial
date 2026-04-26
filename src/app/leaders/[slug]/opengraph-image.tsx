@@ -38,6 +38,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           >
             <img
               src={imageUrl}
+              alt={leader?.name ? `${leader.name} portrait` : 'Leader portrait'}
               width={260}
               height={260}
               style={{ objectFit: 'cover' }}
