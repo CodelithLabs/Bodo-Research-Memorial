@@ -48,7 +48,7 @@ const createArchiveItemSchema = z.object({
     condition: z.enum(['excellent', 'good', 'fair', 'poor']).default('good'),
     source: z.object({
         name: z.string().optional(),
-        collection: z.string().optional(),
+        collectionName: z.string().optional(),
         donor: z.string().optional(),
         accessionNumber: z.string().optional(),
     }).optional(),

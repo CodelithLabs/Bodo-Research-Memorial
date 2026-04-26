@@ -1,7 +1,6 @@
 import { ImageResponse } from 'next/og';
 import { getLeaderBySlug } from '@/data/leaders';
 
-export const runtime = 'edge';
 export const size = { width: 1200, height: 630 };
 
 export default async function Image({ params }: { params: { slug: string } }) {

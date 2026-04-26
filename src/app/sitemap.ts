@@ -1,35 +1,14 @@
 import { MetadataRoute } from 'next';
-import { connectDB, Leader } from '@/models';
 import { getAllLeaders } from '@/data/leaders';
+import { archiveItems } from '@/data/archive';
 import { ALL_CULTURE_ARTICLES } from '@/data/culture';
 import { ALL_RELIGION_ARTICLES } from '@/data/religion';
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://bodo-research-memorial.org';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    // Try to fetch from DB, fallback to static URLs if DB unavailable
-    let dynamicUrls: MetadataRoute.Sitemap = [];
-
-    try {
-        await connectDB();
-
-        // Fetch published leaders
-        const leaders = await Leader.find({ status: 'published' }).select('slug updatedAt').lean();
-
-        // Convert to sitemap entries
-        dynamicUrls = [
-            ...leaders.map((leader) => ({
-                url: `${BASE_URL}/leaders/${leader.slug}`,
-                lastModified: leader.updatedAt ? new Date(leader.updatedAt as unknown as string) : new Date(),
-                changeFrequency: 'weekly' as const,
-                priority: 0.8,
-            })),
-        ];
-    } catch {
-        console.log('Could not fetch from database, using static sitemap only');
-    }
-
     const staticLeaders = getAllLeaders();
+    const staticArchiveItems = archiveItems.filter((item) => item.status === 'published');
     const staticArticles = ALL_CULTURE_ARTICLES;
     const staticReligion = ALL_RELIGION_ARTICLES;
 
@@ -45,6 +24,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date().toISOString(),
         changeFrequency: 'monthly' as const,
         priority: 0.7,
+    }));
+
+    const staticArchiveUrls = staticArchiveItems.map((item) => ({
+        url: `${BASE_URL}/archive/${item.slug}`,
+        lastModified: new Date(item.createdAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
     }));
 
     const staticReligionUrls = staticReligion.map((article) => ({
@@ -187,8 +173,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return [
         ...staticUrls,
         ...staticLeaderUrls,
+        ...staticArchiveUrls,
         ...staticArticleUrls,
         ...staticReligionUrls,
-        ...dynamicUrls,
     ];
 }

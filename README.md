@@ -47,6 +47,10 @@ UPSTASH_REDIS_REST_TOKEN=<upstash-token>
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
+For production deployments, set the same variables in Vercel Project Settings so build-time and runtime imports can resolve them.
+
+If pnpm reports ignored build scripts for native packages such as `sharp`, run `pnpm approve-builds` in a trusted local environment before deploying so Next.js image optimization remains available.
+
 ### 3. Run locally
 
 ```bash

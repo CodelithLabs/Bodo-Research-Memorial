@@ -38,7 +38,7 @@ export interface IArchiveItem extends Document {
     condition: 'excellent' | 'good' | 'fair' | 'poor';
     source: {
         name?: string;
-        collection?: string;
+        collectionName?: string;
         donor?: string;
         accessionNumber?: string;
     };
@@ -91,7 +91,7 @@ const CreatorSchema = new Schema(
 const SourceSchema = new Schema(
     {
         name: String,
-        collection: String,
+        collectionName: String,
         donor: String,
         accessionNumber: String,
     },
