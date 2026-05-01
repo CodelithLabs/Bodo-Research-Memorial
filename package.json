@@ -14,7 +14,9 @@
     "test:coverage": "vitest --coverage",
     "type-check": "tsc --noEmit",
     "seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' src/scripts/seed.ts",
-    "seed:force": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' src/scripts/seed.ts --force"
+    "seed:force": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' src/scripts/seed.ts --force",
+    "seed:leaders": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/seedLeaders.ts",
+    "seed:leaders:force": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/seedLeaders.ts --force"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.7.4",
