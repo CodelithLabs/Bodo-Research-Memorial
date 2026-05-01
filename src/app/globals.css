@@ -280,6 +280,46 @@
   .text-gray-400 {
     color: #6a6254 !important;
   }
+
+  .bg-white,
+  .bg-gray-50,
+  .bg-slate-50,
+  .bg-background,
+  .glass-panel,
+  .glass-panel-strong,
+  .futuristic-shell {
+    color: var(--ink-700);
+  }
+
+  .bg-white :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em, input, textarea, select),
+  .bg-gray-50 :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em, input, textarea, select),
+  .bg-slate-50 :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em, input, textarea, select),
+  .bg-background :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em, input, textarea, select),
+  .glass-panel :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em, input, textarea, select),
+  .glass-panel-strong :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em, input, textarea, select),
+  .futuristic-shell :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em, input, textarea, select) {
+    color: inherit;
+  }
+
+  .bg-primary,
+  .bg-heritage,
+  .bg-navy-950,
+  .bg-slate-900,
+  .bg-slate-800,
+  .bg-gradient-to-r,
+  .bg-gradient-to-b {
+    color: #fffaf0;
+  }
+
+  .bg-primary :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em),
+  .bg-heritage :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em),
+  .bg-navy-950 :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em),
+  .bg-slate-900 :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em),
+  .bg-slate-800 :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em),
+  .bg-gradient-to-r :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em),
+  .bg-gradient-to-b :is(h1, h2, h3, h4, h5, h6, p, span, li, a, label, button, small, strong, em) {
+    color: inherit;
+  }
 }
 
 @keyframes scan {
