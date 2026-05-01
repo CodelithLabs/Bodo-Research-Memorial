@@ -1,3 +1,6 @@
+export const revalidate = 3600;
+export const dynamicParams = true;
+
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { ALL_LEADERS, getLeaderBySlug, getRelatedLeaders } from '@/data/leaders';

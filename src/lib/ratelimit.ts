@@ -52,3 +52,24 @@ export const rateLimitContact = createRateLimiter(5, '1 h');
 export const rateLimitSearch = createRateLimiter(100, '1 m');
 export const rateLimitRevisions = createRateLimiter(20, '1 m');
 export const rateLimitAdmin = createRateLimiter(10, '1 m');
+
+/**
+ * Cache helper functions using Upstash Redis
+ */
+export async function cacheGet<T>(key: string): Promise<T | null> {
+  try {
+    const val = await redis?.get<string>(key);
+    if (!val) return null;
+    return typeof val === 'string' ? JSON.parse(val) : (val as T);
+  } catch {
+    return null;
+  }
+}
+
+export async function cacheSet<T>(key: string, value: T, ttlSeconds: number): Promise<void> {
+  try {
+    await redis?.setex(key, ttlSeconds, JSON.stringify(value));
+  } catch {
+    // fail silently — cache is non-critical
+  }
+}

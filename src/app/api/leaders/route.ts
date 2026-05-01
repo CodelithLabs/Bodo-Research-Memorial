@@ -15,6 +15,7 @@ import { connectDB, Leader } from '@/models';
 import { withAuth } from '@/lib/auth';
 import { validateCsrfToken } from '@/lib/csrf';
 import { authOptions } from '@/lib/auth-options';
+import { cacheGet, cacheSet } from '@/lib/ratelimit';
 
 // Validation schema for creating leader
 const createLeaderSchema = z.object({
@@ -60,10 +61,20 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         const page = parseInt(searchParams.get('page') || '1');
         const limit = parseInt(searchParams.get('limit') || '12');
         const region = searchParams.get('region');
+        const movement = searchParams.get('movement');
         const featured = searchParams.get('featured') === 'true';
         const search = searchParams.get('search');
         const tag = searchParams.get('tag');
         const sort = searchParams.get('sort') || '-createdAt';
+
+        // Build deterministic cache key
+        const cacheKey = `leaders:${page || 1}:${region || 'all'}:${movement || 'all'}`;
+
+        // Check cache first
+        const cachedResults = await cacheGet(cacheKey);
+        if (cachedResults) {
+            return NextResponse.json(cachedResults);
+        }
 
         // Build query
         const query: Record<string, unknown> = { status: 'published' };
@@ -88,7 +99,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             Leader.countDocuments(query),
         ]);
 
-        return NextResponse.json({
+        const response = {
             leaders,
             pagination: {
                 page,
@@ -96,7 +107,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
                 total,
                 pages: Math.ceil(total / limit),
             },
-        });
+        };
+
+        // Cache the results (30 minutes TTL)
+        await cacheSet(cacheKey, response, 1800);
+
+        return NextResponse.json(response);
     } catch (error) {
         console.error('Get leaders error:', error);
         return NextResponse.json(
