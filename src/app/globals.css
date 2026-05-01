@@ -237,6 +237,56 @@
     background: rgba(255, 247, 234, 0.95);
   }
 
+  .card-academic {
+    @apply rounded-2xl border shadow-card-hover transition-all duration-200;
+    border-color: rgba(81, 64, 36, 0.18);
+    background: rgba(255, 251, 243, 0.94);
+    color: var(--ink-700);
+  }
+
+  .card-academic:hover {
+    border-color: rgba(133, 93, 34, 0.34);
+    box-shadow: 0 20px 40px rgba(68, 49, 20, 0.14);
+  }
+
+  .label-category {
+    @apply inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em];
+    border-color: rgba(133, 93, 34, 0.22);
+    background: rgba(184, 134, 59, 0.1);
+    color: #715220;
+  }
+
+  .button-institutional {
+    @apply inline-flex items-center justify-center rounded-full border px-5 py-3 text-[11px] font-bold uppercase tracking-[0.18em] transition-all;
+    border-color: rgba(81, 64, 36, 0.22);
+    background: rgba(255, 251, 243, 0.96);
+    color: var(--ink-700);
+  }
+
+  .button-institutional:hover {
+    border-color: rgba(133, 93, 34, 0.45);
+    background: rgba(247, 236, 216, 0.98);
+  }
+
+  .prose-institutional {
+    color: var(--ink-600);
+  }
+
+  .prose-institutional :is(h1, h2, h3, h4, h5, h6) {
+    color: var(--ink-700);
+  }
+
+  .prose-institutional :is(p, li, blockquote) {
+    color: var(--ink-600);
+  }
+
+  .bg-weave {
+    background-image:
+      linear-gradient(rgba(23, 59, 49, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(23, 59, 49, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
   .search-input {
     @apply w-full rounded-full border px-4 py-3 text-sm;
     border-color: rgba(81, 64, 36, 0.22);

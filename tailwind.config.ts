@@ -12,6 +12,9 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
+                primary: '#173b31',
+                secondary: '#b8863b',
+                background: '#f8f3e8',
                 parrot: {
                     DEFAULT: '#44CC44',
                     50: '#E8F5E8',
@@ -103,6 +106,7 @@ const config: Config = {
                 'card-hover': '0 8px 32px rgba(0,0,0,0.4)',
             },
             backgroundImage: {
+                weave: 'linear-gradient(rgba(23,59,49,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23,59,49,0.045) 1px, transparent 1px)',
                 'hero-radial':
                     'radial-gradient(ellipse at 70% 40%, rgba(201,146,42,0.07) 0%, transparent 60%), radial-gradient(ellipse at 10% 80%, rgba(15,40,100,0.5) 0%, transparent 50%)',
                 'gold-line':
