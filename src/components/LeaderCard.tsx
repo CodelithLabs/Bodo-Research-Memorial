@@ -6,9 +6,9 @@ interface LeaderCardProps {
 }
 
 const TAG_STYLES = {
-    amber: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-    blue: 'bg-blue-400/10 text-blue-300/70 border-blue-400/20',
-    teal: 'bg-teal-400/10 text-teal-300/70 border-teal-400/15',
+    amber: 'bg-[#f0dfc2] text-[#6f4f21] border-[#b8863b]/35',
+    blue: 'bg-[#d9e5e7] text-[#355460] border-[#5b7b87]/30',
+    teal: 'bg-[#dbe7dc] text-[#2d5846] border-[#3f6857]/30',
 };
 
 export default function LeaderCard({ leader }: LeaderCardProps) {
@@ -27,35 +27,35 @@ export default function LeaderCard({ leader }: LeaderCardProps) {
         <Link href={`/leaders/${leader.id}`} className="group block">
             <article
                 className={`
-                    relative rounded-[1.4rem] overflow-hidden
-                    bg-[linear-gradient(180deg,rgba(12,18,34,0.96),rgba(7,10,20,0.96))]
+                    relative rounded-[1.2rem] overflow-hidden
+                    bg-[linear-gradient(180deg,rgba(255,251,243,0.94),rgba(248,238,221,0.96))]
                     border transition-all duration-300
-                    hover:shadow-[0_24px_70px_rgba(0,0,0,0.55)] hover:-translate-y-1 hover:scale-[1.01]
+                    hover:shadow-[0_20px_44px_rgba(76,57,28,0.2)] hover:-translate-y-1
                     ${leader.isMartyr
-                        ? 'border-amber-500/25 hover:border-amber-400/45'
-                        : 'border-cream/10 hover:border-amber-500/30'}
+                        ? 'border-[#b8863b]/35 hover:border-[#a1712e]'
+                        : 'border-[#ad8f62]/25 hover:border-[#8c6b3d]/45'}
                 `}
             >
-                <div className="absolute inset-0 opacity-[0.08] pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(237,232,220,0.9) 1px, transparent 1px)', backgroundSize: '100% 16px' }} />
+                <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(90,75,49,0.9) 1px, transparent 1px)', backgroundSize: '100% 16px' }} />
                 <div className="
-                    h-28 bg-[linear-gradient(135deg,rgba(201,146,42,0.15),rgba(110,91,211,0.15),rgba(7,10,20,0.92))]
+                    h-28 bg-[linear-gradient(135deg,rgba(184,134,59,0.18),rgba(63,104,87,0.12),rgba(255,246,233,0.95))]
                     flex items-center justify-center relative
-                    border-b border-cream/10
+                    border-b border-[#c8ae84]/35
                 ">
                     <div className="
-                        w-14 h-14 rounded-full border border-amber-500/30
+                        w-14 h-14 rounded-full border border-[#9a7140]/40
                         flex items-center justify-center
-                        font-display text-xl text-amber-300 font-bold
-                        bg-[radial-gradient(circle,rgba(201,146,42,0.22),rgba(201,146,42,0.05))]
-                        group-hover:border-amber-400/80 group-hover:shadow-[0_0_30px_rgba(201,146,42,0.18)] transition-all duration-300
+                        font-display text-xl text-[#6a4b23] font-bold
+                        bg-[radial-gradient(circle,rgba(184,134,59,0.22),rgba(184,134,59,0.08))]
+                        group-hover:border-[#8d662f] group-hover:shadow-[0_0_20px_rgba(184,134,59,0.2)] transition-all duration-300
                     ">
                         {initials}
                     </div>
 
                     <span className="
                         absolute top-2.5 right-2.5
-                        text-[9px] tracking-[0.3em] uppercase text-amber-300/80
-                        bg-black/30 border border-amber-500/20
+                        text-[9px] tracking-[0.3em] uppercase text-[#6a4b23]
+                        bg-[#f9ecd8]/80 border border-[#b8863b]/30
                         rounded-[3px] px-1.5 py-0.5 font-medium
                     ">
                         {leader.era}
@@ -64,8 +64,8 @@ export default function LeaderCard({ leader }: LeaderCardProps) {
                     {leader.isMartyr && (
                         <span className="
                             absolute top-2.5 left-2.5
-                            text-[9px] tracking-[0.28em] uppercase text-amber-200
-                            bg-amber-500/15 border border-amber-400/25
+                            text-[9px] tracking-[0.28em] uppercase text-[#6f4f21]
+                            bg-[#f0dfc2]/85 border border-[#b8863b]/35
                             rounded-[3px] px-1.5 py-0.5 font-semibold
                         ">
                             Martyr
@@ -75,13 +75,13 @@ export default function LeaderCard({ leader }: LeaderCardProps) {
 
                 <div className="p-4 relative">
                     <h3 className="
-                        font-display text-cream text-[14px] font-semibold
+                        font-display text-[#2f2a22] text-[14px] font-semibold
                         leading-snug mb-1.5
-                        group-hover:text-amber-200 transition-colors duration-150
+                        group-hover:text-[#6f4f21] transition-colors duration-150
                     ">
                         {leader.name}
                     </h3>
-                    <p className="text-cream/40 text-[10px] tracking-[0.18em] mb-3 font-light uppercase">
+                    <p className="text-[#6a6154] text-[10px] tracking-[0.18em] mb-3 font-medium uppercase">
                         {leader.title}
                     </p>
 

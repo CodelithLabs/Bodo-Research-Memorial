@@ -78,22 +78,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${sourceSans.variable}`}>
-      <body className="relative bg-navy-950 text-cream antialiased min-h-screen flex flex-col">
+      <body className="relative antialiased min-h-screen flex flex-col text-text-primary">
         <div
           aria-hidden="true"
           className="fixed inset-0 pointer-events-none z-0"
           style={{
             background:
-              'radial-gradient(circle at 20% 20%, rgba(201,146,42,0.14), transparent 22%), radial-gradient(circle at 80% 10%, rgba(110,91,211,0.18), transparent 24%), radial-gradient(circle at 50% 90%, rgba(32,180,255,0.08), transparent 26%)',
+              'radial-gradient(circle at 15% 18%, rgba(184,134,59,0.12), transparent 24%), radial-gradient(circle at 82% 14%, rgba(45,80,66,0.12), transparent 22%), radial-gradient(circle at 52% 88%, rgba(199,154,82,0.08), transparent 26%)',
           }}
         />
         <div
           aria-hidden="true"
-          className="fixed inset-0 pointer-events-none z-0 opacity-[0.06] mix-blend-screen"
+          className="fixed inset-0 pointer-events-none z-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(237,232,220,0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(237,232,220,0.25) 1px, transparent 1px)',
-            backgroundSize: '72px 72px',
+              'linear-gradient(rgba(74,67,55,0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(74,67,55,0.25) 1px, transparent 1px)',
+            backgroundSize: '64px 64px',
           }}
         />
         <Script
@@ -102,7 +102,7 @@ export default function RootLayout({
         />
         <div className="relative z-10 flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1 pt-16">{children}</main>
+          <main className="flex-1 pt-20">{children}</main>
           <Footer />
           <BackToTop />
         </div>

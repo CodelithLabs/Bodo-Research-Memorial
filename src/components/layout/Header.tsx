@@ -31,7 +31,7 @@ export default function Header() {
     const [dropdown, setDropdown] = useState<string | null>(null);
 
     useEffect(() => {
-        const handler = () => setScrolled(window.scrollY > 20);
+        const handler = () => setScrolled(window.scrollY > 18);
         window.addEventListener('scroll', handler, { passive: true });
         return () => window.removeEventListener('scroll', handler);
     }, []);
@@ -42,66 +42,51 @@ export default function Header() {
     return (
         <>
             <header
-                className={`
-                    fixed top-0 left-0 right-0 z-50 transition-all duration-300
-                    ${scrolled
-                        ? 'bg-navy-950/75 backdrop-blur-2xl border-b border-amber-500/15 shadow-[0_12px_40px_rgba(0,0,0,0.35)]'
-                        : 'bg-transparent border-b border-transparent'}
-                `}
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+                    scrolled
+                        ? 'bg-[#f8f2e6]/90 backdrop-blur-xl border-b border-[#9a7340]/25 shadow-[0_12px_36px_rgba(63,47,24,0.14)]'
+                        : 'bg-[#f8f2e6]/70 backdrop-blur-md border-b border-transparent'
+                }`}
             >
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-18 lg:h-20">
-                        <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-                            <div className="
-                                w-10 h-10 rounded-[10px]
-                                bg-[linear-gradient(135deg,rgba(201,146,42,0.22),rgba(110,91,211,0.22))]
-                                border border-amber-500/30
-                                flex items-center justify-center
-                                font-display text-amber-300 text-xl font-bold leading-none
-                                shadow-[0_0_30px_rgba(201,146,42,0.12)]
-                                group-hover:border-amber-300 group-hover:shadow-[0_0_40px_rgba(201,146,42,0.2)]
-                                transition-all duration-200
-                            ">
+                <div className="container-academic px-2">
+                    <div className="h-20 flex items-center justify-between gap-4">
+                        <Link href="/" className="group inline-flex items-center gap-3 min-w-0">
+                            <div className="w-11 h-11 rounded-xl border border-[#8b6636]/35 bg-[linear-gradient(135deg,#f0ddbe,#f8e8cf)] text-[#5f4320] flex items-center justify-center font-display font-bold text-xl shadow-[0_8px_20px_rgba(79,58,26,0.16)]">
                                 B
                             </div>
-                            <div className="hidden sm:flex flex-col gap-0.5">
-                                <span className="font-display text-cream text-[13px] font-semibold tracking-[0.08em] uppercase leading-none">
+                            <div className="hidden sm:flex flex-col min-w-0">
+                                <span className="font-display text-[13px] uppercase tracking-[0.09em] text-[#332d24] leading-none truncate">
                                     Bodo Research Memorial
                                 </span>
-                                <span className="text-[9px] tracking-[0.3em] uppercase text-cream/35 leading-none">
-                                    Digital Heritage Archive
+                                <span className="text-[9px] uppercase tracking-[0.32em] text-[#6a6254] leading-none mt-1">
+                                    Heritage Knowledge Platform
                                 </span>
                             </div>
                         </Link>
 
-                        <nav className="hidden lg:flex items-center gap-1 glass-panel px-2 py-1">
+                        <nav className="hidden lg:flex items-center gap-1 rounded-full border border-[#8f744c]/24 bg-[#fff9ef]/85 px-2 py-1">
                             {NAV_LINKS.map((link) =>
                                 link.children ? (
-                                    <div key={link.label} className="relative group">
+                                    <div key={link.label} className="relative">
                                         <button
-                                            className={`
-                                                flex items-center gap-1 px-3 py-2 rounded-md text-[11px] font-medium uppercase
-                                                tracking-[0.22em] transition-colors duration-150
-                                                ${isActive(link.href)
-                                                    ? 'text-amber-300'
-                                                    : 'text-cream/45 hover:text-cream/85'}
-                                            `}
+                                            className={`flex items-center gap-1 px-3 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                                                isActive(link.href)
+                                                    ? 'text-[#5f4320] bg-[#f2dfc0]'
+                                                    : 'text-[#5b5244] hover:text-[#2f2b23] hover:bg-[#efe6d6]'
+                                            }`}
                                             onMouseEnter={() => setDropdown(link.label)}
                                             onMouseLeave={() => setDropdown(null)}
                                         >
                                             {link.label}
-                                            <ChevronDown size={11} className="opacity-60 group-hover:opacity-100 transition-transform group-hover:rotate-180 duration-200" />
+                                            <ChevronDown size={12} className="opacity-70" />
                                         </button>
 
                                         <div
-                                            className={`
-                                                absolute top-full left-0 mt-1 w-44
-                                                bg-navy-950/95 border border-amber-500/20 rounded-xl overflow-hidden shadow-card-hover backdrop-blur-xl
-                                                transition-all duration-150 origin-top
-                                                ${dropdown === link.label
-                                                    ? 'opacity-100 scale-y-100 pointer-events-auto'
-                                                    : 'opacity-0 scale-y-95 pointer-events-none'}
-                                            `}
+                                            className={`absolute top-full left-0 mt-2 w-48 rounded-xl border border-[#917347]/28 bg-[#fff8ec]/95 shadow-[0_14px_30px_rgba(48,36,19,0.18)] backdrop-blur-xl overflow-hidden transition-all duration-150 origin-top ${
+                                                dropdown === link.label
+                                                    ? 'opacity-100 scale-100 pointer-events-auto'
+                                                    : 'opacity-0 scale-95 pointer-events-none'
+                                            }`}
                                             onMouseEnter={() => setDropdown(link.label)}
                                             onMouseLeave={() => setDropdown(null)}
                                         >
@@ -109,12 +94,7 @@ export default function Header() {
                                                 <Link
                                                     key={child.href}
                                                     href={child.href}
-                                                    className="
-                                                        block px-4 py-2.5 text-[11px] text-cream/60
-                                                        hover:text-cream hover:bg-amber-500/10
-                                                        border-b border-subtle last:border-0
-                                                        transition-colors duration-100 tracking-[0.04em]
-                                                    "
+                                                    className="block px-4 py-2.5 text-[11px] tracking-[0.05em] text-[#564b3d] hover:text-[#2f2a22] hover:bg-[#f3e4cc] border-b border-[#ddceb4]/55 last:border-0"
                                                 >
                                                     {child.label}
                                                 </Link>
@@ -125,13 +105,11 @@ export default function Header() {
                                     <Link
                                         key={link.label}
                                         href={link.href}
-                                        className={`
-                                            px-3 py-2 rounded-md text-[11px] font-medium uppercase tracking-[0.22em]
-                                            transition-colors duration-150
-                                            ${isActive(link.href)
-                                                ? 'text-amber-300'
-                                                : 'text-cream/45 hover:text-cream/80'}
-                                        `}
+                                        className={`px-3 py-2 rounded-full text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                                            isActive(link.href)
+                                                ? 'text-[#5f4320] bg-[#f2dfc0]'
+                                                : 'text-[#5b5244] hover:text-[#2f2b23] hover:bg-[#efe6d6]'
+                                        }`}
                                     >
                                         {link.label}
                                     </Link>
@@ -140,37 +118,21 @@ export default function Header() {
                         </nav>
 
                         <div className="flex items-center gap-2">
-                            <button
-                                className="
-                                    flex items-center gap-2 px-3 py-1.5 rounded-md
-                                    border border-cream/10 bg-white/5 text-cream/35 text-[11px] tracking-[0.18em]
-                                    hover:border-amber-500/30 hover:text-cream/75
-                                    transition-all duration-150 hidden md:flex
-                                "
-                            >
-                                <Search size={11} />
-                                <span>Search archive...</span>
-                                <kbd className="text-[9px] px-1.5 py-0.5 border border-cream/10 rounded font-mono text-cream/20 bg-black/20">
-                                    ⌘K
-                                </kbd>
-                            </button>
-
                             <Link
-                                href="/tribute"
-                                className="
-                                    hidden lg:block px-4 py-1.5 rounded-md
-                                    bg-[linear-gradient(135deg,rgba(201,146,42,0.2),rgba(110,91,211,0.18))] text-amber-200 border border-amber-500/25
-                                    text-[11px] font-semibold tracking-[0.26em] uppercase
-                                    hover:bg-[linear-gradient(135deg,rgba(201,146,42,0.28),rgba(110,91,211,0.26))] hover:border-amber-400/60
-                                    transition-all duration-150
-                                "
+                                href="/search"
+                                className="hidden md:inline-flex items-center gap-2 rounded-full border border-[#87663a]/24 bg-[#fff9ef]/90 px-3.5 py-2 text-[11px] uppercase tracking-[0.14em] text-[#594f42] hover:text-[#2f2a22]"
                             >
-                                Tribute
+                                <Search size={13} />
+                                Search
+                            </Link>
+
+                            <Link href="/tribute" className="hidden lg:inline-flex btn-primary">
+                                Pay Tribute
                             </Link>
 
                             <button
-                                onClick={() => setMenuOpen((p) => !p)}
-                                className="lg:hidden p-2 text-cream/50 hover:text-cream"
+                                onClick={() => setMenuOpen((prev) => !prev)}
+                                className="lg:hidden p-2 rounded-md text-[#4d4335] hover:bg-[#efe2cb]"
                                 aria-label="Toggle menu"
                             >
                                 {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -178,40 +140,25 @@ export default function Header() {
                         </div>
                     </div>
                 </div>
-
-                {scrolled && <div className="h-px bg-gold-line opacity-60" />}
             </header>
 
             {menuOpen && (
-                <div className="
-                    fixed inset-0 z-40 lg:hidden
-                    bg-navy-950/96 backdrop-blur-2xl
-                    flex flex-col pt-20 px-6 pb-8
-                ">
-                    <nav className="flex flex-col gap-1 glass-panel p-4">
+                <div className="fixed inset-0 z-40 lg:hidden bg-[#f3ead9]/95 backdrop-blur-xl pt-24 px-5 pb-8">
+                    <nav className="futuristic-shell p-4 flex flex-col">
                         {NAV_LINKS.map((link) => (
                             <Link
                                 key={link.label}
                                 href={link.href}
                                 onClick={() => setMenuOpen(false)}
-                                className={`
-                                    py-3 border-b border-cream/10 text-[14px] font-medium uppercase
-                                    tracking-[0.22em] transition-colors duration-100
-                                    ${isActive(link.href) ? 'text-amber-300' : 'text-cream/55'}
-                                `}
+                                className={`py-3 border-b border-[#dac8aa] text-[13px] uppercase tracking-[0.2em] ${
+                                    isActive(link.href) ? 'text-[#6c4f25] font-semibold' : 'text-[#5b5244]'
+                                }`}
                             >
                                 {link.label}
                             </Link>
                         ))}
                     </nav>
-                    <Link
-                        href="/tribute"
-                        className="
-                            mt-6 py-3 text-center rounded-lg
-                            bg-[linear-gradient(135deg,rgba(201,146,42,0.2),rgba(110,91,211,0.18))] text-amber-200 border border-amber-500/30
-                            text-[12px] font-semibold tracking-[0.28em] uppercase
-                        "
-                    >
+                    <Link href="/tribute" className="btn-primary mt-5 w-full" onClick={() => setMenuOpen(false)}>
                         Pay Tribute
                     </Link>
                 </div>
