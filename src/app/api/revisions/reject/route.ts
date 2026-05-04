@@ -7,18 +7,20 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import jwt from 'jsonwebtoken';
 import { connectDB, LeaderRevision, AuditLog } from '@/models';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-options';
 import { rateLimitAdmin } from '@/lib/ratelimit';
 import { validateCsrfToken } from '@/lib/csrf';
+import { withAuth } from '@/lib/auth';
 
 const rejectRevisionSchema = z.object({
     revisionId: z.string().regex(/^[0-9a-fA-F]{24}$/, 'Invalid ID format'),
     reviewerNote: z.string().min(5, 'Reviewer note is required').max(2000),
 });
 
-async function rejectRevision(request: NextRequest): Promise<NextResponse> {
+async function rejectRevision(request: NextRequest, _user: jwt.JwtPayload): Promise<NextResponse> {
     try {
         const session = await getServerSession(authOptions);
         if (!session) {
@@ -44,8 +46,9 @@ async function rejectRevision(request: NextRequest): Promise<NextResponse> {
 
         const body = await request.json();
         const { csrfToken, ...payload } = body;
+        const csrfCandidate = csrfToken ?? request.headers.get('x-csrf-token');
 
-        const csrfValid = await validateCsrfToken(csrfToken);
+        const csrfValid = await validateCsrfToken(csrfCandidate);
         if (!csrfValid) {
             return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
         }
@@ -101,4 +104,4 @@ async function rejectRevision(request: NextRequest): Promise<NextResponse> {
     }
 }
 
-export const POST = rejectRevision;
+export const POST = withAuth(rejectRevision, 'admin');

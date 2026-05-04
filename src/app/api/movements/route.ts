@@ -180,8 +180,9 @@ async function createMovement(request: NextRequest, _user: jwt.JwtPayload): Prom
 
         const body = await request.json();
         const { csrfToken, ...payload } = body;
+        const csrfCandidate = csrfToken ?? request.headers.get('x-csrf-token');
 
-        const csrfValid = await validateCsrfToken(csrfToken);
+        const csrfValid = await validateCsrfToken(csrfCandidate);
         if (!csrfValid) {
             return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
         }

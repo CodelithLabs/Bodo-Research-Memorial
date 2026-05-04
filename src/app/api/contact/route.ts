@@ -34,8 +34,9 @@ export async function POST(req: NextRequest) {
 
     const data = await req.json();
     const { name, email, message, hp, csrfToken } = data;
+    const csrfCandidate = csrfToken ?? req.headers.get('x-csrf-token');
 
-    const csrfValid = await validateCsrfToken(csrfToken);
+    const csrfValid = await validateCsrfToken(csrfCandidate);
     if (!csrfValid) {
       return NextResponse.json({ error: 'Invalid request' }, { status: 403 });
     }

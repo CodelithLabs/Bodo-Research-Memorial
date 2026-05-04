@@ -12,20 +12,27 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-    { params }: { params: Promise<{ slug: string }> }
+    { params }: { params: { slug: string } }
 ): Promise<Metadata> {
-    const { slug } = await params;
+    const { slug } = params;
     const leader = getLeaderBySlug(slug);
-    if (!leader) return {};
+    if (!leader) {
+        return { title: 'Leader Not Found | Bodo Research Memorial' };
+    }
+    const description = leader.biography?.slice(0, 155) ?? `Learn about ${leader.name}, a key figure in Bodo history.`;
     return {
         title: `${leader.name} | Bodo Research Memorial`,
-        description: leader.biography.slice(0, 155) + '...',
-        openGraph: { title: leader.name, description: leader.title },
+        description,
+        openGraph: {
+            title: leader.name,
+            description: leader.biography?.slice(0, 155) ?? '',
+            type: 'profile',
+        },
     };
 }
 
-export default async function LeaderProfilePage({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params;
+export default async function LeaderProfilePage({ params }: { params: { slug: string } }) {
+    const { slug } = params;
     const leader = getLeaderBySlug(slug);
     if (!leader) notFound();
 

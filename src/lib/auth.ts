@@ -8,7 +8,10 @@
 
 import jwt from 'jsonwebtoken';
 import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { getToken } from 'next-auth/jwt';
 import { IUser } from '@/models';
+import { authOptions } from '@/lib/auth-options';
 
 const JWT_SECRET_VALUE: string = process.env.JWT_SECRET ?? '';
 
@@ -91,29 +94,67 @@ export function withAuth(
     return async (request: NextRequest): Promise<NextResponse> => {
         const token = extractToken(request);
 
-        if (!token) {
+        if (token) {
+            const payload = verifyToken(token);
+
+            if (!payload) {
+                return NextResponse.json(
+                    { error: 'Invalid or expired token' },
+                    { status: 401 }
+                );
+            }
+
+            // Check role authorization
+            if (requiredRole !== 'public' && !hasRole(payload.role as Role, requiredRole)) {
+                return NextResponse.json(
+                    { error: 'Insufficient permissions' },
+                    { status: 403 }
+                );
+            }
+
+            return handler(request, payload);
+        }
+
+        const session = await getServerSession(authOptions);
+
+        if (!session) {
             return NextResponse.json(
                 { error: 'Authentication required' },
                 { status: 401 }
             );
         }
 
-        const payload = verifyToken(token);
+        const sessionRole = (session.user as { role?: string } | undefined)?.role ?? 'public';
+        const role = sessionRole as Role;
 
-        if (!payload) {
-            return NextResponse.json(
-                { error: 'Invalid or expired token' },
-                { status: 401 }
-            );
-        }
-
-        // Check role authorization
-        if (requiredRole !== 'public' && !hasRole(payload.role as Role, requiredRole)) {
+        if (requiredRole !== 'public' && !hasRole(role, requiredRole)) {
             return NextResponse.json(
                 { error: 'Insufficient permissions' },
                 { status: 403 }
             );
         }
+
+        const nextAuthToken = await getToken({
+            req: request,
+            secret: authOptions.secret ?? process.env.NEXTAUTH_SECRET,
+        });
+
+        const sessionUser = session.user as { id?: string; email?: string; name?: string } | undefined;
+        const userId = sessionUser?.id ?? nextAuthToken?.sub;
+
+        if (!userId) {
+            return NextResponse.json(
+                { error: 'Authentication required' },
+                { status: 401 }
+            );
+        }
+
+        const payload: jwt.JwtPayload = {
+            id: userId,
+            email: sessionUser?.email ?? nextAuthToken?.email,
+            name: sessionUser?.name ?? nextAuthToken?.name,
+            role,
+        };
 
         return handler(request, payload);
     };
